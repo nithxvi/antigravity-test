@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AURUM — Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0E0E0F;
+      --surface: #161618;
+      --card: #1C1C1F;
+      --accent: #C9A96E;
+      --accent-dim: rgba(201,169,110,0.15);
+      --accent-mid: rgba(201,169,110,0.4);
+      --text: #F0EDE8;
+      --muted: #7A7875;
+      --border: 1px solid rgba(201,169,110,0.15);
+      --radius-card: 4px;
+      --radius-pill: 999px;
+      --ease: cubic-bezier(0.4,0,0.2,1);
+      --section-pad: 120px;
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 72px;
+      background: rgba(14,14,15,0.72);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.75rem;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: 0.18em;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text);
+      text-decoration: none;
+      position: relative;
+      padding-bottom: 4px;
+      transition: color 0.35s var(--ease);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 1px;
+      background: var(--accent);
+      transition: width 0.35s var(--ease);
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+    .nav-links a:hover::after,
+    .nav-links a.active::after { width: 100%; }
+    .nav-links a.active { color: var(--accent); }
+
+    /* Hamburger */
+    .nav-toggle { display: none; }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 24px; height: 16px;
+      cursor: pointer;
+      z-index: 1100;
+      position: relative;
+    }
+    .hamburger span {
+      display: block;
+      width: 100%; height: 1.5px;
+      background: var(--text);
+      transition: all 0.35s var(--ease);
+      pointer-events: none;
+    }
+
+    .nav-toggle:checked ~ .hamburger span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .nav-toggle:checked ~ .hamburger span:nth-child(2) { opacity: 0; }
+    .nav-toggle:checked ~ .hamburger span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    .nav-mobile {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(14,14,15,0.97);
+      backdrop-filter: blur(16px);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      z-index: 999;
+    }
+
+    .nav-toggle:checked ~ .nav-mobile { display: flex; }
+
+    .nav-mobile a {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem;
+      font-weight: 400;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: color 0.3s var(--ease);
+    }
+    .nav-mobile a:hover { color: var(--accent); }
+
+    /* ─── HERO CAROUSEL ─── */
+    .carousel {
+      position: relative;
+      width: 100%;
+      height: 85vh;
+      overflow: hidden;
+      background: var(--bg);
+    }
+
+    .carousel-track {
+      display: flex;
+      width: 300%;
+      height: 100%;
+      transition: transform 0.85s var(--ease);
+    }
+
+    .carousel-slide {
+      position: relative;
+      width: calc(100% / 3);
+      height: 100%;
+      flex-shrink: 0;
+    }
+
+    .carousel-slide video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .carousel-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(14,14,15,0.3), rgba(14,14,15,0.82));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+    }
+
+    .slide-eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeUp 0.7s var(--ease) 0.2s forwards;
+    }
+
+    .slide-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 7vw, 6rem);
+      font-weight: 400;
+      line-height: 1.05;
+      color: var(--text);
+      max-width: 700px;
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeUp 0.7s var(--ease) 0.4s forwards;
+    }
+
+    .slide-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      font-weight: 300;
+      color: rgba(240,237,232,0.75);
+      max-width: 420px;
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: fadeUp 0.7s var(--ease) 0.55s forwards;
+    }
+
+    .slide-cta {
+      display: inline-block;
+      padding: 14px 40px;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: var(--radius-pill);
+      transition: all 0.35s var(--ease);
+      opacity: 0;
+      animation: fadeUp 0.7s var(--ease) 0.7s forwards;
+    }
+    .slide-cta:hover {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    /* Arrow buttons */
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      width: 48px; height: 48px;
+      background: rgba(14,14,15,0.5);
+      border: var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.35s var(--ease);
+    }
+    .carousel-arrow:hover { background: var(--accent); border-color: var(--accent); }
+    .carousel-arrow:hover svg { stroke: var(--bg); }
+    .carousel-arrow svg { stroke: var(--text); width: 18px; height: 18px; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: stroke 0.35s var(--ease); }
+    .carousel-arrow.prev { left: 28px; }
+    .carousel-arrow.next { right: 28px; }
+
+    /* Dots */
+    .carousel-dots {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 10;
+    }
+    .carousel-dot {
+      height: 4px;
+      border-radius: var(--radius-pill);
+      background: rgba(240,237,232,0.35);
+      cursor: pointer;
+      transition: all 0.35s var(--ease);
+      width: 20px;
+    }
+    .carousel-dot.active {
+      background: var(--accent);
+      width: 36px;
+    }
+
+    /* ─── REVIEWS ─── */
+    .reviews-section {
+      padding: var(--section-pad) 48px;
+      background: var(--bg);
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 4vw, 3.6rem);
+      font-weight: 400;
+      color: var(--text);
+      text-align: center;
+      margin-bottom: 64px;
+      letter-spacing: 0.01em;
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .review-card {
+      background: var(--card);
+      border: var(--border);
+      border-radius: var(--radius-card);
+      padding: 36px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s var(--ease), transform 0.6s var(--ease), box-shadow 0.35s var(--ease);
+    }
+    .review-card:hover {
+      box-shadow: 0 8px 40px rgba(201,169,110,0.08);
+    }
+    .review-card.visible { opacity: 1; transform: translateY(0); }
+    .review-card:nth-child(1) { transition-delay: 0s; }
+    .review-card:nth-child(2) { transition-delay: 0.1s; }
+    .review-card:nth-child(3) { transition-delay: 0.2s; }
+    .review-card:nth-child(4) { transition-delay: 0.3s; }
+    .review-card:nth-child(5) { transition-delay: 0.4s; grid-column: 2 / 4; }
+
+    .review-stars { color: var(--accent); font-size: 1rem; letter-spacing: 3px; }
+
+    .review-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.65;
+      flex: 1;
+    }
+
+    .review-author {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .review-avatar {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--bg);
+      flex-shrink: 0;
+    }
+
+    .review-meta { display: flex; flex-direction: column; gap: 2px; }
+    .review-name {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+    .review-role {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    /* ─── TEXT TICKER ─── */
+    .ticker-section {
+      padding: 100px 48px;
+      background: var(--surface);
+      border-top: var(--border);
+      border-bottom: var(--border);
+      text-align: center;
+    }
+
+    .ticker-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--text);
+      max-width: 780px;
+      margin: 0 auto 40px;
+      line-height: 1.35;
+      transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+    }
+    .ticker-text.fade-out {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    .ticker-text.fade-in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .ticker-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+    }
+    .ticker-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--muted);
+      cursor: pointer;
+      transition: all 0.35s var(--ease);
+    }
+    .ticker-dot.active {
+      background: var(--accent);
+      transform: scale(1.3);
+    }
+
+    /* ─── FOOTER ─── */
+    .footer {
+      padding: 48px;
+      background: var(--surface);
+      border-top: var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+    }
+    .footer-copy {
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── REDUCED MOTION ─── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      :root { --section-pad: 60px; }
+      .nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .review-card:nth-child(5) { grid-column: auto; }
+      .ticker-section { padding: 60px 24px; }
+      .reviews-section { padding: 60px 24px; }
+      .footer { padding: 32px 24px; }
+    }
+
+    @media (max-width: 600px) {
+      .carousel-arrow { width: 38px; height: 38px; }
+      .carousel-arrow.prev { left: 12px; }
+      .carousel-arrow.next { right: 12px; }
+      .slide-headline { font-size: 2.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAV ─── -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">AURUM</a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle" hidden />
+    <label for="nav-toggle" class="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </label>
+    <div class="nav-mobile">
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="about.html">About</a>
+    </div>
+  </nav>
+
+  <!-- ─── HERO CAROUSEL ─── -->
+  <section class="carousel" id="carousel" aria-label="Hero carousel">
+    <div class="carousel-track" id="carouselTrack">
+
+      <div class="carousel-slide">
+        <video autoplay muted loop playsinline src="https://www.w3schools.com/html/mov_bbb.mp4"></video>
+        <div class="carousel-overlay">
+          <span class="slide-eyebrow">Collection 2026</span>
+          <h1 class="slide-headline">Timeless Above All</h1>
+          <p class="slide-sub">Artifacts of quiet luxury, crafted for those who know.</p>
+          <a href="products.html" class="slide-cta">Explore Collection</a>
+        </div>
+      </div>
+
+      <div class="carousel-slide">
+        <video autoplay muted loop playsinline src="https://www.w3schools.com/html/movie.mp4"></video>
+        <div class="carousel-overlay">
+          <span class="slide-eyebrow">The Aurum Edit</span>
+          <h1 class="slide-headline">Refined Without Effort</h1>
+          <p class="slide-sub">Objects that whisper the language of excellence.</p>
+          <a href="products.html" class="slide-cta">Discover More</a>
+        </div>
+      </div>
+
+      <div class="carousel-slide">
+        <video autoplay muted loop playsinline src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm"></video>
+        <div class="carousel-overlay">
+          <span class="slide-eyebrow">Heritage & Craft</span>
+          <h1 class="slide-headline">Made to Be Kept</h1>
+          <p class="slide-sub">Heirlooms in the making — beauty with intent.</p>
+          <a href="about.html" class="slide-cta">Our Story</a>
+        </div>
+      </div>
+
+    </div>
+
+    <button class="carousel-arrow prev" id="carouselPrev" aria-label="Previous slide">
+      <svg viewBox="0 0 24 24"><polyline points="15,18 9,12 15,6"></polyline></svg>
+    </button>
+    <button class="carousel-arrow next" id="carouselNext" aria-label="Next slide">
+      <svg viewBox="0 0 24 24"><polyline points="9,6 15,12 9,18"></polyline></svg>
+    </button>
+
+    <div class="carousel-dots" id="carouselDots">
+      <div class="carousel-dot active" data-index="0"></div>
+      <div class="carousel-dot" data-index="1"></div>
+      <div class="carousel-dot" data-index="2"></div>
+    </div>
+  </section>
+
+  <!-- ─── REVIEWS ─── -->
+  <section class="reviews-section">
+    <h2 class="section-title">What Our Clients Say</h2>
+    <div class="reviews-grid" id="reviewsGrid">
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-quote">"Every Aurum piece I own feels like it was made specifically for me. The craftsmanship is simply unmatched in today's market."</p>
+        <div class="review-author">
+          <div class="review-avatar" style="background: linear-gradient(135deg,#C9A96E,#a07840);">EC</div>
+          <div class="review-meta">
+            <span class="review-name">Eleanor Cavendish</span>
+            <span class="review-role">Interior Designer, London</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-quote">"I gifted the Obsidian Watch to my partner and the reaction was priceless. Aurum understands that true luxury is in the details."</p>
+        <div class="review-author">
+          <div class="review-avatar" style="background: linear-gradient(135deg,#6e8ca0,#3a5f74);">MS</div>
+          <div class="review-meta">
+            <span class="review-name">Marcus Strauss</span>
+            <span class="review-role">Architect, Vienna</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-quote">"The Velvet Cipher Bag is my most-complimented possession. A conversation piece that never grows old."</p>
+        <div class="review-author">
+          <div class="review-avatar" style="background: linear-gradient(135deg,#9e7ea0,#6a3f6e);">IR</div>
+          <div class="review-meta">
+            <span class="review-name">Isabelle Renard</span>
+            <span class="review-role">Creative Director, Paris</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-quote">"Exceptional quality, impeccable packaging, and customer service that feels personal. Aurum has earned a lifelong client."</p>
+        <div class="review-author">
+          <div class="review-avatar" style="background: linear-gradient(135deg,#7ea07e,#3f6a3f);">JK</div>
+          <div class="review-meta">
+            <span class="review-name">James Kwon</span>
+            <span class="review-role">Art Collector, Seoul</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-quote">"There is a silence to Aurum's aesthetic — it doesn't shout luxury, it radiates it. The Aurum Pen Set has found a permanent home on my desk and in my daily ritual. A brand that truly understands the meaning of refinement."</p>
+        <div class="review-author">
+          <div class="review-avatar" style="background: linear-gradient(135deg,#a09e6e,#706e3a);">SF</div>
+          <div class="review-meta">
+            <span class="review-name">Sophia Fontaine</span>
+            <span class="review-role">Author & Essayist, New York</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── TEXT TICKER ─── -->
+  <section class="ticker-section">
+    <p class="ticker-text fade-in" id="tickerText">Crafted for those who appreciate the extraordinary</p>
+    <div class="ticker-dots" id="tickerDots">
+      <div class="ticker-dot active" data-index="0"></div>
+      <div class="ticker-dot" data-index="1"></div>
+      <div class="ticker-dot" data-index="2"></div>
+      <div class="ticker-dot" data-index="3"></div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ─── -->
+  <footer class="footer">
+    <span class="footer-logo">AURUM</span>
+    <span class="footer-copy">© 2026 Aurum. All rights reserved.</span>
+  </footer>
+
+  <script>
+    // ─── HERO CAROUSEL ───
+    (function() {
+      const track = document.getElementById('carouselTrack');
+      const dots = document.querySelectorAll('#carouselDots .carousel-dot');
+      const slides = document.querySelectorAll('.carousel-slide');
+      let current = 0;
+      let autoTimer;
+
+      function goTo(idx) {
+        current = (idx + slides.length) % slides.length;
+        track.style.transform = 'translateX(-' + ((100 / 3) * current) + '%)';
+        dots.forEach(function(d, i) { d.classList.toggle('active', i === current); });
+        // Restart text animations
+        var overlay = slides[current].querySelector('.carousel-overlay');
+        var els = overlay.querySelectorAll('.slide-eyebrow, .slide-headline, .slide-sub, .slide-cta');
+        els.forEach(function(el) {
+          el.style.animation = 'none';
+          void el.offsetHeight;
+          el.style.animation = '';
+        });
+      }
+
+      document.getElementById('carouselNext').addEventListener('click', function() { clearInterval(autoTimer); goTo(current + 1); startAuto(); });
+      document.getElementById('carouselPrev').addEventListener('click', function() { clearInterval(autoTimer); goTo(current - 1); startAuto(); });
+      dots.forEach(function(d) {
+        d.addEventListener('click', function() { clearInterval(autoTimer); goTo(+d.dataset.index); startAuto(); });
+      });
+
+      function startAuto() { autoTimer = setInterval(function() { goTo(current + 1); }, 5000); }
+      startAuto();
+    })();
+
+    // ─── REVIEWS SCROLL ANIMATION ───
+    (function() {
+      var cards = document.querySelectorAll('.review-card');
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+      }, { threshold: 0.15 });
+      cards.forEach(function(c) { observer.observe(c); });
+    })();
+
+    // ─── TEXT TICKER ───
+    (function() {
+      var statements = [
+        'Crafted for those who appreciate the extraordinary',
+        'Quality that speaks before words do',
+        'Luxury is not excess — it is intention',
+        'Objects of meaning, made to endure'
+      ];
+      var el = document.getElementById('tickerText');
+      var dots = document.querySelectorAll('#tickerDots .ticker-dot');
+      var idx = 0;
+
+      function showIdx(i) {
+        el.classList.remove('fade-in');
+        el.classList.add('fade-out');
+        setTimeout(function() {
+          idx = i;
+          el.textContent = statements[idx];
+          dots.forEach(function(d, j) { d.classList.toggle('active', j === idx); });
+          el.classList.remove('fade-out');
+          el.classList.add('fade-in');
+        }, 500);
+      }
+
+      dots.forEach(function(d) {
+        d.addEventListener('click', function() { showIdx(+d.dataset.index); });
+      });
+
+      setInterval(function() { showIdx((idx + 1) % statements.length); }, 3500);
+    })();
+  </script>
+</body>
+</html>

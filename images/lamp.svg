@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-label="Lamp study">
+  <rect width="800" height="1000" fill="#1a1814"/>
+  <rect x="80" y="70" width="640" height="860" fill="none" stroke="#c6a572" stroke-opacity="0.25"/>
+  <ellipse cx="400" cy="280" rx="160" ry="90" fill="#2b261f" stroke="#c6a572"/>
+  <path d="M400 370 V640" stroke="#c6a572" stroke-width="6"/>
+  <ellipse cx="400" cy="660" rx="70" ry="14" fill="#c6a572"/>
+  <text x="400" y="820" text-anchor="middle" fill="#d8d0c2" font-family="Georgia, serif" font-size="28" letter-spacing="6">NOCTURNE</text>
+</svg>

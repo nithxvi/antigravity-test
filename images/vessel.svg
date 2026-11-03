@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-label="Vessel study">
+  <rect width="800" height="1000" fill="#161410"/>
+  <path d="M300 240h200l40 80-30 380c-10 70-70 110-110 110s-100-40-110-110L260 320z" fill="#2a241c" stroke="#c6a572"/>
+  <text x="400" y="860" text-anchor="middle" fill="#d8d0c2" font-family="Georgia, serif" font-size="28" letter-spacing="6">HARBOR</text>
+</svg>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-label="Chair study">
+  <rect width="800" height="1000" fill="#171512"/>
+  <path d="M250 260h300v220H250z" fill="#2a251e" stroke="#c6a572"/>
+  <path d="M270 480h260v40H270zM280 520v220M520 520v220" stroke="#c6a572" stroke-width="8"/>
+  <text x="400" y="860" text-anchor="middle" fill="#d8d0c2" font-family="Georgia, serif" font-size="28" letter-spacing="6">SALON</text>
+</svg>

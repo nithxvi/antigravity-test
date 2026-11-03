@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AURUM — Products</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0E0E0F;
+      --surface: #161618;
+      --card: #1C1C1F;
+      --accent: #C9A96E;
+      --accent-dim: rgba(201,169,110,0.15);
+      --accent-mid: rgba(201,169,110,0.4);
+      --text: #F0EDE8;
+      --muted: #7A7875;
+      --border: 1px solid rgba(201,169,110,0.15);
+      --radius-card: 4px;
+      --radius-pill: 999px;
+      --ease: cubic-bezier(0.4,0,0.2,1);
+      --section-pad: 120px;
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 72px;
+      background: rgba(14,14,15,0.72);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.75rem;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: 0.18em;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text);
+      text-decoration: none;
+      position: relative;
+      padding-bottom: 4px;
+      transition: color 0.35s var(--ease);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 1px;
+      background: var(--accent);
+      transition: width 0.35s var(--ease);
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+    .nav-links a:hover::after,
+    .nav-links a.active::after { width: 100%; }
+    .nav-links a.active { color: var(--accent); }
+
+    .nav-toggle { display: none; }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 24px; height: 16px;
+      cursor: pointer;
+      z-index: 1100;
+      position: relative;
+    }
+    .hamburger span {
+      display: block;
+      width: 100%; height: 1.5px;
+      background: var(--text);
+      transition: all 0.35s var(--ease);
+      pointer-events: none;
+    }
+    .nav-toggle:checked ~ .hamburger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle:checked ~ .hamburger span:nth-child(2) { opacity: 0; }
+    .nav-toggle:checked ~ .hamburger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .nav-mobile {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(14,14,15,0.97);
+      backdrop-filter: blur(16px);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      z-index: 999;
+    }
+    .nav-toggle:checked ~ .nav-mobile { display: flex; }
+    .nav-mobile a {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem;
+      font-weight: 400;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: color 0.3s var(--ease);
+    }
+    .nav-mobile a:hover { color: var(--accent); }
+
+    /* ─── PRODUCTS HERO ─── */
+    .products-hero {
+      padding: var(--section-pad) 48px 80px;
+      text-align: center;
+      background: var(--bg);
+      border-bottom: var(--border);
+    }
+
+    .eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+      display: block;
+      opacity: 0;
+      animation: fadeUp 0.7s var(--ease) 0.1s forwards;
+    }
+
+    .hero-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.05;
+      letter-spacing: 0.01em;
+      opacity: 0;
+      animation: fadeUp 0.7s var(--ease) 0.3s forwards;
+    }
+
+    /* ─── PRODUCTS GRID ─── */
+    .products-section {
+      padding: 80px 48px var(--section-pad);
+      background: var(--bg);
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2rem;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .product-card {
+      background: var(--card);
+      border: var(--border);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
+      opacity: 0;
+      transform: translateY(32px);
+    }
+    .product-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(201,169,110,0.1);
+    }
+    .product-card:nth-child(1) { transition-delay: 0s; }
+    .product-card:nth-child(2) { transition-delay: 0.08s; }
+    .product-card:nth-child(3) { transition-delay: 0.16s; }
+    .product-card:nth-child(4) { transition-delay: 0.24s; }
+    .product-card:nth-child(5) { transition-delay: 0.32s; }
+    .product-card:nth-child(6) { transition-delay: 0.40s; }
+
+    .product-image {
+      height: 280px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* unique gradient per card */
+    .product-card:nth-child(1) .product-image {
+      background: linear-gradient(145deg, #1a1a1c 0%, #0d0d10 40%, #1c1810 100%);
+    }
+    .product-card:nth-child(2) .product-image {
+      background: linear-gradient(145deg, #1c1a18 0%, #141214 50%, #0f0f12 100%);
+    }
+    .product-card:nth-child(3) .product-image {
+      background: linear-gradient(145deg, #121218 0%, #1a1710 60%, #0e0e0f 100%);
+    }
+    .product-card:nth-child(4) .product-image {
+      background: linear-gradient(145deg, #0e0e0f 0%, #161410 50%, #1c1a14 100%);
+    }
+    .product-card:nth-child(5) .product-image {
+      background: linear-gradient(145deg, #12161a 0%, #0e1014 50%, #1a1812 100%);
+    }
+    .product-card:nth-child(6) .product-image {
+      background: linear-gradient(145deg, #181614 0%, #0e0e12 50%, #1c1a16 100%);
+    }
+
+    /* CSS geometric placeholder icons */
+    .product-icon {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.55;
+      transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
+    }
+    .product-card:hover .product-icon { opacity: 0.85; transform: scale(1.05); }
+
+    /* watch */
+    .icon-watch {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      position: relative;
+    }
+    .icon-watch::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 2px; height: 28px;
+      background: var(--accent);
+      transform: translate(-50%, -100%) rotate(-30deg);
+      transform-origin: bottom center;
+    }
+    .icon-watch::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 2px; height: 18px;
+      background: rgba(201,169,110,0.6);
+      transform: translate(-50%, -100%) rotate(70deg);
+      transform-origin: bottom center;
+    }
+
+    /* bag */
+    .icon-bag {
+      width: 56px; height: 62px;
+      border: 2px solid var(--accent);
+      border-radius: 4px 4px 6px 6px;
+      position: relative;
+    }
+    .icon-bag::before {
+      content: '';
+      position: absolute;
+      top: -22px; left: 50%;
+      width: 28px; height: 22px;
+      border: 2px solid var(--accent);
+      border-bottom: none;
+      border-radius: 999px 999px 0 0;
+      transform: translateX(-50%);
+    }
+
+    /* pen */
+    .icon-pen {
+      width: 8px; height: 64px;
+      background: linear-gradient(to bottom, var(--accent), rgba(201,169,110,0.4));
+      border-radius: 4px 4px 2px 2px;
+      position: relative;
+    }
+    .icon-pen::after {
+      content: '';
+      position: absolute;
+      bottom: -12px; left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 12px solid rgba(201,169,110,0.6);
+    }
+
+    /* wallet */
+    .icon-wallet {
+      width: 64px; height: 42px;
+      border: 2px solid var(--accent);
+      border-radius: 4px;
+      position: relative;
+    }
+    .icon-wallet::before {
+      content: '';
+      position: absolute;
+      right: -2px; top: 50%;
+      transform: translateY(-50%);
+      width: 22px; height: 28px;
+      border: 2px solid var(--accent);
+      border-radius: 0 4px 4px 0;
+      background: rgba(201,169,110,0.08);
+    }
+    .icon-wallet::after {
+      content: '';
+      position: absolute;
+      right: 6px; top: 50%;
+      transform: translateY(-50%);
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    /* decanter */
+    .icon-decanter {
+      width: 38px; height: 72px;
+      background: transparent;
+      border: 2px solid var(--accent);
+      border-radius: 4px 4px 12px 12px;
+      position: relative;
+    }
+    .icon-decanter::before {
+      content: '';
+      position: absolute;
+      top: -18px; left: 50%;
+      transform: translateX(-50%);
+      width: 18px; height: 18px;
+      border: 2px solid var(--accent);
+      border-radius: 2px;
+    }
+    .icon-decanter::after {
+      content: '';
+      position: absolute;
+      bottom: 12px; left: 50%;
+      transform: translateX(-50%);
+      width: 20px; height: 1px;
+      background: rgba(201,169,110,0.5);
+    }
+
+    /* throw / blanket */
+    .icon-throw {
+      width: 68px; height: 48px;
+      position: relative;
+    }
+    .icon-throw::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 2px solid var(--accent);
+      border-radius: 2px;
+    }
+    .icon-throw::after {
+      content: '';
+      position: absolute;
+      top: 8px; left: 8px; right: 8px; bottom: 8px;
+      border: 1px solid rgba(201,169,110,0.4);
+      border-radius: 1px;
+    }
+
+    .product-info {
+      padding: 28px 28px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+    }
+
+    .product-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 500;
+      color: var(--text);
+      letter-spacing: 0.01em;
+    }
+
+    .product-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.83rem;
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    .product-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 12px;
+    }
+
+    .product-price {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.02em;
+    }
+
+    .product-btn {
+      display: inline-block;
+      padding: 9px 22px;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: var(--radius-pill);
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.35s var(--ease);
+    }
+    .product-btn:hover {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    /* ─── FOOTER ─── */
+    .footer {
+      padding: 48px;
+      background: var(--surface);
+      border-top: var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+    }
+    .footer-copy {
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .product-card {
+      transition: opacity 0.6s var(--ease), transform 0.6s var(--ease), box-shadow 0.35s var(--ease);
+    }
+    .product-card.visible:hover {
+      transform: translateY(-4px);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      :root { --section-pad: 60px; }
+      .nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .products-hero { padding: 60px 24px 48px; }
+      .products-section { padding: 48px 24px 60px; }
+      .footer { padding: 32px 24px; }
+    }
+
+    @media (max-width: 480px) {
+      .products-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAV ─── -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">AURUM</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="products.html" class="active">Products</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle" hidden />
+    <label for="nav-toggle" class="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </label>
+    <div class="nav-mobile">
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="about.html">About</a>
+    </div>
+  </nav>
+
+  <!-- ─── PRODUCTS HERO ─── -->
+  <section class="products-hero">
+    <span class="eyebrow">Our Collection</span>
+    <h1 class="hero-heading">Curated Excellence</h1>
+  </section>
+
+  <!-- ─── PRODUCTS GRID ─── -->
+  <main class="products-section">
+    <div class="products-grid" id="productsGrid">
+
+      <!-- 1 -->
+      <article class="product-card">
+        <div class="product-image">
+          <div class="product-icon"><div class="icon-watch"></div></div>
+        </div>
+        <div class="product-info">
+          <h2 class="product-title">The Obsidian Watch</h2>
+          <p class="product-desc">Precision timekeeping</p>
+          <div class="product-footer">
+            <span class="product-price">$2,400</span>
+            <button class="product-btn">View Details →</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 2 -->
+      <article class="product-card">
+        <div class="product-image">
+          <div class="product-icon"><div class="icon-bag"></div></div>
+        </div>
+        <div class="product-info">
+          <h2 class="product-title">Velvet Cipher Bag</h2>
+          <p class="product-desc">Structured elegance</p>
+          <div class="product-footer">
+            <span class="product-price">$890</span>
+            <button class="product-btn">View Details →</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 3 -->
+      <article class="product-card">
+        <div class="product-image">
+          <div class="product-icon"><div class="icon-pen"></div></div>
+        </div>
+        <div class="product-info">
+          <h2 class="product-title">Aurum Pen Set</h2>
+          <p class="product-desc">Writing reimagined</p>
+          <div class="product-footer">
+            <span class="product-price">$340</span>
+            <button class="product-btn">View Details →</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 4 -->
+      <article class="product-card">
+        <div class="product-image">
+          <div class="product-icon"><div class="icon-wallet"></div></div>
+        </div>
+        <div class="product-info">
+          <h2 class="product-title">The Noir Wallet</h2>
+          <p class="product-desc">Slim profile luxury</p>
+          <div class="product-footer">
+            <span class="product-price">$420</span>
+            <button class="product-btn">View Details →</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 5 -->
+      <article class="product-card">
+        <div class="product-image">
+          <div class="product-icon"><div class="icon-decanter"></div></div>
+        </div>
+        <div class="product-info">
+          <h2 class="product-title">Crystalline Decanter</h2>
+          <p class="product-desc">For the discerning host</p>
+          <div class="product-footer">
+            <span class="product-price">$680</span>
+            <button class="product-btn">View Details →</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 6 -->
+      <article class="product-card">
+        <div class="product-image">
+          <div class="product-icon"><div class="icon-throw"></div></div>
+        </div>
+        <div class="product-info">
+          <h2 class="product-title">Cashmere Throw</h2>
+          <p class="product-desc">Warmth, refined</p>
+          <div class="product-footer">
+            <span class="product-price">$560</span>
+            <button class="product-btn">View Details →</button>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <!-- ─── FOOTER ─── -->
+  <footer class="footer">
+    <span class="footer-logo">AURUM</span>
+    <span class="footer-copy">© 2026 Aurum. All rights reserved.</span>
+  </footer>
+
+  <script>
+    // ─── PRODUCT CARD SCROLL ANIMATION ───
+    (function() {
+      var cards = document.querySelectorAll('.product-card');
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            observer.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      cards.forEach(function(c) { observer.observe(c); });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-label="Plate study">
+  <rect width="800" height="1000" fill="#141210"/>
+  <circle cx="400" cy="430" r="220" fill="none" stroke="#c6a572" stroke-width="2"/>
+  <circle cx="400" cy="430" r="150" fill="#221e18" stroke="#c6a572"/>
+  <text x="400" y="820" text-anchor="middle" fill="#d8d0c2" font-family="Georgia, serif" font-size="28" letter-spacing="6">TWILIGHT</text>
+</svg>

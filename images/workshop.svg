@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 1400" role="img" aria-label="Workshop study">
+  <rect width="1100" height="1400" fill="#191612"/>
+  <rect x="160" y="180" width="780" height="980" fill="none" stroke="#c6a572" stroke-opacity="0.4"/>
+  <path d="M220 980h660M300 200v900" stroke="#c6a572" stroke-opacity="0.35"/>
+  <text x="550" y="1280" text-anchor="middle" fill="#d8d0c2" font-family="Georgia, serif" font-size="32" letter-spacing="10">FOUNDRY</text>
+</svg>
