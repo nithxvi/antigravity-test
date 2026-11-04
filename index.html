@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AURUM — Home</title>
+  <title>TRESA — Home</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -47,7 +47,7 @@
       justify-content: space-between;
       padding: 0 48px;
       height: 72px;
-      background: rgba(14,14,15,0.72);
+      background: rgba(14,14,15,0.85);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border-bottom: var(--border);
@@ -60,6 +60,8 @@
       color: var(--accent);
       letter-spacing: 0.18em;
       text-decoration: none;
+      position: relative;
+      z-index: 1200;
     }
 
     .nav-links {
@@ -95,58 +97,79 @@
     .nav-links a.active::after { width: 100%; }
     .nav-links a.active { color: var(--accent); }
 
-    /* Hamburger */
-    .nav-toggle { display: none; }
-    .hamburger {
+    /* ─── HAMBURGER (JS-driven) ─── */
+    .hamburger-btn {
       display: none;
       flex-direction: column;
       justify-content: space-between;
-      width: 24px; height: 16px;
+      width: 26px;
+      height: 18px;
       cursor: pointer;
-      z-index: 1100;
+      background: none;
+      border: none;
+      padding: 0;
       position: relative;
+      z-index: 1200;
     }
-    .hamburger span {
+    .hamburger-btn span {
       display: block;
-      width: 100%; height: 1.5px;
+      width: 100%;
+      height: 1.5px;
       background: var(--text);
-      transition: all 0.35s var(--ease);
-      pointer-events: none;
+      border-radius: 2px;
+      transition: transform 0.35s var(--ease), opacity 0.35s var(--ease), background 0.35s var(--ease);
     }
+    .hamburger-btn.open span:nth-child(1) { transform: translateY(8.25px) rotate(45deg); background: var(--accent); }
+    .hamburger-btn.open span:nth-child(2) { opacity: 0; }
+    .hamburger-btn.open span:nth-child(3) { transform: translateY(-8.25px) rotate(-45deg); background: var(--accent); }
 
-    .nav-toggle:checked ~ .hamburger span:nth-child(1) {
-      transform: translateY(7px) rotate(45deg);
-    }
-    .nav-toggle:checked ~ .hamburger span:nth-child(2) { opacity: 0; }
-    .nav-toggle:checked ~ .hamburger span:nth-child(3) {
-      transform: translateY(-7px) rotate(-45deg);
-    }
-
+    /* ─── MOBILE MENU ─── */
     .nav-mobile {
-      display: none;
       position: fixed;
       inset: 0;
-      background: rgba(14,14,15,0.97);
-      backdrop-filter: blur(16px);
+      background: rgba(14,14,15,0.98);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 40px;
-      z-index: 999;
+      gap: 0;
+      z-index: 1100;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.4s var(--ease);
     }
-
-    .nav-toggle:checked ~ .nav-mobile { display: flex; }
-
+    .nav-mobile.open {
+      opacity: 1;
+      pointer-events: all;
+    }
     .nav-mobile a {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 2.5rem;
+      font-size: clamp(2.2rem, 8vw, 3.5rem);
       font-weight: 400;
       color: var(--text);
       text-decoration: none;
-      letter-spacing: 0.05em;
-      transition: color 0.3s var(--ease);
+      letter-spacing: 0.06em;
+      padding: 18px 48px;
+      width: 100%;
+      text-align: center;
+      border-bottom: 1px solid rgba(201,169,110,0.08);
+      transition: color 0.3s var(--ease), background 0.3s var(--ease);
+      transform: translateY(16px);
+      opacity: 0;
+      transition: color 0.3s var(--ease), background 0.3s var(--ease), transform 0.4s var(--ease), opacity 0.4s var(--ease);
     }
-    .nav-mobile a:hover { color: var(--accent); }
+    .nav-mobile.open a {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .nav-mobile.open a:nth-child(1) { transition-delay: 0.08s; }
+    .nav-mobile.open a:nth-child(2) { transition-delay: 0.14s; }
+    .nav-mobile.open a:nth-child(3) { transition-delay: 0.20s; }
+    .nav-mobile a:first-child { border-top: 1px solid rgba(201,169,110,0.08); }
+    .nav-mobile a:hover { color: var(--accent); background: rgba(201,169,110,0.04); }
+    .nav-mobile a.active { color: var(--accent); }
 
     /* ─── HERO CAROUSEL ─── */
     .carousel {
@@ -242,12 +265,8 @@
       opacity: 0;
       animation: fadeUp 0.7s var(--ease) 0.7s forwards;
     }
-    .slide-cta:hover {
-      background: var(--accent);
-      color: var(--bg);
-    }
+    .slide-cta:hover { background: var(--accent); color: var(--bg); }
 
-    /* Arrow buttons */
     .carousel-arrow {
       position: absolute;
       top: 50%;
@@ -269,7 +288,6 @@
     .carousel-arrow.prev { left: 28px; }
     .carousel-arrow.next { right: 28px; }
 
-    /* Dots */
     .carousel-dots {
       position: absolute;
       bottom: 32px;
@@ -287,15 +305,27 @@
       transition: all 0.35s var(--ease);
       width: 20px;
     }
-    .carousel-dot.active {
-      background: var(--accent);
-      width: 36px;
+    .carousel-dot.active { background: var(--accent); width: 36px; }
+
+    /* ─── BEST SELLERS ALTERNATING SPLIT-SCREEN ─── */
+    .bestsellers-section {
+      padding: var(--section-pad) 48px;
+      background: var(--surface);
+      border-top: var(--border);
+      border-bottom: var(--border);
+      position: relative;
     }
 
-    /* ─── REVIEWS ─── */
-    .reviews-section {
-      padding: var(--section-pad) 48px;
-      background: var(--bg);
+    .section-eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: block;
+      text-align: center;
+      margin-bottom: 16px;
     }
 
     .section-title {
@@ -304,8 +334,317 @@
       font-weight: 400;
       color: var(--text);
       text-align: center;
-      margin-bottom: 64px;
+      margin-bottom: 80px;
       letter-spacing: 0.01em;
+    }
+
+    .bestsellers-container {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 72px;
+    }
+
+    .bs-row {
+      display: flex;
+      align-items: center;
+      gap: 64px;
+      background: var(--card);
+      border: var(--border);
+      border-radius: var(--radius-card);
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s var(--ease), transform 0.8s var(--ease), box-shadow 0.4s var(--ease), border-color 0.4s var(--ease);
+    }
+    .bs-row.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .bs-row:hover {
+      border-color: rgba(201,169,110,0.38);
+      box-shadow: 0 24px 64px rgba(0,0,0,0.5), 0 0 40px rgba(201,169,110,0.06);
+    }
+
+    /* Alternating row layout */
+    .bs-row:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+
+    /* Eye-catching large media placeholder dominating screen space */
+    .bs-media {
+      flex: 1.2;
+      min-width: 0;
+      height: 480px;
+      position: relative;
+    }
+
+    .bs-image-box {
+      width: 100%;
+      height: 100%;
+      border-radius: calc(var(--radius-card) - 1px);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(201,169,110,0.12);
+      transition: transform 0.6s var(--ease);
+    }
+    .bs-row:hover .bs-image-box {
+      transform: scale(1.01);
+    }
+
+    /* Unique rich atmospheres per product row */
+    .bs-row:nth-child(1) .bs-image-box {
+      background: radial-gradient(circle at 45% 45%, rgba(201,169,110,0.18) 0%, rgba(26,26,29,0.95) 55%, #0B0B0C 100%);
+    }
+    .bs-row:nth-child(2) .bs-image-box {
+      background: radial-gradient(circle at 55% 45%, rgba(201,169,110,0.2) 0%, rgba(29,25,20,0.95) 55%, #0B0B0C 100%);
+    }
+    .bs-row:nth-child(3) .bs-image-box {
+      background: radial-gradient(circle at 45% 55%, rgba(201,169,110,0.16) 0%, rgba(22,24,28,0.95) 55%, #0B0B0C 100%);
+    }
+    .bs-row:nth-child(4) .bs-image-box {
+      background: radial-gradient(circle at 50% 50%, rgba(201,169,110,0.19) 0%, rgba(27,21,18,0.95) 55%, #0B0B0C 100%);
+    }
+
+    .bs-badge {
+      position: absolute;
+      top: 24px;
+      left: 24px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(14,14,15,0.72);
+      border: 1px solid rgba(201,169,110,0.25);
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      backdrop-filter: blur(8px);
+      z-index: 2;
+    }
+
+    .bs-ambient-glow {
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,169,110,0.25) 0%, transparent 70%);
+      filter: blur(30px);
+      pointer-events: none;
+      animation: pulseGlow 6s ease-in-out infinite alternate;
+    }
+    @keyframes pulseGlow {
+      0% { transform: scale(0.9); opacity: 0.4; }
+      100% { transform: scale(1.15); opacity: 0.75; }
+    }
+
+    .bs-icon {
+      position: relative;
+      z-index: 1;
+      transform: scale(1.55);
+      opacity: 0.75;
+      transition: transform 0.5s var(--ease), opacity 0.5s var(--ease);
+    }
+    .bs-row:hover .bs-icon {
+      transform: scale(1.7);
+      opacity: 0.95;
+    }
+
+    /* reuse icon shapes */
+    .icon-fork {
+      width: 6px; height: 72px;
+      background: linear-gradient(to bottom, var(--accent), rgba(201,169,110,0.4));
+      border-radius: 3px 3px 2px 2px;
+      position: relative;
+    }
+    .icon-fork::before {
+      content: '';
+      position: absolute;
+      top: -14px; left: 50%;
+      transform: translateX(-50%);
+      width: 16px; height: 14px;
+      border: 1.5px solid var(--accent);
+      border-bottom: none;
+      border-radius: 2px 2px 0 0;
+    }
+
+    .icon-plate {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .icon-plate::before {
+      content: '';
+      width: 46px; height: 46px;
+      border-radius: 50%;
+      border: 1px solid rgba(201,169,110,0.5);
+    }
+
+    .icon-placemat {
+      width: 76px; height: 50px;
+      border: 2px solid var(--accent);
+      border-radius: 6px;
+      position: relative;
+    }
+    .icon-placemat::before {
+      content: '';
+      position: absolute;
+      inset: 7px;
+      border: 1px solid rgba(201,169,110,0.4);
+      border-radius: 3px;
+    }
+
+    .icon-spoon {
+      width: 10px; height: 70px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .icon-spoon::before {
+      content: '';
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: rgba(201,169,110,0.2);
+      border: 2px solid var(--accent);
+      flex-shrink: 0;
+    }
+    .icon-spoon::after {
+      content: '';
+      width: 3px;
+      flex: 1;
+      background: linear-gradient(to bottom, var(--accent), rgba(201,169,110,0.4));
+      border-radius: 0 0 2px 2px;
+    }
+
+    /* Details side with bold typography & negative space */
+    .bs-details {
+      flex: 1;
+      min-width: 0;
+      padding: 24px 36px 24px 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .bs-row:nth-child(even) .bs-details {
+      padding: 24px 16px 24px 36px;
+    }
+
+    .bs-tag {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+      display: inline-block;
+    }
+
+    .bs-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.3rem, 3.5vw, 3.3rem);
+      font-weight: 500;
+      line-height: 1.12;
+      color: var(--text);
+      letter-spacing: 0.01em;
+      margin-bottom: 20px;
+    }
+
+    .bs-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.98rem;
+      font-weight: 300;
+      line-height: 1.85;
+      color: rgba(240,237,232,0.78);
+      margin-bottom: 36px;
+      max-width: 480px;
+    }
+
+    .bs-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 24px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(201,169,110,0.16);
+    }
+
+    .bs-price-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .bs-price-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .bs-price {
+      font-family: 'Inter', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #F8E4BA;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      text-shadow: 0 0 20px rgba(201,169,110,0.3);
+    }
+
+    /* "Purchase" external link button */
+    .bs-purchase-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 15px 36px;
+      background: var(--accent);
+      color: var(--bg);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: var(--radius-pill);
+      box-shadow: 0 6px 24px rgba(201,169,110,0.25);
+      transition: all 0.35s var(--ease);
+    }
+    .bs-purchase-btn svg {
+      width: 15px;
+      height: 15px;
+      stroke: currentColor;
+      transition: transform 0.35s var(--ease);
+    }
+    .bs-purchase-btn:hover {
+      background: #E8C88B;
+      color: #0E0E0F;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 32px rgba(201,169,110,0.45);
+    }
+    .bs-purchase-btn:hover svg {
+      transform: translate(2px, -2px);
+    }
+
+    /* ─── REVIEWS ─── */
+    .reviews-section {
+      padding: var(--section-pad) 48px;
+      background: var(--bg);
     }
 
     .reviews-grid {
@@ -328,9 +667,7 @@
       transform: translateY(30px);
       transition: opacity 0.6s var(--ease), transform 0.6s var(--ease), box-shadow 0.35s var(--ease);
     }
-    .review-card:hover {
-      box-shadow: 0 8px 40px rgba(201,169,110,0.08);
-    }
+    .review-card:hover { box-shadow: 0 8px 40px rgba(201,169,110,0.08); }
     .review-card.visible { opacity: 1; transform: translateY(0); }
     .review-card:nth-child(1) { transition-delay: 0s; }
     .review-card:nth-child(2) { transition-delay: 0.1s; }
@@ -350,11 +687,7 @@
       flex: 1;
     }
 
-    .review-author {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
+    .review-author { display: flex; align-items: center; gap: 14px; }
 
     .review-avatar {
       width: 42px; height: 42px;
@@ -370,17 +703,8 @@
     }
 
     .review-meta { display: flex; flex-direction: column; gap: 2px; }
-    .review-name {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.88rem;
-      font-weight: 500;
-      color: var(--text);
-    }
-    .review-role {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.75rem;
-      color: var(--muted);
-    }
+    .review-name { font-family: 'Inter', sans-serif; font-size: 0.88rem; font-weight: 500; color: var(--text); }
+    .review-role { font-family: 'Inter', sans-serif; font-size: 0.75rem; color: var(--muted); }
 
     /* ─── TEXT TICKER ─── */
     .ticker-section {
@@ -402,20 +726,10 @@
       line-height: 1.35;
       transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
     }
-    .ticker-text.fade-out {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    .ticker-text.fade-in {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .ticker-text.fade-out { opacity: 0; transform: translateY(10px); }
+    .ticker-text.fade-in { opacity: 1; transform: translateY(0); }
 
-    .ticker-dots {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-    }
+    .ticker-dots { display: flex; justify-content: center; gap: 8px; }
     .ticker-dot {
       width: 6px; height: 6px;
       border-radius: 50%;
@@ -423,10 +737,7 @@
       cursor: pointer;
       transition: all 0.35s var(--ease);
     }
-    .ticker-dot.active {
-      background: var(--accent);
-      transform: scale(1.3);
-    }
+    .ticker-dot.active { background: var(--accent); transform: scale(1.3); }
 
     /* ─── FOOTER ─── */
     .footer {
@@ -439,17 +750,8 @@
       flex-wrap: wrap;
       gap: 16px;
     }
-    .footer-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.3rem;
-      color: var(--accent);
-      letter-spacing: 0.15em;
-    }
-    .footer-copy {
-      font-size: 0.78rem;
-      color: var(--muted);
-      letter-spacing: 0.06em;
-    }
+    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--accent); letter-spacing: 0.15em; }
+    .footer-copy { font-size: 0.78rem; color: var(--muted); letter-spacing: 0.06em; }
 
     /* ─── ANIMATIONS ─── */
     @keyframes fadeUp {
@@ -457,7 +759,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* ─── REDUCED MOTION ─── */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
     }
@@ -467,11 +768,29 @@
       :root { --section-pad: 60px; }
       .nav { padding: 0 24px; }
       .nav-links { display: none; }
-      .hamburger { display: flex; }
+      .hamburger-btn { display: flex; }
       .reviews-grid { grid-template-columns: 1fr; }
       .review-card:nth-child(5) { grid-column: auto; }
       .ticker-section { padding: 60px 24px; }
       .reviews-section { padding: 60px 24px; }
+      .bestsellers-section { padding: 60px 24px; }
+      .bestsellers-container { gap: 48px; }
+      .bs-row, .bs-row:nth-child(even) {
+        flex-direction: column;
+        padding: 24px;
+        gap: 28px;
+      }
+      .bs-media {
+        width: 100%;
+        height: 340px;
+      }
+      .bs-details, .bs-row:nth-child(even) .bs-details {
+        padding: 0 8px;
+        width: 100%;
+      }
+      .bs-desc {
+        max-width: 100%;
+      }
       .footer { padding: 32px 24px; }
     }
 
@@ -480,6 +799,13 @@
       .carousel-arrow.prev { left: 12px; }
       .carousel-arrow.next { right: 12px; }
       .slide-headline { font-size: 2.4rem; }
+      .bs-media { height: 280px; }
+      .bs-icon { transform: scale(1.25); }
+      .bs-row:hover .bs-icon { transform: scale(1.35); }
+      .bs-title { font-size: 2rem; }
+      .bs-price { font-size: 1.8rem; }
+      .bs-meta-row { flex-direction: column; align-items: flex-start; gap: 18px; }
+      .bs-purchase-btn { width: 100%; justify-content: center; }
     }
   </style>
 </head>
@@ -487,22 +813,23 @@
 
   <!-- ─── NAV ─── -->
   <nav class="nav">
-    <a href="index.html" class="nav-logo">AURUM</a>
+    <a href="index.html" class="nav-logo">TRESA</a>
     <ul class="nav-links">
       <li><a href="index.html" class="active">Home</a></li>
       <li><a href="products.html">Products</a></li>
       <li><a href="about.html">About</a></li>
     </ul>
-    <input type="checkbox" id="nav-toggle" class="nav-toggle" hidden />
-    <label for="nav-toggle" class="hamburger" aria-label="Toggle menu">
+    <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false">
       <span></span><span></span><span></span>
-    </label>
-    <div class="nav-mobile">
-      <a href="index.html">Home</a>
-      <a href="products.html">Products</a>
-      <a href="about.html">About</a>
-    </div>
+    </button>
   </nav>
+
+  <!-- ─── MOBILE MENU ─── -->
+  <div class="nav-mobile" id="navMobile" role="dialog" aria-label="Navigation menu">
+    <a href="index.html" class="active">Home</a>
+    <a href="products.html">Products</a>
+    <a href="about.html">About</a>
+  </div>
 
   <!-- ─── HERO CAROUSEL ─── -->
   <section class="carousel" id="carousel" aria-label="Hero carousel">
@@ -521,7 +848,7 @@
       <div class="carousel-slide">
         <video autoplay muted loop playsinline src="https://www.w3schools.com/html/movie.mp4"></video>
         <div class="carousel-overlay">
-          <span class="slide-eyebrow">The Aurum Edit</span>
+          <span class="slide-eyebrow">The Tresa Edit</span>
           <h1 class="slide-headline">Refined Without Effort</h1>
           <p class="slide-sub">Objects that whisper the language of excellence.</p>
           <a href="products.html" class="slide-cta">Discover More</a>
@@ -531,7 +858,7 @@
       <div class="carousel-slide">
         <video autoplay muted loop playsinline src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm"></video>
         <div class="carousel-overlay">
-          <span class="slide-eyebrow">Heritage & Craft</span>
+          <span class="slide-eyebrow">Heritage &amp; Craft</span>
           <h1 class="slide-headline">Made to Be Kept</h1>
           <p class="slide-sub">Heirlooms in the making — beauty with intent.</p>
           <a href="about.html" class="slide-cta">Our Story</a>
@@ -554,6 +881,119 @@
     </div>
   </section>
 
+  <!-- ─── BEST SELLERS (ALTERNATING SPLIT-SCREEN) ─── -->
+  <section class="bestsellers-section" id="bestsellers">
+    <span class="section-eyebrow">Most Loved</span>
+    <h2 class="section-title">Best Sellers</h2>
+    <div class="bestsellers-container" id="bestsellersContainer">
+
+      <!-- Row 1: Image Left / Text Right -->
+      <article class="bs-row">
+        <div class="bs-media">
+          <div class="bs-image-box">
+            <span class="bs-badge">Atelier No. 01</span>
+            <div class="bs-ambient-glow"></div>
+            <div class="bs-icon"><div class="icon-plate"></div></div>
+          </div>
+        </div>
+        <div class="bs-details">
+          <span class="bs-tag">Ceramic Artistry</span>
+          <h3 class="bs-title">The Matte Dinner Plate</h3>
+          <p class="bs-desc">Hand-thrown from ultra-fine bone china with our signature smoked-ash matte glaze. Designed with an intentional low rim and substantial weight, each piece elevates daily dining into a quiet ceremonial experience.</p>
+          <div class="bs-meta-row">
+            <div class="bs-price-wrap">
+              <span class="bs-price-label">Price</span>
+              <span class="bs-price">$180</span>
+            </div>
+            <a href="products.html#plates" class="bs-purchase-btn" aria-label="Purchase The Matte Dinner Plate">
+              <span>Purchase</span>
+              <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Row 2: Text Left / Image Right -->
+      <article class="bs-row">
+        <div class="bs-media">
+          <div class="bs-image-box">
+            <span class="bs-badge">Atelier No. 02</span>
+            <div class="bs-ambient-glow"></div>
+            <div class="bs-icon"><div class="icon-fork"></div></div>
+          </div>
+        </div>
+        <div class="bs-details">
+          <span class="bs-tag">Forged Titanium</span>
+          <h3 class="bs-title">Noir Cutlery Set</h3>
+          <p class="bs-desc">Forged from medical-grade stainless steel with vapor-deposited matte black titanium. Sculptural balance and whisper-thin knife bevels combine timeless European silhouettes with razor precision.</p>
+          <div class="bs-meta-row">
+            <div class="bs-price-wrap">
+              <span class="bs-price-label">Price</span>
+              <span class="bs-price">$340</span>
+            </div>
+            <a href="products.html#cutlery" class="bs-purchase-btn" aria-label="Purchase Noir Cutlery Set">
+              <span>Purchase</span>
+              <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Row 3: Image Left / Text Right -->
+      <article class="bs-row">
+        <div class="bs-media">
+          <div class="bs-image-box">
+            <span class="bs-badge">Atelier No. 03</span>
+            <div class="bs-ambient-glow"></div>
+            <div class="bs-icon"><div class="icon-placemat"></div></div>
+          </div>
+        </div>
+        <div class="bs-details">
+          <span class="bs-tag">Pure Belgian Flax</span>
+          <h3 class="bs-title">Linen Weave Placemat</h3>
+          <p class="bs-desc">Woven on artisanal looms in Flanders using unbleached heirloom flax fibers. Stonewashed to a soft, tactile drape with raw hem detailing that catches ambient room light with quiet elegance.</p>
+          <div class="bs-meta-row">
+            <div class="bs-price-wrap">
+              <span class="bs-price-label">Price</span>
+              <span class="bs-price">$95</span>
+            </div>
+            <a href="products.html#placemats" class="bs-purchase-btn" aria-label="Purchase Linen Weave Placemat">
+              <span>Purchase</span>
+              <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Row 4: Text Left / Image Right -->
+      <article class="bs-row">
+        <div class="bs-media">
+          <div class="bs-image-box">
+            <span class="bs-badge">Atelier No. 04</span>
+            <div class="bs-ambient-glow"></div>
+            <div class="bs-icon"><div class="icon-spoon"></div></div>
+          </div>
+        </div>
+        <div class="bs-details">
+          <span class="bs-tag">Sterling Craft</span>
+          <h3 class="bs-title">Artisan Serving Spoon</h3>
+          <p class="bs-desc">Individually hand-hammered and buffed to an iridescent satin finish. An ergonomic counterbalance neck ensures grace in every movement, turning shared table courses into an intentional art form.</p>
+          <div class="bs-meta-row">
+            <div class="bs-price-wrap">
+              <span class="bs-price-label">Price</span>
+              <span class="bs-price">$125</span>
+            </div>
+            <a href="products.html#cutlery" class="bs-purchase-btn" aria-label="Purchase Artisan Serving Spoon">
+              <span>Purchase</span>
+              <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
   <!-- ─── REVIEWS ─── -->
   <section class="reviews-section">
     <h2 class="section-title">What Our Clients Say</h2>
@@ -561,7 +1001,7 @@
 
       <div class="review-card">
         <div class="review-stars">★★★★★</div>
-        <p class="review-quote">"Every Aurum piece I own feels like it was made specifically for me. The craftsmanship is simply unmatched in today's market."</p>
+        <p class="review-quote">"Every Tresa piece I own feels like it was made specifically for me. The craftsmanship is simply unmatched in today's market."</p>
         <div class="review-author">
           <div class="review-avatar" style="background: linear-gradient(135deg,#C9A96E,#a07840);">EC</div>
           <div class="review-meta">
@@ -573,7 +1013,7 @@
 
       <div class="review-card">
         <div class="review-stars">★★★★★</div>
-        <p class="review-quote">"I gifted the Obsidian Watch to my partner and the reaction was priceless. Aurum understands that true luxury is in the details."</p>
+        <p class="review-quote">"I gifted the dinner set to my partner and the reaction was priceless. Tresa understands that true luxury is in the details."</p>
         <div class="review-author">
           <div class="review-avatar" style="background: linear-gradient(135deg,#6e8ca0,#3a5f74);">MS</div>
           <div class="review-meta">
@@ -585,7 +1025,7 @@
 
       <div class="review-card">
         <div class="review-stars">★★★★★</div>
-        <p class="review-quote">"The Velvet Cipher Bag is my most-complimented possession. A conversation piece that never grows old."</p>
+        <p class="review-quote">"The placemats are my most-complimented table piece. A conversation starter that never grows old."</p>
         <div class="review-author">
           <div class="review-avatar" style="background: linear-gradient(135deg,#9e7ea0,#6a3f6e);">IR</div>
           <div class="review-meta">
@@ -597,7 +1037,7 @@
 
       <div class="review-card">
         <div class="review-stars">★★★★★</div>
-        <p class="review-quote">"Exceptional quality, impeccable packaging, and customer service that feels personal. Aurum has earned a lifelong client."</p>
+        <p class="review-quote">"Exceptional quality, impeccable packaging, and service that feels personal. Tresa has earned a lifelong client."</p>
         <div class="review-author">
           <div class="review-avatar" style="background: linear-gradient(135deg,#7ea07e,#3f6a3f);">JK</div>
           <div class="review-meta">
@@ -609,12 +1049,12 @@
 
       <div class="review-card">
         <div class="review-stars">★★★★★</div>
-        <p class="review-quote">"There is a silence to Aurum's aesthetic — it doesn't shout luxury, it radiates it. The Aurum Pen Set has found a permanent home on my desk and in my daily ritual. A brand that truly understands the meaning of refinement."</p>
+        <p class="review-quote">"There is a silence to Tresa's aesthetic — it doesn't shout luxury, it radiates it. The cutlery set has found a permanent home on my table and in my daily ritual. A brand that truly understands the meaning of refinement."</p>
         <div class="review-author">
           <div class="review-avatar" style="background: linear-gradient(135deg,#a09e6e,#706e3a);">SF</div>
           <div class="review-meta">
             <span class="review-name">Sophia Fontaine</span>
-            <span class="review-role">Author & Essayist, New York</span>
+            <span class="review-role">Author &amp; Essayist, New York</span>
           </div>
         </div>
       </div>
@@ -635,24 +1075,52 @@
 
   <!-- ─── FOOTER ─── -->
   <footer class="footer">
-    <span class="footer-logo">AURUM</span>
-    <span class="footer-copy">© 2026 Aurum. All rights reserved.</span>
+    <span class="footer-logo">TRESA</span>
+    <span class="footer-copy">© 2026 Tresa. All rights reserved.</span>
   </footer>
 
   <script>
+    // ─── MOBILE NAV ───
+    (function() {
+      var btn = document.getElementById('hamburgerBtn');
+      var menu = document.getElementById('navMobile');
+      var open = false;
+
+      function toggleMenu() {
+        open = !open;
+        btn.classList.toggle('open', open);
+        menu.classList.toggle('open', open);
+        btn.setAttribute('aria-expanded', open);
+        document.body.style.overflow = open ? 'hidden' : '';
+      }
+
+      btn.addEventListener('click', toggleMenu);
+
+      // Close on link click
+      menu.querySelectorAll('a').forEach(function(link) {
+        link.addEventListener('click', function() {
+          if (open) toggleMenu();
+        });
+      });
+
+      // Close on Escape key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && open) toggleMenu();
+      });
+    })();
+
     // ─── HERO CAROUSEL ───
     (function() {
-      const track = document.getElementById('carouselTrack');
-      const dots = document.querySelectorAll('#carouselDots .carousel-dot');
-      const slides = document.querySelectorAll('.carousel-slide');
-      let current = 0;
-      let autoTimer;
+      var track = document.getElementById('carouselTrack');
+      var dots = document.querySelectorAll('#carouselDots .carousel-dot');
+      var slides = document.querySelectorAll('.carousel-slide');
+      var current = 0;
+      var autoTimer;
 
       function goTo(idx) {
         current = (idx + slides.length) % slides.length;
         track.style.transform = 'translateX(-' + ((100 / 3) * current) + '%)';
         dots.forEach(function(d, i) { d.classList.toggle('active', i === current); });
-        // Restart text animations
         var overlay = slides[current].querySelector('.carousel-overlay');
         var els = overlay.querySelectorAll('.slide-eyebrow, .slide-headline, .slide-sub, .slide-cta');
         els.forEach(function(el) {
@@ -670,6 +1138,15 @@
 
       function startAuto() { autoTimer = setInterval(function() { goTo(current + 1); }, 5000); }
       startAuto();
+    })();
+
+    // ─── BEST SELLERS SCROLL ANIMATION ───
+    (function() {
+      var rows = document.querySelectorAll('.bs-row');
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+      }, { threshold: 0.15 });
+      rows.forEach(function(r) { observer.observe(r); });
     })();
 
     // ─── REVIEWS SCROLL ANIMATION ───
@@ -705,10 +1182,7 @@
         }, 500);
       }
 
-      dots.forEach(function(d) {
-        d.addEventListener('click', function() { showIdx(+d.dataset.index); });
-      });
-
+      dots.forEach(function(d) { d.addEventListener('click', function() { showIdx(+d.dataset.index); }); });
       setInterval(function() { showIdx((idx + 1) % statements.length); }, 3500);
     })();
   </script>

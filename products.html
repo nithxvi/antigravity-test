@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AURUM — Products</title>
+  <title>TRESA — Products</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -47,7 +47,7 @@
       justify-content: space-between;
       padding: 0 48px;
       height: 72px;
-      background: rgba(14,14,15,0.72);
+      background: rgba(14,14,15,0.85);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border-bottom: var(--border);
@@ -60,6 +60,8 @@
       color: var(--accent);
       letter-spacing: 0.18em;
       text-decoration: none;
+      position: relative;
+      z-index: 1200;
     }
 
     .nav-links {
@@ -95,50 +97,72 @@
     .nav-links a.active::after { width: 100%; }
     .nav-links a.active { color: var(--accent); }
 
-    .nav-toggle { display: none; }
-    .hamburger {
+    /* ─── HAMBURGER ─── */
+    .hamburger-btn {
       display: none;
       flex-direction: column;
       justify-content: space-between;
-      width: 24px; height: 16px;
+      width: 26px;
+      height: 18px;
       cursor: pointer;
-      z-index: 1100;
+      background: none;
+      border: none;
+      padding: 0;
       position: relative;
+      z-index: 1200;
     }
-    .hamburger span {
+    .hamburger-btn span {
       display: block;
-      width: 100%; height: 1.5px;
+      width: 100%;
+      height: 1.5px;
       background: var(--text);
-      transition: all 0.35s var(--ease);
-      pointer-events: none;
+      border-radius: 2px;
+      transition: transform 0.35s var(--ease), opacity 0.35s var(--ease), background 0.35s var(--ease);
     }
-    .nav-toggle:checked ~ .hamburger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .nav-toggle:checked ~ .hamburger span:nth-child(2) { opacity: 0; }
-    .nav-toggle:checked ~ .hamburger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .hamburger-btn.open span:nth-child(1) { transform: translateY(8.25px) rotate(45deg); background: var(--accent); }
+    .hamburger-btn.open span:nth-child(2) { opacity: 0; }
+    .hamburger-btn.open span:nth-child(3) { transform: translateY(-8.25px) rotate(-45deg); background: var(--accent); }
 
+    /* ─── MOBILE MENU ─── */
     .nav-mobile {
-      display: none;
       position: fixed;
       inset: 0;
-      background: rgba(14,14,15,0.97);
-      backdrop-filter: blur(16px);
+      background: rgba(14,14,15,0.98);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 40px;
-      z-index: 999;
+      gap: 0;
+      z-index: 1100;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.4s var(--ease);
     }
-    .nav-toggle:checked ~ .nav-mobile { display: flex; }
+    .nav-mobile.open { opacity: 1; pointer-events: all; }
     .nav-mobile a {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 2.5rem;
+      font-size: clamp(2.2rem, 8vw, 3.5rem);
       font-weight: 400;
       color: var(--text);
       text-decoration: none;
-      letter-spacing: 0.05em;
-      transition: color 0.3s var(--ease);
+      letter-spacing: 0.06em;
+      padding: 18px 48px;
+      width: 100%;
+      text-align: center;
+      border-bottom: 1px solid rgba(201,169,110,0.08);
+      transform: translateY(16px);
+      opacity: 0;
+      transition: color 0.3s var(--ease), background 0.3s var(--ease), transform 0.4s var(--ease), opacity 0.4s var(--ease);
     }
-    .nav-mobile a:hover { color: var(--accent); }
+    .nav-mobile.open a { transform: translateY(0); opacity: 1; }
+    .nav-mobile.open a:nth-child(1) { transition-delay: 0.08s; }
+    .nav-mobile.open a:nth-child(2) { transition-delay: 0.14s; }
+    .nav-mobile.open a:nth-child(3) { transition-delay: 0.20s; }
+    .nav-mobile a:first-child { border-top: 1px solid rgba(201,169,110,0.08); }
+    .nav-mobile a:hover { color: var(--accent); background: rgba(201,169,110,0.04); }
+    .nav-mobile a.active { color: var(--accent); }
 
     /* ─── PRODUCTS HERO ─── */
     .products-hero {
@@ -172,15 +196,99 @@
       animation: fadeUp 0.7s var(--ease) 0.3s forwards;
     }
 
-    /* ─── PRODUCTS GRID ─── */
+    /* ─── CATEGORY FILTER NAV ─── */
+    .category-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 32px 48px;
+      background: var(--surface);
+      border-bottom: var(--border);
+      flex-wrap: wrap;
+      position: sticky;
+      top: 72px;
+      z-index: 100;
+    }
+
+    .cat-link {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 8px 22px;
+      border: 1px solid transparent;
+      border-radius: var(--radius-pill);
+      transition: all 0.35s var(--ease);
+    }
+    .cat-link:hover {
+      color: var(--text);
+      border-color: rgba(201,169,110,0.25);
+    }
+    .cat-link.active {
+      color: var(--bg);
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .cat-divider {
+      width: 1px;
+      height: 14px;
+      background: rgba(201,169,110,0.2);
+    }
+
+    /* ─── PRODUCTS SECTION ─── */
     .products-section {
-      padding: 80px 48px var(--section-pad);
+      padding: 0 48px var(--section-pad);
       background: var(--bg);
     }
 
+    /* ─── CATEGORY BLOCK ─── */
+    .category-block {
+      padding-top: 80px;
+    }
+
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-bottom: 40px;
+      max-width: 1280px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .category-header::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, rgba(201,169,110,0.25), transparent);
+    }
+
+    .category-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
+    .category-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+      font-weight: 400;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    /* ─── PRODUCTS GRID ─── */
     .products-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       gap: 2rem;
       max-width: 1280px;
       margin: 0 auto;
@@ -194,27 +302,15 @@
       display: flex;
       flex-direction: column;
       cursor: pointer;
-      transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
       opacity: 0;
       transform: translateY(32px);
+      transition: opacity 0.6s var(--ease), transform 0.6s var(--ease), box-shadow 0.35s var(--ease);
     }
-    .product-card.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .product-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 16px 48px rgba(201,169,110,0.1);
-    }
-    .product-card:nth-child(1) { transition-delay: 0s; }
-    .product-card:nth-child(2) { transition-delay: 0.08s; }
-    .product-card:nth-child(3) { transition-delay: 0.16s; }
-    .product-card:nth-child(4) { transition-delay: 0.24s; }
-    .product-card:nth-child(5) { transition-delay: 0.32s; }
-    .product-card:nth-child(6) { transition-delay: 0.40s; }
+    .product-card.visible { opacity: 1; transform: translateY(0); }
+    .product-card.visible:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(201,169,110,0.1); }
 
     .product-image {
-      height: 280px;
+      height: 260px;
       position: relative;
       overflow: hidden;
       display: flex;
@@ -222,27 +318,21 @@
       justify-content: center;
     }
 
-    /* unique gradient per card */
-    .product-card:nth-child(1) .product-image {
-      background: linear-gradient(145deg, #1a1a1c 0%, #0d0d10 40%, #1c1810 100%);
-    }
-    .product-card:nth-child(2) .product-image {
-      background: linear-gradient(145deg, #1c1a18 0%, #141214 50%, #0f0f12 100%);
-    }
-    .product-card:nth-child(3) .product-image {
-      background: linear-gradient(145deg, #121218 0%, #1a1710 60%, #0e0e0f 100%);
-    }
-    .product-card:nth-child(4) .product-image {
-      background: linear-gradient(145deg, #0e0e0f 0%, #161410 50%, #1c1a14 100%);
-    }
-    .product-card:nth-child(5) .product-image {
-      background: linear-gradient(145deg, #12161a 0%, #0e1014 50%, #1a1812 100%);
-    }
-    .product-card:nth-child(6) .product-image {
-      background: linear-gradient(145deg, #181614 0%, #0e0e12 50%, #1c1a16 100%);
-    }
+    /* Cutlery gradients */
+    .cat-cutlery .product-card:nth-child(1) .product-image { background: linear-gradient(145deg, #1a1a1c 0%, #0d0d10 40%, #1c1810 100%); }
+    .cat-cutlery .product-card:nth-child(2) .product-image { background: linear-gradient(145deg, #121218 0%, #1a1710 60%, #0e0e0f 100%); }
+    .cat-cutlery .product-card:nth-child(3) .product-image { background: linear-gradient(145deg, #181412 0%, #0e0e0f 50%, #1c1a16 100%); }
 
-    /* CSS geometric placeholder icons */
+    /* Plates gradients */
+    .cat-plates .product-card:nth-child(1) .product-image { background: linear-gradient(145deg, #12161a 0%, #0e1014 50%, #1a1812 100%); }
+    .cat-plates .product-card:nth-child(2) .product-image { background: linear-gradient(145deg, #1c1a18 0%, #141214 50%, #0f0f12 100%); }
+    .cat-plates .product-card:nth-child(3) .product-image { background: linear-gradient(145deg, #101418 0%, #0a0e12 55%, #181614 100%); }
+
+    /* Placemats gradients */
+    .cat-placemats .product-card:nth-child(1) .product-image { background: linear-gradient(145deg, #181614 0%, #0e0e12 50%, #1c1a16 100%); }
+    .cat-placemats .product-card:nth-child(2) .product-image { background: linear-gradient(145deg, #161414 0%, #0e0c0c 50%, #1a1816 100%); }
+    .cat-placemats .product-card:nth-child(3) .product-image { background: linear-gradient(145deg, #141618 0%, #0c0e10 50%, #181614 100%); }
+
     .product-icon {
       position: relative;
       display: flex;
@@ -253,140 +343,184 @@
     }
     .product-card:hover .product-icon { opacity: 0.85; transform: scale(1.05); }
 
-    /* watch */
-    .icon-watch {
-      width: 72px; height: 72px;
+    /* ─ Icon shapes ─ */
+    .icon-fork {
+      width: 6px; height: 72px;
+      background: linear-gradient(to bottom, var(--accent), rgba(201,169,110,0.4));
+      border-radius: 3px 3px 2px 2px;
+      position: relative;
+    }
+    .icon-fork::before {
+      content: '';
+      position: absolute;
+      top: -14px; left: 50%;
+      transform: translateX(-50%);
+      width: 16px; height: 14px;
+      border: 1.5px solid var(--accent);
+      border-bottom: none;
+      border-radius: 2px 2px 0 0;
+    }
+
+    .icon-knife {
+      width: 5px; height: 70px;
+      background: linear-gradient(to bottom, rgba(201,169,110,0.8), rgba(201,169,110,0.3));
+      border-radius: 1px 3px 2px 2px;
+      position: relative;
+    }
+    .icon-knife::before {
+      content: '';
+      position: absolute;
+      top: -10px; left: 0;
+      width: 12px; height: 14px;
+      background: linear-gradient(135deg, var(--accent), rgba(201,169,110,0.5));
+      clip-path: polygon(0 100%, 100% 0, 100% 100%);
+    }
+
+    .icon-spoon {
+      width: 20px; height: 72px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .icon-spoon::before {
+      content: '';
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: rgba(201,169,110,0.15);
+      border: 2px solid var(--accent);
+      flex-shrink: 0;
+    }
+    .icon-spoon::after {
+      content: '';
+      width: 3px;
+      flex: 1;
+      background: linear-gradient(to bottom, var(--accent), rgba(201,169,110,0.4));
+      border-radius: 0 0 2px 2px;
+    }
+
+    .icon-plate {
+      width: 76px; height: 76px;
       border-radius: 50%;
       border: 2px solid var(--accent);
       position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .icon-watch::before {
+    .icon-plate::before {
+      content: '';
+      width: 50px; height: 50px;
+      border-radius: 50%;
+      border: 1px solid rgba(201,169,110,0.5);
+    }
+    .icon-plate::after {
       content: '';
       position: absolute;
-      top: 50%; left: 50%;
-      width: 2px; height: 28px;
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      background: rgba(201,169,110,0.07);
+    }
+
+    .icon-bowl {
+      width: 68px; height: 36px;
+      border: 2px solid var(--accent);
+      border-top: none;
+      border-radius: 0 0 50px 50px;
+      position: relative;
+    }
+    .icon-bowl::before {
+      content: '';
+      position: absolute;
+      top: -2px; left: -4px; right: -4px;
+      height: 2px;
       background: var(--accent);
-      transform: translate(-50%, -100%) rotate(-30deg);
-      transform-origin: bottom center;
+      border-radius: 2px;
     }
-    .icon-watch::after {
+    .icon-bowl::after {
       content: '';
       position: absolute;
-      top: 50%; left: 50%;
-      width: 2px; height: 18px;
-      background: rgba(201,169,110,0.6);
-      transform: translate(-50%, -100%) rotate(70deg);
-      transform-origin: bottom center;
+      bottom: -8px; left: 50%;
+      transform: translateX(-50%);
+      width: 28px; height: 2px;
+      background: rgba(201,169,110,0.5);
+      border-radius: 2px;
     }
 
-    /* bag */
-    .icon-bag {
-      width: 56px; height: 62px;
+    .icon-sideplate {
+      width: 56px; height: 56px;
+      border-radius: 50%;
       border: 2px solid var(--accent);
-      border-radius: 4px 4px 6px 6px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .icon-sideplate::before {
+      content: '';
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(201,169,110,0.4);
+    }
+
+    .icon-placemat {
+      width: 80px; height: 52px;
+      border: 2px solid var(--accent);
+      border-radius: 6px;
       position: relative;
     }
-    .icon-bag::before {
+    .icon-placemat::before {
       content: '';
       position: absolute;
-      top: -22px; left: 50%;
-      width: 28px; height: 22px;
-      border: 2px solid var(--accent);
-      border-bottom: none;
-      border-radius: 999px 999px 0 0;
-      transform: translateX(-50%);
+      inset: 7px;
+      border: 1px solid rgba(201,169,110,0.4);
+      border-radius: 3px;
     }
 
-    /* pen */
-    .icon-pen {
-      width: 8px; height: 64px;
-      background: linear-gradient(to bottom, var(--accent), rgba(201,169,110,0.4));
-      border-radius: 4px 4px 2px 2px;
-      position: relative;
-    }
-    .icon-pen::after {
-      content: '';
-      position: absolute;
-      bottom: -12px; left: 50%;
-      transform: translateX(-50%);
-      width: 0;
-      height: 0;
-      border-left: 5px solid transparent;
-      border-right: 5px solid transparent;
-      border-top: 12px solid rgba(201,169,110,0.6);
-    }
-
-    /* wallet */
-    .icon-wallet {
-      width: 64px; height: 42px;
+    .icon-runner {
+      width: 100px; height: 32px;
       border: 2px solid var(--accent);
       border-radius: 4px;
       position: relative;
     }
-    .icon-wallet::before {
+    .icon-runner::before {
       content: '';
       position: absolute;
-      right: -2px; top: 50%;
-      transform: translateY(-50%);
-      width: 22px; height: 28px;
-      border: 2px solid var(--accent);
-      border-radius: 0 4px 4px 0;
-      background: rgba(201,169,110,0.08);
-    }
-    .icon-wallet::after {
-      content: '';
-      position: absolute;
-      right: 6px; top: 50%;
-      transform: translateY(-50%);
-      width: 6px; height: 6px;
-      background: var(--accent);
-      border-radius: 50%;
-    }
-
-    /* decanter */
-    .icon-decanter {
-      width: 38px; height: 72px;
-      background: transparent;
-      border: 2px solid var(--accent);
-      border-radius: 4px 4px 12px 12px;
-      position: relative;
-    }
-    .icon-decanter::before {
-      content: '';
-      position: absolute;
-      top: -18px; left: 50%;
-      transform: translateX(-50%);
-      width: 18px; height: 18px;
-      border: 2px solid var(--accent);
+      inset: 5px;
+      border: 1px dashed rgba(201,169,110,0.35);
       border-radius: 2px;
     }
-    .icon-decanter::after {
-      content: '';
-      position: absolute;
-      bottom: 12px; left: 50%;
-      transform: translateX(-50%);
-      width: 20px; height: 1px;
-      background: rgba(201,169,110,0.5);
-    }
 
-    /* throw / blanket */
-    .icon-throw {
-      width: 68px; height: 48px;
+    .icon-woven {
+      width: 72px; height: 50px;
+      border: 2px solid var(--accent);
+      border-radius: 5px;
       position: relative;
+      overflow: hidden;
     }
-    .icon-throw::before {
+    .icon-woven::before {
       content: '';
       position: absolute;
       inset: 0;
-      border: 2px solid var(--accent);
-      border-radius: 2px;
+      background: repeating-linear-gradient(
+        90deg,
+        rgba(201,169,110,0.08) 0px,
+        rgba(201,169,110,0.08) 6px,
+        transparent 6px,
+        transparent 12px
+      );
     }
-    .icon-throw::after {
+    .icon-woven::after {
       content: '';
       position: absolute;
-      top: 8px; left: 8px; right: 8px; bottom: 8px;
-      border: 1px solid rgba(201,169,110,0.4);
-      border-radius: 1px;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(201,169,110,0.08) 0px,
+        rgba(201,169,110,0.08) 6px,
+        transparent 6px,
+        transparent 12px
+      );
     }
 
     .product-info {
@@ -399,7 +533,7 @@
 
     .product-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.35rem;
+      font-size: 1.3rem;
       font-weight: 500;
       color: var(--text);
       letter-spacing: 0.01em;
@@ -414,27 +548,61 @@
 
     .product-footer {
       display: flex;
-      align-items: center;
+      align-items: flex-end;
       justify-content: space-between;
-      margin-top: 12px;
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(201, 169, 110, 0.14);
+      gap: 12px;
     }
 
+    .product-price-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .product-price-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      opacity: 0.85;
+    }
+
+    /* TYPOGRAPHY BLING: Catchy, extra bold, significantly larger, standout radiant gold */
     .product-price {
       font-family: 'Inter', sans-serif;
-      font-size: 1.05rem;
-      font-weight: 600;
-      color: var(--accent);
-      letter-spacing: 0.02em;
+      font-size: 1.75rem;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.025em;
+      color: #FCE8BA;
+      background: linear-gradient(135deg, #FFF9EB 0%, #FCE8BA 35%, #D4AF37 75%, #F7D070 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 2px 10px rgba(212, 175, 55, 0.35));
+      display: inline-flex;
+      align-items: baseline;
+      transition: filter 0.35s var(--ease), transform 0.35s var(--ease);
+    }
+
+    .product-card:hover .product-price {
+      filter: drop-shadow(0 4px 18px rgba(247, 208, 112, 0.6));
+      transform: scale(1.06);
+      transform-origin: left bottom;
     }
 
     .product-btn {
       display: inline-block;
-      padding: 9px 22px;
+      padding: 10px 22px;
       border: 1px solid var(--accent);
       color: var(--accent);
       font-family: 'Inter', sans-serif;
       font-size: 0.75rem;
-      font-weight: 500;
+      font-weight: 600;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       text-decoration: none;
@@ -442,11 +610,9 @@
       background: transparent;
       cursor: pointer;
       transition: all 0.35s var(--ease);
+      white-space: nowrap;
     }
-    .product-btn:hover {
-      background: var(--accent);
-      color: var(--bg);
-    }
+    .product-btn:hover { background: var(--accent); color: var(--bg); }
 
     /* ─── FOOTER ─── */
     .footer {
@@ -459,29 +625,13 @@
       flex-wrap: wrap;
       gap: 16px;
     }
-    .footer-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.3rem;
-      color: var(--accent);
-      letter-spacing: 0.15em;
-    }
-    .footer-copy {
-      font-size: 0.78rem;
-      color: var(--muted);
-      letter-spacing: 0.06em;
-    }
+    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--accent); letter-spacing: 0.15em; }
+    .footer-copy { font-size: 0.78rem; color: var(--muted); letter-spacing: 0.06em; }
 
     /* ─── ANIMATIONS ─── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(24px); }
       to { opacity: 1; transform: translateY(0); }
-    }
-
-    .product-card {
-      transition: opacity 0.6s var(--ease), transform 0.6s var(--ease), box-shadow 0.35s var(--ease);
-    }
-    .product-card.visible:hover {
-      transform: translateY(-4px);
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -493,14 +643,16 @@
       :root { --section-pad: 60px; }
       .nav { padding: 0 24px; }
       .nav-links { display: none; }
-      .hamburger { display: flex; }
+      .hamburger-btn { display: flex; }
       .products-hero { padding: 60px 24px 48px; }
-      .products-section { padding: 48px 24px 60px; }
+      .products-section { padding: 0 24px 60px; }
+      .category-nav { padding: 20px 24px; top: 72px; gap: 6px; }
       .footer { padding: 32px 24px; }
     }
 
     @media (max-width: 480px) {
       .products-grid { grid-template-columns: 1fr; }
+      .category-nav { position: static; }
     }
   </style>
 </head>
@@ -508,22 +660,23 @@
 
   <!-- ─── NAV ─── -->
   <nav class="nav">
-    <a href="index.html" class="nav-logo">AURUM</a>
+    <a href="index.html" class="nav-logo">TRESA</a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="products.html" class="active">Products</a></li>
       <li><a href="about.html">About</a></li>
     </ul>
-    <input type="checkbox" id="nav-toggle" class="nav-toggle" hidden />
-    <label for="nav-toggle" class="hamburger" aria-label="Toggle menu">
+    <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false">
       <span></span><span></span><span></span>
-    </label>
-    <div class="nav-mobile">
-      <a href="index.html">Home</a>
-      <a href="products.html">Products</a>
-      <a href="about.html">About</a>
-    </div>
+    </button>
   </nav>
+
+  <!-- ─── MOBILE MENU ─── -->
+  <div class="nav-mobile" id="navMobile" role="dialog" aria-label="Navigation menu">
+    <a href="index.html">Home</a>
+    <a href="products.html" class="active">Products</a>
+    <a href="about.html">About</a>
+  </div>
 
   <!-- ─── PRODUCTS HERO ─── -->
   <section class="products-hero">
@@ -531,110 +684,264 @@
     <h1 class="hero-heading">Curated Excellence</h1>
   </section>
 
-  <!-- ─── PRODUCTS GRID ─── -->
+  <!-- ─── CATEGORY FILTER NAV ─── -->
+  <nav class="category-nav" aria-label="Product categories">
+    <a href="#cutlery" class="cat-link active" data-category="cutlery">Cutlery</a>
+    <div class="cat-divider"></div>
+    <a href="#plates" class="cat-link" data-category="plates">Plates</a>
+    <div class="cat-divider"></div>
+    <a href="#placemats" class="cat-link" data-category="placemats">Placemats</a>
+  </nav>
+
+  <!-- ─── PRODUCTS ─── -->
   <main class="products-section">
-    <div class="products-grid" id="productsGrid">
 
-      <!-- 1 -->
-      <article class="product-card">
-        <div class="product-image">
-          <div class="product-icon"><div class="icon-watch"></div></div>
-        </div>
-        <div class="product-info">
-          <h2 class="product-title">The Obsidian Watch</h2>
-          <p class="product-desc">Precision timekeeping</p>
-          <div class="product-footer">
-            <span class="product-price">$2,400</span>
-            <button class="product-btn">View Details →</button>
+    <!-- CUTLERY -->
+    <section id="cutlery" class="category-block cat-cutlery">
+      <div class="category-header">
+        <span class="category-label">Category 01</span>
+        <h2 class="category-title">Cutlery</h2>
+      </div>
+      <div class="products-grid" id="gridCutlery">
+
+        <article class="product-card">
+          <div class="product-image">
+            <div class="product-icon"><div class="icon-fork"></div></div>
           </div>
-        </div>
-      </article>
-
-      <!-- 2 -->
-      <article class="product-card">
-        <div class="product-image">
-          <div class="product-icon"><div class="icon-bag"></div></div>
-        </div>
-        <div class="product-info">
-          <h2 class="product-title">Velvet Cipher Bag</h2>
-          <p class="product-desc">Structured elegance</p>
-          <div class="product-footer">
-            <span class="product-price">$890</span>
-            <button class="product-btn">View Details →</button>
+          <div class="product-info">
+            <h3 class="product-title">Noir Five-Piece Set</h3>
+            <p class="product-desc">Matte black titanium-coated, service for two</p>
+            <div class="product-footer">
+              <div class="product-price-wrap">
+                <span class="product-price-label">Price</span>
+                <span class="product-price">$340</span>
+              </div>
+              <a href="#" class="product-btn">View Details →</a>
+            </div>
           </div>
-        </div>
-      </article>
+        </article>
 
-      <!-- 3 -->
-      <article class="product-card">
-        <div class="product-image">
-          <div class="product-icon"><div class="icon-pen"></div></div>
-        </div>
-        <div class="product-info">
-          <h2 class="product-title">Aurum Pen Set</h2>
-          <p class="product-desc">Writing reimagined</p>
-          <div class="product-footer">
-            <span class="product-price">$340</span>
-            <button class="product-btn">View Details →</button>
+        <article class="product-card">
+          <div class="product-image">
+            <div class="product-icon"><div class="icon-knife"></div></div>
           </div>
-        </div>
-      </article>
-
-      <!-- 4 -->
-      <article class="product-card">
-        <div class="product-image">
-          <div class="product-icon"><div class="icon-wallet"></div></div>
-        </div>
-        <div class="product-info">
-          <h2 class="product-title">The Noir Wallet</h2>
-          <p class="product-desc">Slim profile luxury</p>
-          <div class="product-footer">
-            <span class="product-price">$420</span>
-            <button class="product-btn">View Details →</button>
+          <div class="product-info">
+            <h3 class="product-title">The Tresa Chef's Knife</h3>
+            <p class="product-desc">Hand-forged Damascus steel, rosewood handle</p>
+            <div class="product-footer">
+              <div class="product-price-wrap">
+                <span class="product-price-label">Price</span>
+                <span class="product-price">$480</span>
+              </div>
+              <a href="#" class="product-btn">View Details →</a>
+            </div>
           </div>
-        </div>
-      </article>
+        </article>
 
-      <!-- 5 -->
-      <article class="product-card">
-        <div class="product-image">
-          <div class="product-icon"><div class="icon-decanter"></div></div>
-        </div>
-        <div class="product-info">
-          <h2 class="product-title">Crystalline Decanter</h2>
-          <p class="product-desc">For the discerning host</p>
-          <div class="product-footer">
-            <span class="product-price">$680</span>
-            <button class="product-btn">View Details →</button>
+        <article class="product-card">
+          <div class="product-image">
+            <div class="product-icon"><div class="icon-spoon"></div></div>
           </div>
-        </div>
-      </article>
-
-      <!-- 6 -->
-      <article class="product-card">
-        <div class="product-image">
-          <div class="product-icon"><div class="icon-throw"></div></div>
-        </div>
-        <div class="product-info">
-          <h2 class="product-title">Cashmere Throw</h2>
-          <p class="product-desc">Warmth, refined</p>
-          <div class="product-footer">
-            <span class="product-price">$560</span>
-            <button class="product-btn">View Details →</button>
+          <div class="product-info">
+            <h3 class="product-title">Artisan Serving Spoons</h3>
+            <p class="product-desc">Polished sterling silver, set of four</p>
+            <div class="product-footer">
+              <div class="product-price-wrap">
+                <span class="product-price-label">Price</span>
+                <span class="product-price">$220</span>
+              </div>
+              <a href="#" class="product-btn">View Details →</a>
+            </div>
           </div>
-        </div>
-      </article>
+        </article>
 
-    </div>
+      </div>
+    </section>
+
+    <!-- PLATES -->
+    <section id="plates" class="category-block cat-plates">
+      <div class="category-header">
+        <span class="category-label">Category 02</span>
+        <h2 class="category-title">Plates</h2>
+      </div>
+      <div class="products-grid" id="gridPlates">
+
+        <article class="product-card">
+          <div class="product-image">
+            <div class="product-icon"><div class="icon-plate"></div></div>
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">The Matte Dinner Plate</h3>
+            <p class="product-desc">Bone china, hand-thrown, set of two</p>
+            <div class="product-footer">
+              <div class="product-price-wrap">
+                <span class="product-price-label">Price</span>
+                <span class="product-price">$180</span>
+              </div>
+              <a href="#" class="product-btn">View Details →</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-image">
+            <div class="product-icon"><div class="icon-bowl"></div></div>
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Deep Stoneware Bowl</h3>
+            <p class="product-desc">Reactive glaze finish, oven &amp; dishwasher safe</p>
+            <div class="product-footer">
+              <div class="product-price-wrap">
+                <span class="product-price-label">Price</span>
+                <span class="product-price">$135</span>
+              </div>
+              <a href="#" class="product-btn">View Details →</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-image">
+            <div class="product-icon"><div class="icon-sideplate"></div></div>
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Side Plate Duo</h3>
+            <p class="product-desc">Minimal rim, smoked ash glaze, set of two</p>
+            <div class="product-footer">
+              <div class="product-price-wrap">
+                <span class="product-price-label">Price</span>
+                <span class="product-price">$110</span>
+              </div>
+              <a href="#" class="product-btn">View Details →</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- PLACEMATS -->
+    <section id="placemats" class="category-block cat-placemats">
+      <div class="category-header">
+        <span class="category-label">Category 03</span>
+        <h2 class="category-title">Placemats</h2>
+      </div>
+      <div class="products-grid" id="gridPlacemats">
+
+        <article class="product-card">
+          <div class="product-image">
+            <div class="product-icon"><div class="icon-placemat"></div></div>
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Linen Weave Placemat</h3>
+            <p class="product-desc">Pre-washed linen, natural edge, set of four</p>
+            <div class="product-footer">
+              <div class="product-price-wrap">
+                <span class="product-price-label">Price</span>
+                <span class="product-price">$95</span>
+              </div>
+              <a href="#" class="product-btn">View Details →</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-image">
+            <div class="product-icon"><div class="icon-runner"></div></div>
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">The Table Runner</h3>
+            <p class="product-desc">Hand-embroidered cotton, 180cm, natural ivory</p>
+            <div class="product-footer">
+              <div class="product-price-wrap">
+                <span class="product-price-label">Price</span>
+                <span class="product-price">$145</span>
+              </div>
+              <a href="#" class="product-btn">View Details →</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-image">
+            <div class="product-icon"><div class="icon-woven"></div></div>
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Rattan Woven Mat</h3>
+            <p class="product-desc">Natural rattan, heat-resistant, artisan-made</p>
+            <div class="product-footer">
+              <div class="product-price-wrap">
+                <span class="product-price-label">Price</span>
+                <span class="product-price">$75</span>
+              </div>
+              <a href="#" class="product-btn">View Details →</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
   </main>
 
   <!-- ─── FOOTER ─── -->
   <footer class="footer">
-    <span class="footer-logo">AURUM</span>
-    <span class="footer-copy">© 2026 Aurum. All rights reserved.</span>
+    <span class="footer-logo">TRESA</span>
+    <span class="footer-copy">© 2026 Tresa. All rights reserved.</span>
   </footer>
 
   <script>
+    // ─── MOBILE NAV ───
+    (function() {
+      var btn = document.getElementById('hamburgerBtn');
+      var menu = document.getElementById('navMobile');
+      var open = false;
+
+      function toggleMenu() {
+        open = !open;
+        btn.classList.toggle('open', open);
+        menu.classList.toggle('open', open);
+        btn.setAttribute('aria-expanded', open);
+        document.body.style.overflow = open ? 'hidden' : '';
+      }
+
+      btn.addEventListener('click', toggleMenu);
+      menu.querySelectorAll('a').forEach(function(link) {
+        link.addEventListener('click', function() { if (open) toggleMenu(); });
+      });
+      document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && open) toggleMenu(); });
+    })();
+
+    // ─── CATEGORY FILTER HIGHLIGHT ───
+    (function() {
+      var catLinks = document.querySelectorAll('.cat-link');
+      var sections = ['cutlery', 'plates', 'placemats'];
+
+      catLinks.forEach(function(link) {
+        link.addEventListener('click', function() {
+          catLinks.forEach(function(l) { l.classList.remove('active'); });
+          link.classList.add('active');
+        });
+      });
+
+      // Highlight on scroll
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            var id = entry.target.id;
+            catLinks.forEach(function(l) {
+              l.classList.toggle('active', l.dataset.category === id);
+            });
+          }
+        });
+      }, { threshold: 0.4 });
+
+      sections.forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el) observer.observe(el);
+      });
+    })();
+
     // ─── PRODUCT CARD SCROLL ANIMATION ───
     (function() {
       var cards = document.querySelectorAll('.product-card');
@@ -646,7 +953,10 @@
           }
         });
       }, { threshold: 0.1 });
-      cards.forEach(function(c) { observer.observe(c); });
+      cards.forEach(function(c, i) {
+        c.style.transitionDelay = (i % 3 * 0.09) + 's';
+        observer.observe(c);
+      });
     })();
   </script>
 </body>
