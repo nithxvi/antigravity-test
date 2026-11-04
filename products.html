@@ -316,6 +316,16 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      box-sizing: border-box;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      display: block;
     }
 
     /* Cutlery gradients */
@@ -646,13 +656,74 @@
       .hamburger-btn { display: flex; }
       .products-hero { padding: 60px 24px 48px; }
       .products-section { padding: 0 24px 60px; }
-      .category-nav { padding: 20px 24px; top: 72px; gap: 6px; }
+      .category-nav { padding: 18px 24px; top: 72px; gap: 8px; }
       .footer { padding: 32px 24px; }
     }
 
-    @media (max-width: 480px) {
-      .products-grid { grid-template-columns: 1fr; }
-      .category-nav { position: static; }
+    @media (max-width: 600px) {
+      :root { --section-pad: 48px; }
+      body { font-size: 15px; }
+      .nav { padding: 0 16px; height: 64px; }
+      .nav-logo { font-size: 1.5rem; letter-spacing: 0.14em; }
+      .hamburger-btn {
+        width: 44px; height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .hamburger-btn span { width: 22px; }
+      .hamburger-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+      .hamburger-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+      .products-hero { padding: 48px 16px 32px; }
+      .eyebrow { font-size: 0.68rem; margin-bottom: 12px; }
+      .hero-heading { font-size: clamp(2.2rem, 7.5vw, 2.9rem); line-height: 1.15; }
+
+      .category-nav {
+        position: static;
+        padding: 12px 16px;
+        gap: 6px;
+        justify-content: center;
+      }
+      .cat-link {
+        min-height: 42px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 9px 18px;
+        font-size: 0.72rem;
+      }
+      .cat-divider { height: 12px; }
+
+      .products-section { padding: 0 16px 60px; }
+      .category-block { padding-top: 48px; }
+      .category-header { gap: 14px; margin-bottom: 24px; }
+      .category-label { font-size: 0.65rem; }
+      .category-title { font-size: clamp(1.45rem, 5vw, 1.85rem); }
+
+      .products-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .product-image { height: 220px; }
+      .product-info { padding: 22px 18px 24px; }
+      .product-title { font-size: 1.25rem; }
+      .product-desc { font-size: 0.85rem; line-height: 1.6; }
+      .product-footer {
+        margin-top: 16px;
+        padding-top: 16px;
+        gap: 12px;
+      }
+      .product-price { font-size: 1.65rem; }
+      .product-btn {
+        min-height: 44px;
+        padding: 11px 22px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .footer { padding: 32px 18px; flex-direction: column; text-align: center; gap: 12px; }
     }
   </style>
 </head>
@@ -714,7 +785,7 @@
             <div class="product-footer">
               <div class="product-price-wrap">
                 <span class="product-price-label">Price</span>
-                <span class="product-price">$340</span>
+                <span class="product-price">₹340</span>
               </div>
               <a href="#" class="product-btn">View Details →</a>
             </div>
@@ -731,7 +802,7 @@
             <div class="product-footer">
               <div class="product-price-wrap">
                 <span class="product-price-label">Price</span>
-                <span class="product-price">$480</span>
+                <span class="product-price">₹480</span>
               </div>
               <a href="#" class="product-btn">View Details →</a>
             </div>
@@ -748,7 +819,7 @@
             <div class="product-footer">
               <div class="product-price-wrap">
                 <span class="product-price-label">Price</span>
-                <span class="product-price">$220</span>
+                <span class="product-price">₹220</span>
               </div>
               <a href="#" class="product-btn">View Details →</a>
             </div>
@@ -776,7 +847,7 @@
             <div class="product-footer">
               <div class="product-price-wrap">
                 <span class="product-price-label">Price</span>
-                <span class="product-price">$180</span>
+                <span class="product-price">₹180</span>
               </div>
               <a href="#" class="product-btn">View Details →</a>
             </div>
@@ -793,7 +864,7 @@
             <div class="product-footer">
               <div class="product-price-wrap">
                 <span class="product-price-label">Price</span>
-                <span class="product-price">$135</span>
+                <span class="product-price">₹135</span>
               </div>
               <a href="#" class="product-btn">View Details →</a>
             </div>
@@ -810,7 +881,7 @@
             <div class="product-footer">
               <div class="product-price-wrap">
                 <span class="product-price-label">Price</span>
-                <span class="product-price">$110</span>
+                <span class="product-price">₹110</span>
               </div>
               <a href="#" class="product-btn">View Details →</a>
             </div>
@@ -838,7 +909,7 @@
             <div class="product-footer">
               <div class="product-price-wrap">
                 <span class="product-price-label">Price</span>
-                <span class="product-price">$95</span>
+                <span class="product-price">₹95</span>
               </div>
               <a href="#" class="product-btn">View Details →</a>
             </div>
@@ -855,7 +926,7 @@
             <div class="product-footer">
               <div class="product-price-wrap">
                 <span class="product-price-label">Price</span>
-                <span class="product-price">$145</span>
+                <span class="product-price">₹145</span>
               </div>
               <a href="#" class="product-btn">View Details →</a>
             </div>
@@ -872,7 +943,7 @@
             <div class="product-footer">
               <div class="product-price-wrap">
                 <span class="product-price-label">Price</span>
-                <span class="product-price">$75</span>
+                <span class="product-price">₹75</span>
               </div>
               <a href="#" class="product-btn">View Details →</a>
             </div>

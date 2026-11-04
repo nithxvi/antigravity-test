@@ -509,6 +509,57 @@
       .contact-grid { grid-template-columns: 1fr; gap: 48px; }
       .footer { padding: 32px 24px; }
     }
+
+    @media (max-width: 600px) {
+      :root { --section-pad: 48px; }
+      body { font-size: 15px; }
+      .nav { padding: 0 16px; height: 64px; }
+      .nav-logo { font-size: 1.5rem; letter-spacing: 0.14em; }
+      .hamburger-btn {
+        width: 44px; height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .hamburger-btn span { width: 22px; }
+      .hamburger-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+      .hamburger-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+      .about-hero { padding: 48px 16px 36px; }
+      .eyebrow { font-size: 0.68rem; margin-bottom: 14px; }
+      .about-hero-heading { font-size: clamp(2.1rem, 7.5vw, 2.85rem); line-height: 1.15; margin-bottom: 24px; }
+
+      .story-section { padding: 48px 16px; }
+      .story-grid { gap: 36px; }
+      .story-text { gap: 18px; }
+      .story-text p { font-size: 0.94rem; line-height: 1.8; }
+      .css-art { min-height: 280px; }
+      .rings { width: 220px; height: 220px; }
+      .ring:nth-child(1) { width: 220px; height: 220px; }
+      .ring:nth-child(2) { width: 180px; height: 180px; }
+      .ring:nth-child(3) { width: 142px; height: 142px; }
+      .ring:nth-child(4) { width: 106px; height: 106px; }
+      .ring:nth-child(5) { width: 70px; height: 70px; }
+      .ring:nth-child(6) { width: 36px; height: 36px; }
+
+      .values-section { padding: 48px 16px; }
+      .values-heading { font-size: clamp(1.8rem, 5.5vw, 2.3rem); margin-bottom: 36px; }
+      .value-card { padding: 36px 20px; gap: 16px; }
+      .value-title { font-size: 1.35rem; }
+      .value-desc { font-size: 0.86rem; line-height: 1.7; }
+
+      .contact-section { padding: 48px 16px; }
+      .contact-heading { font-size: clamp(1.8rem, 5.5vw, 2.3rem); margin-bottom: 36px; }
+      .contact-grid { gap: 36px; }
+      .contact-info { gap: 24px; }
+      .social-link { width: 44px; height: 44px; }
+
+      .contact-form { gap: 28px; }
+      .form-field input, .form-field textarea { font-size: 0.95rem; }
+      .submit-btn { width: 100%; min-height: 48px; text-align: center; }
+
+      .footer { padding: 32px 18px; flex-direction: column; text-align: center; gap: 12px; }
+    }
   </style>
 </head>
 <body>

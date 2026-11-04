@@ -385,6 +385,7 @@
     .bs-image-box {
       width: 100%;
       height: 100%;
+      box-sizing: border-box;
       border-radius: calc(var(--radius-card) - 1px);
       position: relative;
       overflow: hidden;
@@ -393,6 +394,15 @@
       justify-content: center;
       border: 1px solid rgba(201,169,110,0.12);
       transition: transform 0.6s var(--ease);
+    }
+    .bs-image-box img,
+    .bs-media img {
+      width: 100%;
+      height: 100%;
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      display: block;
     }
     .bs-row:hover .bs-image-box {
       transform: scale(1.01);
@@ -776,16 +786,21 @@
       .bestsellers-section { padding: 60px 24px; }
       .bestsellers-container { gap: 48px; }
       .bs-row, .bs-row:nth-child(even) {
-        flex-direction: column;
+        flex-direction: column !important;
         padding: 24px;
         gap: 28px;
       }
       .bs-media {
+        order: 1 !important;
         width: 100%;
-        height: 340px;
+        height: auto;
+        min-height: 280px;
+        max-height: 360px;
+        aspect-ratio: 16 / 10;
       }
       .bs-details, .bs-row:nth-child(even) .bs-details {
-        padding: 0 8px;
+        order: 2 !important;
+        padding: 0 4px;
         width: 100%;
       }
       .bs-desc {
@@ -795,17 +810,115 @@
     }
 
     @media (max-width: 600px) {
-      .carousel-arrow { width: 38px; height: 38px; }
-      .carousel-arrow.prev { left: 12px; }
-      .carousel-arrow.next { right: 12px; }
-      .slide-headline { font-size: 2.4rem; }
-      .bs-media { height: 280px; }
-      .bs-icon { transform: scale(1.25); }
-      .bs-row:hover .bs-icon { transform: scale(1.35); }
-      .bs-title { font-size: 2rem; }
-      .bs-price { font-size: 1.8rem; }
-      .bs-meta-row { flex-direction: column; align-items: flex-start; gap: 18px; }
-      .bs-purchase-btn { width: 100%; justify-content: center; }
+      :root { --section-pad: 48px; }
+      body { font-size: 15px; }
+      .nav { padding: 0 16px; height: 64px; }
+      .nav-logo { font-size: 1.5rem; letter-spacing: 0.14em; }
+      .hamburger-btn {
+        width: 44px; height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .hamburger-btn span { width: 22px; }
+      .hamburger-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+      .hamburger-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+      .carousel { height: 80vh; }
+      .carousel-overlay { padding: 20px 16px; }
+      .slide-eyebrow { font-size: 0.68rem; margin-bottom: 12px; letter-spacing: 0.18em; }
+      .slide-headline { font-size: clamp(2rem, 7.5vw, 2.7rem); line-height: 1.15; margin-bottom: 16px; }
+      .slide-sub { font-size: 0.92rem; line-height: 1.6; margin-bottom: 24px; max-width: 92%; }
+      .slide-cta {
+        padding: 12px 28px;
+        font-size: 0.74rem;
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .carousel-arrow { width: 44px; height: 44px; }
+      .carousel-arrow.prev { left: 8px; }
+      .carousel-arrow.next { right: 8px; }
+
+      .bestsellers-section { padding: 48px 16px; }
+      .section-eyebrow { font-size: 0.68rem; margin-bottom: 10px; }
+      .section-title { font-size: clamp(1.9rem, 6vw, 2.4rem); margin-bottom: 36px; }
+      .bestsellers-container { gap: 32px; }
+      .bs-row, .bs-row:nth-child(even) {
+        flex-direction: column !important;
+        padding: 18px 16px 24px;
+        gap: 20px;
+      }
+      .bs-media {
+        order: 1 !important;
+        width: 100%;
+        height: auto;
+        min-height: 220px;
+        max-height: 290px;
+        aspect-ratio: 4 / 3;
+      }
+      .bs-image-box {
+        padding: 16px;
+      }
+      .bs-image-box img,
+      .bs-media img {
+        object-fit: contain;
+      }
+      .bs-icon {
+        transform: scale(1) !important;
+      }
+      .bs-row:hover .bs-icon {
+        transform: scale(1.04) !important;
+      }
+      .bs-badge {
+        top: 12px; left: 12px;
+        font-size: 0.62rem;
+        padding: 4px 10px;
+      }
+      .bs-ambient-glow {
+        width: 130px; height: 130px;
+      }
+      .bs-details, .bs-row:nth-child(even) .bs-details {
+        order: 2 !important;
+        padding: 0 4px;
+        width: 100%;
+      }
+      .bs-tag { font-size: 0.68rem; margin-bottom: 10px; }
+      .bs-title {
+        font-size: clamp(1.75rem, 5.5vw, 2.1rem);
+        line-height: 1.18;
+        margin-bottom: 12px;
+      }
+      .bs-desc {
+        font-size: 0.9rem;
+        line-height: 1.75;
+        margin-bottom: 22px;
+      }
+      .bs-meta-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+        padding-top: 18px;
+      }
+      .bs-price {
+        font-size: 1.85rem;
+      }
+      .bs-purchase-btn {
+        width: 100%;
+        min-height: 48px;
+        justify-content: center;
+        padding: 14px 24px;
+      }
+
+      .reviews-section { padding: 48px 16px; }
+      .review-card { padding: 26px 18px; }
+      .review-quote { font-size: 1.05rem; }
+
+      .ticker-section { padding: 48px 16px; }
+      .ticker-text { font-size: clamp(1.4rem, 4.5vw, 1.95rem); margin-bottom: 24px; }
+
+      .footer { padding: 32px 18px; flex-direction: column; text-align: center; gap: 12px; }
     }
   </style>
 </head>
@@ -903,7 +1016,7 @@
           <div class="bs-meta-row">
             <div class="bs-price-wrap">
               <span class="bs-price-label">Price</span>
-              <span class="bs-price">$180</span>
+              <span class="bs-price">₹180</span>
             </div>
             <a href="products.html#plates" class="bs-purchase-btn" aria-label="Purchase The Matte Dinner Plate">
               <span>Purchase</span>
@@ -929,7 +1042,7 @@
           <div class="bs-meta-row">
             <div class="bs-price-wrap">
               <span class="bs-price-label">Price</span>
-              <span class="bs-price">$340</span>
+              <span class="bs-price">₹340</span>
             </div>
             <a href="products.html#cutlery" class="bs-purchase-btn" aria-label="Purchase Noir Cutlery Set">
               <span>Purchase</span>
@@ -955,7 +1068,7 @@
           <div class="bs-meta-row">
             <div class="bs-price-wrap">
               <span class="bs-price-label">Price</span>
-              <span class="bs-price">$95</span>
+              <span class="bs-price">₹95</span>
             </div>
             <a href="products.html#placemats" class="bs-purchase-btn" aria-label="Purchase Linen Weave Placemat">
               <span>Purchase</span>
@@ -981,7 +1094,7 @@
           <div class="bs-meta-row">
             <div class="bs-price-wrap">
               <span class="bs-price-label">Price</span>
-              <span class="bs-price">$125</span>
+              <span class="bs-price">₹125</span>
             </div>
             <a href="products.html#cutlery" class="bs-purchase-btn" aria-label="Purchase Artisan Serving Spoon">
               <span>Purchase</span>
