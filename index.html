@@ -519,12 +519,170 @@
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--accent);
-      background: rgba(14,14,15,0.72);
-      border: 1px solid rgba(201,169,110,0.25);
+      background: rgba(14,14,15,0.78);
+      border: 1px solid rgba(201,169,110,0.3);
       padding: 6px 14px;
       border-radius: var(--radius-pill);
       backdrop-filter: blur(8px);
-      z-index: 2;
+      z-index: 15;
+    }
+
+    /* ─── MODULAR PRODUCT IMAGE CAROUSEL ─── */
+    .product-carousel {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: pan-y;
+      background: #141416;
+      border-radius: inherit;
+    }
+
+    .product-carousel-track {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .product-carousel-slide {
+      position: relative;
+      flex: 0 0 100%;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: #141416;
+    }
+
+    .product-carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s var(--ease);
+      pointer-events: none;
+    }
+
+    .product-card:hover .product-carousel-slide.active img,
+    .bs-row:hover .product-carousel-slide.active img {
+      transform: scale(1.04);
+    }
+
+    /* Navigation Controls */
+    .p-carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(14, 14, 15, 0.72);
+      border: 1px solid rgba(201, 169, 110, 0.3);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 12;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s var(--ease), visibility 0.3s var(--ease), background 0.3s var(--ease), transform 0.3s var(--ease), border-color 0.3s var(--ease);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 0;
+    }
+
+    .p-carousel-btn svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--text);
+      stroke-width: 2;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: stroke 0.3s var(--ease);
+    }
+
+    .p-carousel-btn:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      transform: translateY(-50%) scale(1.08);
+    }
+
+    .p-carousel-btn:hover svg {
+      stroke: var(--bg);
+    }
+
+    .p-carousel-btn.prev {
+      left: 14px;
+    }
+
+    .p-carousel-btn.next {
+      right: 14px;
+    }
+
+    .product-carousel:hover .p-carousel-btn,
+    .bs-row:hover .p-carousel-btn,
+    .product-card:hover .p-carousel-btn {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Pagination Indicator Dots */
+    .p-carousel-dots {
+      position: absolute;
+      bottom: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      z-index: 12;
+      padding: 5px 10px;
+      border-radius: var(--radius-pill);
+      background: rgba(14, 14, 15, 0.58);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(201, 169, 110, 0.18);
+      pointer-events: auto;
+    }
+
+    .p-carousel-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(240, 237, 232, 0.4);
+      cursor: pointer;
+      transition: all 0.3s var(--ease);
+      display: inline-block;
+    }
+
+    .p-carousel-dot.active {
+      width: 18px;
+      border-radius: var(--radius-pill);
+      background: var(--accent);
+      box-shadow: 0 0 10px rgba(201, 169, 110, 0.5);
+    }
+
+    @media (hover: none), (max-width: 768px) {
+      .p-carousel-btn {
+        opacity: 0.85;
+        visibility: visible;
+        width: 32px;
+        height: 32px;
+      }
+      .p-carousel-btn.prev { left: 8px; }
+      .p-carousel-btn.next { right: 8px; }
+      .p-carousel-dots {
+        bottom: 10px;
+        padding: 4px 8px;
+      }
     }
 
     .bs-ambient-glow {
@@ -1103,8 +1261,30 @@
         <div class="bs-media">
           <div class="bs-image-box">
             <span class="bs-badge">Atelier No. 01</span>
-            <div class="bs-ambient-glow"></div>
-            <div class="bs-icon"><div class="icon-plate"></div></div>
+            <div class="product-carousel" data-carousel>
+              <div class="product-carousel-track">
+                <div class="product-carousel-slide active">
+                  <img src="https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=1200&q=80" alt="The Matte Dinner Plate - Angled View" loading="eager" />
+                </div>
+                <div class="product-carousel-slide">
+                  <img src="https://images.unsplash.com/photo-1615865417491-9941019fbc00?auto=format&fit=crop&w=1200&q=80" alt="The Matte Dinner Plate - Table Setting" loading="lazy" />
+                </div>
+                <div class="product-carousel-slide">
+                  <img src="https://images.unsplash.com/photo-1590736969955-71cc94801759?auto=format&fit=crop&w=1200&q=80" alt="The Matte Dinner Plate - Ceramic Craftsmanship" loading="lazy" />
+                </div>
+              </div>
+              <button type="button" class="p-carousel-btn prev" aria-label="Previous image">
+                <svg viewBox="0 0 24 24"><polyline points="15,18 9,12 15,6"></polyline></svg>
+              </button>
+              <button type="button" class="p-carousel-btn next" aria-label="Next image">
+                <svg viewBox="0 0 24 24"><polyline points="9,6 15,12 9,18"></polyline></svg>
+              </button>
+              <div class="p-carousel-dots">
+                <span class="p-carousel-dot active" data-index="0"></span>
+                <span class="p-carousel-dot" data-index="1"></span>
+                <span class="p-carousel-dot" data-index="2"></span>
+              </div>
+            </div>
           </div>
         </div>
         <div class="bs-details">
@@ -1129,8 +1309,30 @@
         <div class="bs-media">
           <div class="bs-image-box">
             <span class="bs-badge">Atelier No. 02</span>
-            <div class="bs-ambient-glow"></div>
-            <div class="bs-icon"><div class="icon-fork"></div></div>
+            <div class="product-carousel" data-carousel>
+              <div class="product-carousel-track">
+                <div class="product-carousel-slide active">
+                  <img src="https://images.unsplash.com/photo-1584346133934-a3afd2a33c4c?auto=format&fit=crop&w=1200&q=80" alt="Noir Cutlery Set - Five-Piece Flat Lay" loading="eager" />
+                </div>
+                <div class="product-carousel-slide">
+                  <img src="https://images.unsplash.com/photo-1616401784845-180882ba9ba8?auto=format&fit=crop&w=1200&q=80" alt="Noir Cutlery Set - Table Context" loading="lazy" />
+                </div>
+                <div class="product-carousel-slide">
+                  <img src="https://images.unsplash.com/photo-1576867757603-05b134ebc379?auto=format&fit=crop&w=1200&q=80" alt="Noir Cutlery Set - Fork & Knife Silhouette" loading="lazy" />
+                </div>
+              </div>
+              <button type="button" class="p-carousel-btn prev" aria-label="Previous image">
+                <svg viewBox="0 0 24 24"><polyline points="15,18 9,12 15,6"></polyline></svg>
+              </button>
+              <button type="button" class="p-carousel-btn next" aria-label="Next image">
+                <svg viewBox="0 0 24 24"><polyline points="9,6 15,12 9,18"></polyline></svg>
+              </button>
+              <div class="p-carousel-dots">
+                <span class="p-carousel-dot active" data-index="0"></span>
+                <span class="p-carousel-dot" data-index="1"></span>
+                <span class="p-carousel-dot" data-index="2"></span>
+              </div>
+            </div>
           </div>
         </div>
         <div class="bs-details">
@@ -1155,8 +1357,30 @@
         <div class="bs-media">
           <div class="bs-image-box">
             <span class="bs-badge">Atelier No. 03</span>
-            <div class="bs-ambient-glow"></div>
-            <div class="bs-icon"><div class="icon-placemat"></div></div>
+            <div class="product-carousel" data-carousel>
+              <div class="product-carousel-track">
+                <div class="product-carousel-slide active">
+                  <img src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=1200&q=80" alt="Linen Weave Placemat - Natural Flax Drape" loading="eager" />
+                </div>
+                <div class="product-carousel-slide">
+                  <img src="https://images.unsplash.com/photo-1533777857889-4be7c70b33f7?auto=format&fit=crop&w=1200&q=80" alt="Linen Weave Placemat - Dining Setting" loading="lazy" />
+                </div>
+                <div class="product-carousel-slide">
+                  <img src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=1200&q=80" alt="Linen Weave Placemat - Raw Hem Detail" loading="lazy" />
+                </div>
+              </div>
+              <button type="button" class="p-carousel-btn prev" aria-label="Previous image">
+                <svg viewBox="0 0 24 24"><polyline points="15,18 9,12 15,6"></polyline></svg>
+              </button>
+              <button type="button" class="p-carousel-btn next" aria-label="Next image">
+                <svg viewBox="0 0 24 24"><polyline points="9,6 15,12 9,18"></polyline></svg>
+              </button>
+              <div class="p-carousel-dots">
+                <span class="p-carousel-dot active" data-index="0"></span>
+                <span class="p-carousel-dot" data-index="1"></span>
+                <span class="p-carousel-dot" data-index="2"></span>
+              </div>
+            </div>
           </div>
         </div>
         <div class="bs-details">
@@ -1181,8 +1405,30 @@
         <div class="bs-media">
           <div class="bs-image-box">
             <span class="bs-badge">Atelier No. 04</span>
-            <div class="bs-ambient-glow"></div>
-            <div class="bs-icon"><div class="icon-spoon"></div></div>
+            <div class="product-carousel" data-carousel>
+              <div class="product-carousel-track">
+                <div class="product-carousel-slide active">
+                  <img src="https://images.unsplash.com/photo-1607344645866-009c320b5ab8?auto=format&fit=crop&w=1200&q=80" alt="Artisan Serving Spoon - Sterling Polish" loading="eager" />
+                </div>
+                <div class="product-carousel-slide">
+                  <img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=1200&q=80" alt="Artisan Serving Spoon - Hammered Handle Detail" loading="lazy" />
+                </div>
+                <div class="product-carousel-slide">
+                  <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80" alt="Artisan Serving Spoon - Table Setting Display" loading="lazy" />
+                </div>
+              </div>
+              <button type="button" class="p-carousel-btn prev" aria-label="Previous image">
+                <svg viewBox="0 0 24 24"><polyline points="15,18 9,12 15,6"></polyline></svg>
+              </button>
+              <button type="button" class="p-carousel-btn next" aria-label="Next image">
+                <svg viewBox="0 0 24 24"><polyline points="9,6 15,12 9,18"></polyline></svg>
+              </button>
+              <div class="p-carousel-dots">
+                <span class="p-carousel-dot active" data-index="0"></span>
+                <span class="p-carousel-dot" data-index="1"></span>
+                <span class="p-carousel-dot" data-index="2"></span>
+              </div>
+            </div>
           </div>
         </div>
         <div class="bs-details">
@@ -1398,6 +1644,90 @@
 
       dots.forEach(function(d) { d.addEventListener('click', function() { showIdx(+d.dataset.index); }); });
       setInterval(function() { showIdx((idx + 1) % statements.length); }, 3500);
+    })();
+
+    // ─── MODULAR PRODUCT CAROUSEL ENGINE ───
+    (function initProductCarousels() {
+      var carousels = document.querySelectorAll('[data-carousel]');
+      carousels.forEach(function(carousel) {
+        var track = carousel.querySelector('.product-carousel-track');
+        var slides = carousel.querySelectorAll('.product-carousel-slide');
+        var dots = carousel.querySelectorAll('.p-carousel-dot');
+        var prevBtn = carousel.querySelector('.p-carousel-btn.prev');
+        var nextBtn = carousel.querySelector('.p-carousel-btn.next');
+
+        if (!track || slides.length <= 1) return;
+
+        var currentIndex = 0;
+        var total = slides.length;
+
+        function goTo(newIndex) {
+          currentIndex = (newIndex + total) % total;
+          track.style.transform = 'translateX(-' + (currentIndex * 100) + '%)';
+
+          slides.forEach(function(slide, idx) {
+            slide.classList.toggle('active', idx === currentIndex);
+            // Preload adjacent images for instantaneous transitions
+            if (Math.abs(idx - currentIndex) <= 1 || (currentIndex === 0 && idx === total - 1) || (currentIndex === total - 1 && idx === 0)) {
+              var lazyImg = slide.querySelector('img[loading="lazy"]');
+              if (lazyImg) lazyImg.loading = 'eager';
+            }
+          });
+
+          dots.forEach(function(dot, idx) {
+            dot.classList.toggle('active', idx === currentIndex);
+          });
+        }
+
+        if (prevBtn) {
+          prevBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            goTo(currentIndex - 1);
+          });
+        }
+
+        if (nextBtn) {
+          nextBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            goTo(currentIndex + 1);
+          });
+        }
+
+        dots.forEach(function(dot, idx) {
+          dot.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            goTo(idx);
+          });
+        });
+
+        // Touch & Swipe gesture handling for mobile responsiveness
+        var startX = 0;
+        var currentX = 0;
+        var isSwiping = false;
+
+        carousel.addEventListener('touchstart', function(e) {
+          startX = e.touches[0].clientX;
+          currentX = startX;
+          isSwiping = true;
+        }, { passive: true });
+
+        carousel.addEventListener('touchmove', function(e) {
+          if (!isSwiping) return;
+          currentX = e.touches[0].clientX;
+        }, { passive: true });
+
+        carousel.addEventListener('touchend', function() {
+          if (!isSwiping) return;
+          isSwiping = false;
+          var diff = startX - currentX;
+          if (Math.abs(diff) > 40) {
+            goTo(diff > 0 ? currentIndex + 1 : currentIndex - 1);
+          }
+        }, { passive: true });
+      });
     })();
   </script>
 </body>
