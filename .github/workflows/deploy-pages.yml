@@ -1,0 +1,72 @@
+name: Deploy public site to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build public site (allowlist only)
+        run: |
+          set -euo pipefail
+          rm -rf _site
+          mkdir -p _site/data _site/assets/products
+
+          cp index.html products.html about.html _site/
+          cp -R css js _site/
+          cp data/products.js _site/data/
+
+          # Publish only real image files from assets/products.
+          find assets/products -type f \
+            \( -iname '*.webp' -o -iname '*.jpg' -o -iname '*.jpeg' \
+               -o -iname '*.png' -o -iname '*.avif' -o -iname '*.gif' \
+               -o -iname '*.svg' \) \
+            -exec cp --parents {} _site/ \;
+
+          # Preserve optional site files if they are added later.
+          if [ -f CNAME ]; then cp CNAME _site/; fi
+          if [ -f 404.html ]; then cp 404.html _site/; fi
+          if [ -f robots.txt ]; then cp robots.txt _site/; fi
+
+          touch _site/.nojekyll
+
+      - name: Verify no private files were staged
+        run: |
+          set -euo pipefail
+          test ! -e _site/admin
+          test ! -e _site/package.json
+          test ! -e _site/package-lock.json
+          test ! -e _site/data/products.json
+          test ! -e _site/assets/products/README.md
+          echo "Public artifact contents:"
+          find _site -type f | sort
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
