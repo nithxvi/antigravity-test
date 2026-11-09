@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-label="Carafe study">
-  <rect width="800" height="1000" fill="#13110f"/>
-  <path d="M360 180h80l20 80-10 420h-100l-10-420z" fill="#262119" stroke="#c6a572"/>
-  <ellipse cx="400" cy="180" rx="28" ry="16" fill="#c6a572"/>
-  <text x="400" y="840" text-anchor="middle" fill="#d8d0c2" font-family="Georgia, serif" font-size="28" letter-spacing="6">RIVER</text>
-</svg>

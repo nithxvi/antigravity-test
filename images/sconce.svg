@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="Sconce study">
-  <rect width="1200" height="800" fill="#1b1814"/>
-  <rect x="520" y="160" width="160" height="420" fill="#2c261e" stroke="#c6a572"/>
-  <circle cx="600" cy="300" r="36" fill="#c6a572"/>
-  <text x="600" y="700" text-anchor="middle" fill="#d8d0c2" font-family="Georgia, serif" font-size="28" letter-spacing="8">CORRIDOR</text>
-</svg>
