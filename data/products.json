@@ -1,12 +1,11 @@
 [
   {
     "id": "tresa-795694",
-    "name": "4-Piece Gold Dessert Spoon",
+    "name": "Tresa Gold Dessert Spoon",
     "slug": "4-piece-gold-dessert-spoon",
     "category": "cutlery",
     "isBestseller": true,
     "bestsellerOrder": 1,
-    "editionBadge": "Atelier No. 01",
     "tagline": "PVD Coated Mirror Finish",
     "price": {
       "amount": 359,
@@ -18,7 +17,7 @@
     "specs": [
       {
         "label": "Material",
-        "value": "High-Fire Stoneware"
+        "value": "100% Stainless Steel"
       },
       {
         "label": "Care",
@@ -46,11 +45,6 @@
           "src": "./assets/products/cutlery/4-piece-gold-dessert-spoon-04.webp",
           "alt": "4-Piece Gold Dessert Spoon - Angle 4",
           "isHero": false
-        },
-        {
-          "src": "./assets/products/cutlery/4-piece-gold-dessert-spoon-01.webp",
-          "alt": "4-Piece Gold Dessert Spoon - Angle 1",
-          "isHero": true
         }
       ]
     },
@@ -67,7 +61,6 @@
     "category": "cutlery",
     "isBestseller": true,
     "bestsellerOrder": 2,
-    "editionBadge": "Atelier No. 02",
     "tagline": "Forged Titanium",
     "price": {
       "amount": 340,
@@ -134,7 +127,6 @@
     "category": "cutlery",
     "isBestseller": false,
     "bestsellerOrder": null,
-    "editionBadge": null,
     "tagline": "Damascus Steel",
     "price": {
       "amount": 480,
@@ -193,7 +185,6 @@
     "category": "cutlery",
     "isBestseller": false,
     "bestsellerOrder": null,
-    "editionBadge": null,
     "tagline": "Sterling Craft",
     "price": {
       "amount": 220,
@@ -252,7 +243,6 @@
     "category": "cutlery",
     "isBestseller": false,
     "bestsellerOrder": null,
-    "editionBadge": null,
     "tagline": "Warm Brass",
     "price": {
       "amount": 260,
@@ -311,7 +301,6 @@
     "category": "cutlery",
     "isBestseller": false,
     "bestsellerOrder": null,
-    "editionBadge": null,
     "tagline": "Razor Edge",
     "price": {
       "amount": 310,
@@ -370,7 +359,6 @@
     "category": "plates",
     "isBestseller": true,
     "bestsellerOrder": 1,
-    "editionBadge": "Atelier No. 01",
     "tagline": "Ceramic Artistry",
     "price": {
       "amount": 180,
@@ -429,7 +417,6 @@
     "category": "plates",
     "isBestseller": false,
     "bestsellerOrder": null,
-    "editionBadge": null,
     "tagline": "Reactive Glaze",
     "price": {
       "amount": 135,
@@ -488,7 +475,6 @@
     "category": "plates",
     "isBestseller": false,
     "bestsellerOrder": null,
-    "editionBadge": null,
     "tagline": "Minimal Rim",
     "price": {
       "amount": 110,
@@ -547,7 +533,6 @@
     "category": "plates",
     "isBestseller": false,
     "bestsellerOrder": null,
-    "editionBadge": null,
     "tagline": "Sculptural Ceramic",
     "price": {
       "amount": 215,
@@ -606,7 +591,6 @@
     "category": "plates",
     "isBestseller": false,
     "bestsellerOrder": null,
-    "editionBadge": null,
     "tagline": "Hand-Pinched",
     "price": {
       "amount": 160,
@@ -665,7 +649,6 @@
     "category": "placemats",
     "isBestseller": true,
     "bestsellerOrder": 3,
-    "editionBadge": "Atelier No. 03",
     "tagline": "Loomed Linen",
     "price": {
       "amount": 145,
@@ -724,7 +707,6 @@
     "category": "placemats",
     "isBestseller": true,
     "bestsellerOrder": 4,
-    "editionBadge": "Atelier No. 04",
     "tagline": "Natural Fiber",
     "price": {
       "amount": 75,
@@ -783,7 +765,6 @@
     "category": "placemats",
     "isBestseller": false,
     "bestsellerOrder": null,
-    "editionBadge": null,
     "tagline": "Stone-Washed",
     "price": {
       "amount": 95,
@@ -842,7 +823,6 @@
     "category": "placemats",
     "isBestseller": false,
     "bestsellerOrder": null,
-    "editionBadge": null,
     "tagline": "Hand-Braided",
     "price": {
       "amount": 85,
@@ -901,7 +881,6 @@
     "category": "placemats",
     "isBestseller": false,
     "bestsellerOrder": null,
-    "editionBadge": null,
     "tagline": "Botanical Dye",
     "price": {
       "amount": 105,

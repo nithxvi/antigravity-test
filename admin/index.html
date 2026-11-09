@@ -1262,7 +1262,7 @@
               <div class="card-media">
                 <img src="${heroImg}" alt="${item.name}" loading="lazy" />
                 <div class="card-badges">
-                  ${item.isBestseller ? `<span class="badge-bestseller">${item.editionBadge || 'Bestseller No. 0' + (item.bestsellerOrder || 1)}</span>` : ''}
+                  ${item.isBestseller ? '<span class="badge-bestseller">Bestseller</span>' : ''}
                   <span class="badge-category">${item.category}</span>
                 </div>
                 <div class="photo-count-pill">
@@ -1362,7 +1362,6 @@
             category: currentFilter !== 'all' && currentFilter !== 'bestsellers' ? currentFilter : 'cutlery',
             isBestseller: false,
             bestsellerOrder: null,
-            editionBadge: '',
             tagline: '',
             buyUrl: '',
             price: { amount: 150, currency: 'INR', display: '₹150' },
@@ -1605,7 +1604,6 @@
         editingProduct.buyUrl = buyUrl;
         editingProduct.isBestseller = isBestseller;
         editingProduct.bestsellerOrder = bestsellerOrder;
-        editingProduct.editionBadge = isBestseller ? `Atelier No. 0${bestsellerOrder || 1}` : null;
         editingProduct.price = {
           amount: priceAmount,
           currency: 'INR',

@@ -92,7 +92,8 @@
 
     var rowsHTML = bestsellers.map(function(item) {
       var carouselHTML = TresaCatalog.buildCarouselHTML(item.media);
-      var badge = item.editionBadge ? '<span class="bs-badge">' + item.editionBadge + '</span>' : '';
+      var categoryLabel = item.category ? String(item.category).trim() : '';
+      var badge = categoryLabel ? '<span class="bs-badge">' + categoryLabel + '</span>' : '';
       var tagline = item.tagline ? '<span class="bs-tag">' + item.tagline + '</span>' : '';
       var desc = item.fullDescription || item.shortDescription || '';
       var priceDisplay = (item.price && item.price.display) ? item.price.display : '₹0';
