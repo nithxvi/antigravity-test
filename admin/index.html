@@ -871,6 +871,7 @@
             <div class="form-group">
               <label class="form-label" for="fieldSlug">Slug Identifier *</label>
               <input type="text" class="form-input" id="fieldSlug" required placeholder="e.g. noir-five-piece-set" />
+              <span class="form-hint">Auto-generated from the product name. You can edit it manually.</span>
             </div>
           </div>
           <div class="form-row triple">
@@ -988,6 +989,8 @@
       let searchQuery = '';
       let editingProduct = null;
       let hasUnsavedChanges = false;
+      let isNewProduct = false;
+      let slugManuallyEdited = false;
 
       // DOM Elements
       const productsGrid = document.getElementById('productsGrid');
@@ -1020,16 +1023,46 @@
         bestsellerOrderGroup.style.display = fieldIsBestseller.checked ? 'block' : 'none';
       });
 
-      // Name to slug auto-fill
+      // Name to slug auto-fill (new products only, until manually edited)
       const fieldName = document.getElementById('fieldName');
       const fieldSlug = document.getElementById('fieldSlug');
-      fieldName.addEventListener('input', () => {
-        if (!editingProduct || !editingProduct.id) {
-          fieldSlug.value = fieldName.value.toLowerCase()
-            .trim()
-            .replace(/[^a-z0-9]+/g, '-')
-            .replace(/^-+|-+$/g, '');
+
+      function slugifyProductName(value) {
+        return String(value)
+          .normalize('NFKD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .toLowerCase()
+          .replace(/['’]/g, '')
+          .replace(/&/g, ' and ')
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/-+/g, '-')
+          .replace(/^-+|-+$/g, '');
+      }
+
+      function makeUniqueSlug(baseSlug) {
+        if (!baseSlug) return '';
+        const usedSlugs = new Set(
+          catalog
+            .filter(p => !editingProduct || p.id !== editingProduct.id)
+            .map(p => p.slug)
+            .filter(Boolean)
+        );
+        let slug = baseSlug;
+        let suffix = 2;
+        while (usedSlugs.has(slug)) {
+          slug = baseSlug + '-' + suffix;
+          suffix += 1;
         }
+        return slug;
+      }
+
+      fieldName.addEventListener('input', () => {
+        if (!isNewProduct || slugManuallyEdited) return;
+        fieldSlug.value = makeUniqueSlug(slugifyProductName(fieldName.value));
+      });
+
+      fieldSlug.addEventListener('input', () => {
+        slugManuallyEdited = true;
       });
 
       // ─── TOAST NOTIFICATIONS ───
@@ -1354,6 +1387,8 @@
 
       // ─── OPEN EDITOR MODAL ───
       function openEditor(id = null) {
+        isNewProduct = !id;
+        slugManuallyEdited = false;
         if (id) {
           const found = catalog.find(p => p.id === id);
           editingProduct = JSON.parse(JSON.stringify(found));
@@ -1419,6 +1454,8 @@
       function closeEditor() {
         modalBackdrop.classList.remove('open');
         editingProduct = null;
+        isNewProduct = false;
+        slugManuallyEdited = false;
         uploadFeedback.classList.remove('active');
       }
 
