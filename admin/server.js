@@ -23,8 +23,13 @@ const PRODUCTS_JS_PATH = path.join(ROOT_DIR, 'data', 'products.js');
 const PRODUCTS_JSON_PATH = path.join(ROOT_DIR, 'data', 'products.json');
 const ASSETS_PRODUCTS_DIR = path.join(ROOT_DIR, 'assets', 'products');
 
+// Product image folders and extensions eligible for orphan cleanup.
+// Everything outside these folders (site icons, logos, etc.) is never touched.
+const PRODUCT_CATEGORIES = ['cutlery', 'plates', 'placemats'];
+const PRODUCT_IMAGE_EXT_RE = /\.(webp|jpe?g|png|gif|avif|svg)$/i;
+
 // Ensure necessary directories exist
-['cutlery', 'plates', 'placemats'].forEach(cat => {
+PRODUCT_CATEGORIES.forEach(cat => {
   const dir = path.join(ASSETS_PRODUCTS_DIR, cat);
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
@@ -101,6 +106,110 @@ function saveProductsCatalog(products) {
   fs.writeFileSync(PRODUCTS_JS_PATH, jsContent, 'utf8');
 }
 
+/**
+ * Helper: Collect every local product-asset key referenced by the catalog.
+ * Keys look like "cutlery/my-image.webp" and are compared case-insensitively
+ * on the category, exact on filename. External URLs (http/https/data/blob)
+ * are ignored because they are not stored in the local assets folder.
+ */
+function collectReferencedAssetKeys(products) {
+  const referenced = new Set();
+
+  function addReference(rawSrc) {
+    if (!rawSrc || typeof rawSrc !== 'string') return;
+    const src = rawSrc.trim();
+    if (!src || /^(https?:|data:|blob:|\/\/)/i.test(src)) return;
+
+    // Strip query string/hash and normalize Windows separators.
+    const normalized = src.split(/[?#]/)[0].replace(/\\/g, '/');
+    const match = normalized.match(/assets\/products\/([^/]+)\/([^/]+)$/i);
+    if (!match) return;
+
+    let filename = match[2];
+    try { filename = decodeURIComponent(filename); } catch (e) { /* keep raw name */ }
+    referenced.add(`${match[1].toLowerCase()}/${filename}`);
+  }
+
+  products.forEach(product => {
+    const media = product && product.media;
+    if (!media) return;
+
+    (media.images || []).forEach(img => {
+      addReference(typeof img === 'string' ? img : img && img.src);
+    });
+
+    // Local video posters also live in the product asset folders.
+    (media.videos || []).forEach(video => {
+      if (video && video.poster) addReference(video.poster);
+    });
+  });
+
+  return referenced;
+}
+
+/**
+ * Helper: Find image files in the product asset folders that no saved product
+ * references. Shared images referenced by two products are therefore safe.
+ */
+function findOrphanedAssets(products) {
+  const referenced = collectReferencedAssetKeys(products);
+  const orphans = [];
+
+  PRODUCT_CATEGORIES.forEach(category => {
+    const dir = path.join(ASSETS_PRODUCTS_DIR, category);
+    if (!fs.existsSync(dir)) return;
+
+    fs.readdirSync(dir).forEach(filename => {
+      if (!PRODUCT_IMAGE_EXT_RE.test(filename)) return;
+
+      const key = `${category.toLowerCase()}/${filename}`;
+      if (referenced.has(key)) return;
+
+      const fullPath = path.join(dir, filename);
+      const stat = fs.statSync(fullPath);
+      if (!stat.isFile()) return;
+
+      orphans.push({
+        category,
+        filename,
+        path: `./assets/products/${category}/${filename}`,
+        size: stat.size
+      });
+    });
+  });
+
+  // Stable, readable ordering for the confirmation dialog.
+  orphans.sort((a, b) => (a.category + '/' + a.filename).localeCompare(b.category + '/' + b.filename));
+  return orphans;
+}
+
+/**
+ * Helper: Find the next free numeric suffix for a product slug in a folder.
+ * Scans existing `<slug>-NN.webp` files (including unreferenced ones) and
+ * returns the smallest unused positive integer. This keeps new images
+ * consecutive without overwriting existing assets, even when older files
+ * were created with gaps (e.g. 01, 03, 05).
+ */
+function getNextAssetNumber(targetDir, baseSlug) {
+  const used = new Set();
+  const filenamePattern = new RegExp('^' + escapeRegExp(baseSlug) + '-(\\d+)\\.webp$', 'i');
+
+  if (fs.existsSync(targetDir)) {
+    fs.readdirSync(targetDir).forEach(filename => {
+      const match = filename.match(filenamePattern);
+      if (match) used.add(parseInt(match[1], 10));
+    });
+  }
+
+  let next = 1;
+  while (used.has(next)) next++;
+  return next;
+}
+
+function escapeRegExp(value) {
+  return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
 // ─── API ROUTES ───
 
 /**
@@ -147,17 +256,23 @@ app.post('/api/upload', upload.single('image'), async (req, res) => {
     }
 
     const category = (req.body.category || 'cutlery').toLowerCase().trim();
-    const safeCategory = ['cutlery', 'plates', 'placemats'].includes(category) ? category : 'cutlery';
+    const safeCategory = PRODUCT_CATEGORIES.includes(category) ? category : 'cutlery';
     const targetDir = path.join(ASSETS_PRODUCTS_DIR, safeCategory);
 
     if (!fs.existsSync(targetDir)) {
       fs.mkdirSync(targetDir, { recursive: true });
     }
 
-    // Generate safe WebP filename
-    const baseSlug = (req.body.slug || 'product').toLowerCase().replace(/[^a-z0-9_-]/g, '-').replace(/-+/g, '-');
-    const indexSuffix = req.body.index ? `-${String(req.body.index).padStart(2, '0')}` : `-${Date.now().toString().slice(-4)}`;
-    const finalFilename = `${baseSlug}${indexSuffix}.webp`;
+    // Generate a clean, consecutive WebP filename. The server owns the
+    // numbering so concurrent/batched uploads never double-increment or skip.
+    const baseSlug = String(req.body.slug || 'product')
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9_-]+/g, '-')   // replace spaces/symbols with a single dash
+      .replace(/-+/g, '-')             // collapse repeats
+      .replace(/^[-_]+|[-_]+$/g, '') || 'product'; // strip trailing/leading noise
+    const nextIndex = getNextAssetNumber(targetDir, baseSlug);
+    const finalFilename = `${baseSlug}-${String(nextIndex).padStart(2, '0')}.webp`;
     const finalFilePath = path.join(targetDir, finalFilename);
 
     const originalSize = req.file.size;
@@ -188,6 +303,7 @@ app.post('/api/upload', upload.single('image'), async (req, res) => {
     res.json({
       success: true,
       filename: finalFilename,
+      index: nextIndex,
       path: relativeWebPath,
       category: safeCategory,
       originalSize: originalSize,
@@ -209,7 +325,7 @@ app.post('/api/upload', upload.single('image'), async (req, res) => {
 app.get('/api/media', (req, res) => {
   try {
     const media = [];
-    ['cutlery', 'plates', 'placemats'].forEach(cat => {
+    PRODUCT_CATEGORIES.forEach(cat => {
       const catDir = path.join(ASSETS_PRODUCTS_DIR, cat);
       if (fs.existsSync(catDir)) {
         const files = fs.readdirSync(catDir);
@@ -233,6 +349,97 @@ app.get('/api/media', (req, res) => {
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
   }
+});
+
+/**
+ * GET /api/assets/orphans
+ * Preview unused product images based on the currently saved catalog.
+ * Nothing is deleted by this endpoint.
+ */
+app.get('/api/assets/orphans', (req, res) => {
+  try {
+    const products = readProductsCatalog();
+    const orphans = findOrphanedAssets(products);
+    const totalSize = orphans.reduce((sum, item) => sum + item.size, 0);
+    const referencedCount = collectReferencedAssetKeys(products).size;
+
+    res.json({
+      success: true,
+      count: orphans.length,
+      totalSize,
+      referencedCount,
+      orphans
+    });
+  } catch (err) {
+    console.error('[Server] Failed to scan for orphaned assets:', err);
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+/**
+ * POST /api/assets/cleanup
+ * Delete unused product images. Orphans are recomputed against the saved
+ * catalog server-side, so a stale or tampered client list cannot delete
+ * referenced/shared images. An optional `files` array narrows the deletion
+ * to the exact items the user confirmed.
+ */
+app.post('/api/assets/cleanup', (req, res) => {
+  try {
+    const products = readProductsCatalog();
+    const orphans = findOrphanedAssets(products);
+
+    const requested = Array.isArray(req.body && req.body.files)
+      ? new Set(req.body.files.map(String))
+      : null;
+
+    const targets = requested
+      ? orphans.filter(item => requested.has(`${item.category}/${item.filename}`))
+      : orphans;
+
+    const productsRoot = path.resolve(ASSETS_PRODUCTS_DIR) + path.sep;
+    const deleted = [];
+    const failed = [];
+
+    targets.forEach(item => {
+      const fullPath = path.resolve(ASSETS_PRODUCTS_DIR, item.category, item.filename);
+
+      // Defense in depth: never delete outside assets/products.
+      if (!fullPath.startsWith(productsRoot)) {
+        failed.push({ path: item.path, error: 'Refused: path outside product assets' });
+        return;
+      }
+
+      try {
+        fs.unlinkSync(fullPath);
+        deleted.push(item.path);
+      } catch (err) {
+        failed.push({ path: item.path, error: err.message });
+      }
+    });
+
+    console.log(`[Server] Asset cleanup removed ${deleted.length} unused image(s)`);
+    res.json({
+      success: true,
+      deletedCount: deleted.length,
+      deleted,
+      failed,
+      orphansRemaining: findOrphanedAssets(readProductsCatalog()).length
+    });
+  } catch (err) {
+    console.error('[Server] Failed to clean orphaned assets:', err);
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+/**
+ * Unknown API route: always answer with JSON so the Studio never tries to
+ * parse Express's HTML error page (the cause of "Unexpected token '<'").
+ */
+app.use('/api', (req, res) => {
+  res.status(404).json({
+    success: false,
+    error: `Unknown API endpoint: ${req.method} ${req.originalUrl}. Restart the Studio server if you just updated it.`
+  });
 });
 
 // ─── STATIC SERVING ───

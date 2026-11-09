@@ -14,6 +14,21 @@
   var TresaCatalog = {};
 
   /**
+   * Helper: Resolve the external purchase URL for a product.
+   * Canonical field is `buyUrl`; `links.externalBuyUrl` is supported as a
+   * legacy fallback. Only absolute http(s) URLs are allowed so unsafe
+   * protocols can never end up in an href.
+   */
+  function getBuyUrl(item) {
+    if (!item) return '';
+    var candidate = item.buyUrl || (item.links && item.links.externalBuyUrl) || '';
+    candidate = String(candidate).trim();
+    if (!/^https?:\/\//i.test(candidate)) return '';
+    return candidate.replace(/"/g, '%22').replace(/'/g, '%27');
+  }
+  TresaCatalog.getBuyUrl = getBuyUrl;
+
+  /**
    * Helper: Build clean carousel HTML for an array of images.
    */
   TresaCatalog.buildCarouselHTML = function(media) {
@@ -82,6 +97,10 @@
       var desc = item.fullDescription || item.shortDescription || '';
       var priceDisplay = (item.price && item.price.display) ? item.price.display : '₹0';
       var detailsUrl = (item.links && item.links.detailsUrl) ? item.links.detailsUrl : 'products.html';
+      var buyUrl = getBuyUrl(item);
+      var purchaseHref = buyUrl || detailsUrl;
+      var purchaseAttrs = buyUrl ? ' target="_blank" rel="noopener noreferrer"' : '';
+      var purchaseLabel = buyUrl ? 'Buy Now' : 'View Details';
 
       return (
         '<article class="bs-row" data-product-id="' + item.id + '">' +
@@ -100,8 +119,8 @@
                 '<span class="bs-price-label">Price</span>' +
                 '<span class="bs-price">' + priceDisplay + '</span>' +
               '</div>' +
-              '<a href="' + detailsUrl + '" class="bs-purchase-btn" aria-label="Purchase ' + item.name + '">' +
-                '<span>Purchase</span>' +
+              '<a href="' + purchaseHref + '" class="bs-purchase-btn" aria-label="' + purchaseLabel + ' ' + item.name + '"' + purchaseAttrs + '>' +
+                '<span>' + purchaseLabel + '</span>' +
                 '<svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
               '</a>' +
             '</div>' +
@@ -148,7 +167,11 @@
       var cardsHTML = items.map(function(item) {
         var carouselHTML = TresaCatalog.buildCarouselHTML(item.media);
         var priceDisplay = (item.price && item.price.display) ? item.price.display : '₹0';
-        var buyUrl = (item.links && item.links.externalBuyUrl) ? item.links.externalBuyUrl : '#';
+        var detailsUrl = (item.links && item.links.detailsUrl) ? item.links.detailsUrl : 'products.html';
+        var buyUrl = getBuyUrl(item);
+        var purchaseHref = buyUrl || detailsUrl;
+        var purchaseAttrs = buyUrl ? ' target="_blank" rel="noopener noreferrer"' : '';
+        var purchaseLabel = buyUrl ? 'Buy Now →' : 'View Details →';
 
         return (
           '<article class="product-card" data-product-id="' + item.id + '">' +
@@ -163,7 +186,7 @@
                   '<span class="product-price-label">Price</span>' +
                   '<span class="product-price">' + priceDisplay + '</span>' +
                 '</div>' +
-                '<a href="' + buyUrl + '" class="product-btn">View Details →</a>' +
+                '<a href="' + purchaseHref + '" class="product-btn"' + purchaseAttrs + '>' + purchaseLabel + '</a>' +
               '</div>' +
             '</div>' +
           '</article>'

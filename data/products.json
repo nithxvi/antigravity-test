@@ -28,31 +28,37 @@
     "media": {
       "images": [
         {
-          "src": "./assets/products/cutlery/4-piece-gold-dessert-spoon-01.webp",
-          "alt": "4-piece-gold-dessert-spoon - Angle 1",
-          "isHero": true
+          "src": "./assets/products/cutlery/4-piece-gold-dessert-spoon-02.webp",
+          "alt": "4-Piece Gold Dessert Spoon - Angle 2",
+          "isHero": false
         },
         {
           "src": "./assets/products/cutlery/4-piece-gold-dessert-spoon-03.webp",
-          "alt": "4-piece-gold-dessert-spoon - Angle 2",
+          "alt": "4-Piece Gold Dessert Spoon - Angle 3",
           "isHero": false
         },
         {
           "src": "./assets/products/cutlery/4-piece-gold-dessert-spoon-05.webp",
-          "alt": "4-piece-gold-dessert-spoon - Angle 3",
+          "alt": "4-Piece Gold Dessert Spoon - Angle 5",
           "isHero": false
         },
         {
-          "src": "./assets/products/cutlery/4-piece-gold-dessert-spoon-07.webp",
-          "alt": "4-piece-gold-dessert-spoon - Angle 4",
+          "src": "./assets/products/cutlery/4-piece-gold-dessert-spoon-04.webp",
+          "alt": "4-Piece Gold Dessert Spoon - Angle 4",
           "isHero": false
+        },
+        {
+          "src": "./assets/products/cutlery/4-piece-gold-dessert-spoon-01.webp",
+          "alt": "4-Piece Gold Dessert Spoon - Angle 1",
+          "isHero": true
         }
       ]
     },
     "links": {
       "detailsUrl": "products.html#cutlery",
-      "externalBuyUrl": "#"
-    }
+      "externalBuyUrl": "https://www.amazon.in/dp/B0GFPKGZ8P"
+    },
+    "buyUrl": "https://www.amazon.in/dp/B0GFPKGZ8P"
   },
   {
     "id": "tresa-cutlery-01",
@@ -118,7 +124,8 @@
     "links": {
       "detailsUrl": "products.html#cutlery",
       "externalBuyUrl": "#"
-    }
+    },
+    "buyUrl": ""
   },
   {
     "id": "tresa-cutlery-02",
@@ -176,7 +183,8 @@
     "links": {
       "detailsUrl": "products.html#cutlery",
       "externalBuyUrl": "#"
-    }
+    },
+    "buyUrl": ""
   },
   {
     "id": "tresa-cutlery-03",
@@ -234,7 +242,8 @@
     "links": {
       "detailsUrl": "products.html#cutlery",
       "externalBuyUrl": "#"
-    }
+    },
+    "buyUrl": ""
   },
   {
     "id": "tresa-cutlery-04",
@@ -292,7 +301,8 @@
     "links": {
       "detailsUrl": "products.html#cutlery",
       "externalBuyUrl": "#"
-    }
+    },
+    "buyUrl": ""
   },
   {
     "id": "tresa-cutlery-05",
@@ -350,7 +360,8 @@
     "links": {
       "detailsUrl": "products.html#cutlery",
       "externalBuyUrl": "#"
-    }
+    },
+    "buyUrl": ""
   },
   {
     "id": "tresa-plates-01",
@@ -408,7 +419,8 @@
     "links": {
       "detailsUrl": "products.html#plates",
       "externalBuyUrl": "#"
-    }
+    },
+    "buyUrl": ""
   },
   {
     "id": "tresa-plates-02",
@@ -466,7 +478,8 @@
     "links": {
       "detailsUrl": "products.html#plates",
       "externalBuyUrl": "#"
-    }
+    },
+    "buyUrl": ""
   },
   {
     "id": "tresa-plates-03",
@@ -524,7 +537,8 @@
     "links": {
       "detailsUrl": "products.html#plates",
       "externalBuyUrl": "#"
-    }
+    },
+    "buyUrl": ""
   },
   {
     "id": "tresa-plates-04",
@@ -582,7 +596,8 @@
     "links": {
       "detailsUrl": "products.html#plates",
       "externalBuyUrl": "#"
-    }
+    },
+    "buyUrl": ""
   },
   {
     "id": "tresa-plates-05",
@@ -640,7 +655,8 @@
     "links": {
       "detailsUrl": "products.html#plates",
       "externalBuyUrl": "#"
-    }
+    },
+    "buyUrl": ""
   },
   {
     "id": "tresa-placemats-01",
@@ -698,7 +714,8 @@
     "links": {
       "detailsUrl": "products.html#placemats",
       "externalBuyUrl": "#"
-    }
+    },
+    "buyUrl": ""
   },
   {
     "id": "tresa-placemats-02",
@@ -756,7 +773,8 @@
     "links": {
       "detailsUrl": "products.html#placemats",
       "externalBuyUrl": "#"
-    }
+    },
+    "buyUrl": ""
   },
   {
     "id": "tresa-placemats-03",
@@ -814,7 +832,8 @@
     "links": {
       "detailsUrl": "products.html#placemats",
       "externalBuyUrl": "#"
-    }
+    },
+    "buyUrl": ""
   },
   {
     "id": "tresa-placemats-04",
@@ -872,7 +891,8 @@
     "links": {
       "detailsUrl": "products.html#placemats",
       "externalBuyUrl": "#"
-    }
+    },
+    "buyUrl": ""
   },
   {
     "id": "tresa-placemats-05",
@@ -930,6 +950,7 @@
     "links": {
       "detailsUrl": "products.html#placemats",
       "externalBuyUrl": "#"
-    }
+    },
+    "buyUrl": ""
   }
 ]

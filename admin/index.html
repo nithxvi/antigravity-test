@@ -182,6 +182,26 @@
       padding: 8px;
       border-radius: var(--radius-sm);
     }
+    .btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+    .asset-count {
+      min-width: 20px;
+      height: 20px;
+      padding: 0 6px;
+      border-radius: var(--radius-pill);
+      background: var(--accent-dim);
+      color: var(--accent);
+      border: 1px solid rgba(201, 169, 110, 0.35);
+      font-size: 0.68rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
 
     /* ─── MAIN CONTAINER ─── */
     .container {
@@ -581,6 +601,12 @@
       min-height: 80px;
       line-height: 1.5;
     }
+    .form-hint {
+      font-size: 0.68rem;
+      line-height: 1.45;
+      color: var(--text-muted);
+      opacity: 0.85;
+    }
 
     .checkbox-wrap {
       display: flex;
@@ -763,6 +789,11 @@
       </div>
     </div>
     <div class="topbar-right">
+      <button type="button" class="btn" id="btnCleanAssets" title="Delete product images that are not used by any saved product">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"></path></svg>
+        <span>Clean Unused Assets</span>
+        <span class="asset-count" id="orphanCount" style="display:none;">0</span>
+      </button>
       <a href="/index.html" target="_blank" class="btn" title="View Storefront">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
         <span>Preview Site</span>
@@ -855,6 +886,11 @@
               <label class="form-label" for="fieldTagline">Artistic Tagline</label>
               <input type="text" class="form-input" id="fieldTagline" placeholder="e.g. Forged Titanium" />
             </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="fieldBuyUrl">External Purchase Link (Buy Now URL)</label>
+            <input type="url" class="form-input" id="fieldBuyUrl" placeholder="https://your-store.example/product" />
+            <span class="form-hint">Used by the “Buy Now” button on the storefront and opens safely in a new tab. Leave blank to fall back to the product details link.</span>
           </div>
           <div class="form-row">
             <div class="form-group">
@@ -956,6 +992,8 @@
       const statusBadge = document.getElementById('statusBadge');
       const statusText = document.getElementById('statusText');
       const btnSaveCatalog = document.getElementById('btnSaveCatalog');
+      const btnCleanAssets = document.getElementById('btnCleanAssets');
+      const orphanCount = document.getElementById('orphanCount');
       const modalBackdrop = document.getElementById('modalBackdrop');
       const btnNewProduct = document.getElementById('btnNewProduct');
       const btnModalClose = document.getElementById('btnModalClose');
@@ -1004,6 +1042,30 @@
         }, 4000);
       }
 
+      // ─── API RESPONSE PARSING ───
+      // Express returns HTML for unknown routes. Parse defensively so the UI
+      // shows a useful message instead of "Unexpected token '<'".
+      async function readJsonApiResponse(res) {
+        const text = await res.text();
+        let data;
+
+        try {
+          data = text ? JSON.parse(text) : {};
+        } catch (err) {
+          const snippet = text.replace(/\s+/g, ' ').trim().slice(0, 140);
+          if (res.status === 404) {
+            throw new Error('This API endpoint is missing from the running server. Restart the Studio server (npm run admin) and try again.');
+          }
+          throw new Error(`Server returned ${res.status} ${res.statusText}: ${snippet}`);
+        }
+
+        if (!res.ok) {
+          throw new Error(data.error || `Server returned ${res.status} ${res.statusText}`);
+        }
+
+        return data;
+      }
+
       // ─── STATUS INDICATOR ───
       function setDirty(isDirty) {
         hasUnsavedChanges = isDirty;
@@ -1016,6 +1078,20 @@
           statusText.textContent = 'Catalog Synced';
           btnSaveCatalog.style.display = 'none';
         }
+      }
+
+      // ─── MEDIA PATH NORMALIZATION ───
+      // Product data stores paths relative to the site root (e.g. ./assets/...).
+      // The Studio is served from /admin/, so those paths would incorrectly
+      // resolve to /admin/assets/... . Convert local paths to root-relative
+      // only for display; keep the stored value untouched for the storefront.
+      function toStudioAssetUrl(src) {
+        if (!src) return '';
+        const value = String(src).trim();
+        if (!value) return '';
+        if (/^(https?:|data:|blob:|\/\/)/i.test(value)) return value;
+        const rootRelative = value.replace(/^\.?\//, '');
+        return '/' + rootRelative;
       }
 
       // ─── FETCH PRODUCTS ───
@@ -1047,6 +1123,7 @@
           if (data.success) {
             setDirty(false);
             showToast('Catalog saved to data/products.js successfully!', 'success');
+            refreshOrphanCount();
           } else {
             showToast('Save failed: ' + (data.error || 'Server error'), 'error');
           }
@@ -1055,6 +1132,84 @@
         }
       }
       btnSaveCatalog.addEventListener('click', saveCatalog);
+
+      // ─── UNUSED ASSET CLEANUP ───
+      function formatBytes(bytes) {
+        if (!bytes) return '0 KB';
+        if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+        return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
+      }
+
+      async function refreshOrphanCount() {
+        try {
+          const res = await fetch('/api/assets/orphans');
+          const data = await readJsonApiResponse(res);
+          if (!data.success) return;
+
+          orphanCount.textContent = data.count;
+          orphanCount.style.display = data.count ? 'inline-flex' : 'none';
+          btnCleanAssets.disabled = data.count === 0;
+          btnCleanAssets.title = data.count
+            ? `${data.count} unused image(s), ${formatBytes(data.totalSize)} — safe to remove`
+            : 'No unused product images found';
+        } catch (err) {
+          // Keep the Studio usable if the scan endpoint is unavailable.
+          btnCleanAssets.disabled = false;
+        }
+      }
+
+      btnCleanAssets.addEventListener('click', async () => {
+        btnCleanAssets.disabled = true;
+        try {
+          const res = await fetch('/api/assets/orphans');
+          const data = await readJsonApiResponse(res);
+          if (!data.success) {
+            showToast('Asset scan failed: ' + (data.error || 'Server error'), 'error');
+            return;
+          }
+
+          if (!data.count) {
+            showToast('No unused product images found.', 'success');
+            return;
+          }
+
+          const preview = data.orphans.slice(0, 12)
+            .map(item => '• ' + item.category + '/' + item.filename)
+            .join('\n');
+          const more = data.count > 12 ? `\n…and ${data.count - 12} more` : '';
+          const message =
+            `Found ${data.count} unused product image(s) (${formatBytes(data.totalSize)}) ` +
+            `in assets/products:\n\n${preview}${more}\n\n` +
+            'These files are not referenced by any saved product. Delete them?\n' +
+            'You can restore them from Git if this was a mistake.';
+
+          if (!confirm(message)) return;
+
+          const cleanupRes = await fetch('/api/assets/cleanup', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              files: data.orphans.map(item => item.category + '/' + item.filename)
+            })
+          });
+          const cleanup = await readJsonApiResponse(cleanupRes);
+
+          if (!cleanup.success) {
+            showToast('Cleanup failed: ' + (cleanup.error || 'Server error'), 'error');
+            return;
+          }
+
+          if (cleanup.failed && cleanup.failed.length) {
+            showToast(`Removed ${cleanup.deletedCount} file(s); ${cleanup.failed.length} could not be deleted.`, 'error');
+          } else {
+            showToast(`Removed ${cleanup.deletedCount} unused image(s).`, 'success');
+          }
+        } catch (err) {
+          showToast('Cleanup error: ' + err.message, 'error');
+        } finally {
+          refreshOrphanCount();
+        }
+      });
 
       // ─── RENDER CATALOG GRID ───
       function renderCatalog() {
@@ -1092,8 +1247,12 @@
         }
 
         productsGrid.innerHTML = filtered.map(item => {
-          const heroImg = (item.media && item.media.images && item.media.images.length)
-            ? item.media.images[0].src
+          const firstImage = (item.media && item.media.images && item.media.images.length)
+            ? item.media.images[0]
+            : null;
+          const firstImageSrc = typeof firstImage === 'string' ? firstImage : (firstImage && firstImage.src);
+          const heroImg = firstImageSrc
+            ? toStudioAssetUrl(firstImageSrc)
             : 'https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=600&q=80';
           const imgCount = (item.media && item.media.images) ? item.media.images.length : 0;
           const priceDisplay = (item.price && item.price.display) ? item.price.display : '₹' + (item.price?.amount || 0);
@@ -1185,7 +1344,7 @@
           catalog = catalog.filter(p => p.id !== id);
           renderCatalog();
           setDirty(true);
-          showToast(`Deleted "${item.name}"`, 'success');
+          showToast(`Deleted "${item.name}" — save the catalog, then use Clean Unused Assets to remove its images.`, 'success');
         }
       }
 
@@ -1205,6 +1364,7 @@
             bestsellerOrder: null,
             editionBadge: '',
             tagline: '',
+            buyUrl: '',
             price: { amount: 150, currency: 'INR', display: '₹150' },
             shortDescription: '',
             fullDescription: '',
@@ -1230,6 +1390,11 @@
         document.getElementById('fieldCategory').value = editingProduct.category || 'cutlery';
         document.getElementById('fieldPrice').value = editingProduct.price ? editingProduct.price.amount : 0;
         document.getElementById('fieldTagline').value = editingProduct.tagline || '';
+        const existingBuyUrl = editingProduct.buyUrl ||
+          (editingProduct.links && editingProduct.links.externalBuyUrl && editingProduct.links.externalBuyUrl !== '#'
+            ? editingProduct.links.externalBuyUrl
+            : '');
+        document.getElementById('fieldBuyUrl').value = existingBuyUrl;
         document.getElementById('fieldIsBestseller').checked = !!editingProduct.isBestseller;
         document.getElementById('bestsellerOrderGroup').style.display = editingProduct.isBestseller ? 'block' : 'none';
         document.getElementById('fieldBestsellerOrder').value = editingProduct.bestsellerOrder || 1;
@@ -1260,7 +1425,8 @@
 
       // ─── RENDER MEDIA SLIDES IN EDITOR ───
       function renderEditorMediaGrid() {
-        const images = editingProduct.media?.images || [];
+        const rawImages = editingProduct.media?.images || [];
+        const images = rawImages.map(img => typeof img === 'string' ? { src: img, alt: '' } : img);
         if (images.length === 0) {
           editorMediaGrid.innerHTML = `<div style="grid-column:1/-1; font-size:0.75rem; color:var(--text-muted); padding:10px 0;">No images attached yet. Drop images into the box above to auto-convert to WebP.</div>`;
           return;
@@ -1268,7 +1434,7 @@
 
         editorMediaGrid.innerHTML = images.map((img, idx) => `
           <div class="media-item-box" data-idx="${idx}">
-            <img class="media-item-thumb" src="${img.src}" alt="${img.alt || 'Slide ' + (idx + 1)}" />
+            <img class="media-item-thumb" src="${toStudioAssetUrl(img.src)}" alt="${img.alt || 'Slide ' + (idx + 1)}" />
             ${idx === 0 ? '<span class="media-hero-tag">Hero</span>' : ''}
             <div class="media-item-actions">
               <button type="button" class="reorder-btn btn-slide-left" title="Move Left" data-idx="${idx}">‹</button>
@@ -1353,7 +1519,7 @@
           formData.append('image', file);
           formData.append('category', category);
           formData.append('slug', slug);
-          formData.append('index', (editingProduct.media?.images?.length || 0) + i + 1);
+          // The server allocates the next consecutive numeric suffix.
 
           try {
             const res = await fetch('/api/upload', {
@@ -1414,6 +1580,7 @@
         const category = document.getElementById('fieldCategory').value;
         const priceAmount = parseFloat(document.getElementById('fieldPrice').value) || 0;
         const tagline = document.getElementById('fieldTagline').value.trim();
+        const buyUrl = document.getElementById('fieldBuyUrl').value.trim();
         const isBestseller = document.getElementById('fieldIsBestseller').checked;
         const bestsellerOrder = isBestseller ? parseInt(document.getElementById('fieldBestsellerOrder').value, 10) : null;
         const shortDesc = document.getElementById('fieldShortDesc').value.trim();
@@ -1426,10 +1593,16 @@
           return;
         }
 
+        if (buyUrl && !/^https?:\/\//i.test(buyUrl)) {
+          alert('The External Purchase Link must start with http:// or https:// (or be left blank).');
+          return;
+        }
+
         editingProduct.name = name;
         editingProduct.slug = slug;
         editingProduct.category = category;
         editingProduct.tagline = tagline;
+        editingProduct.buyUrl = buyUrl;
         editingProduct.isBestseller = isBestseller;
         editingProduct.bestsellerOrder = bestsellerOrder;
         editingProduct.editionBadge = isBestseller ? `Atelier No. 0${bestsellerOrder || 1}` : null;
@@ -1442,7 +1615,7 @@
         editingProduct.fullDescription = fullDesc;
         editingProduct.links = {
           detailsUrl: `products.html#${category}`,
-          externalBuyUrl: '#'
+          externalBuyUrl: buyUrl || '#'
         };
 
         if (videoSrc) {
@@ -1472,6 +1645,7 @@
 
       // Initial Load
       loadCatalog();
+      refreshOrphanCount();
 
     })();
   </script>
