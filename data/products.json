@@ -242,6 +242,61 @@
     "buyUrl": ""
   },
   {
+    "id": "tresa-267043",
+    "name": "Tresa Silver Wavy Box Set",
+    "slug": "tresa-silver-wavy-box-set",
+    "category": "cutlery",
+    "isBestseller": false,
+    "bestsellerOrder": null,
+    "tagline": "",
+    "buyUrl": "https://www.amazon.in/dp/B0G65Q42ZW",
+    "price": {
+      "amount": 799,
+      "currency": "INR",
+      "display": "₹799"
+    },
+    "shortDescription": "",
+    "fullDescription": "",
+    "specs": [
+      {
+        "label": "Material",
+        "value": "High-Fire Stoneware"
+      },
+      {
+        "label": "Care",
+        "value": "Dishwasher safe"
+      }
+    ],
+    "media": {
+      "images": [
+        {
+          "src": "./assets/products/cutlery/tresa-silver-wavy-box-set-04.webp",
+          "alt": "tresa-silver-wavy-box-set - Angle 4",
+          "isHero": false
+        },
+        {
+          "src": "./assets/products/cutlery/tresa-silver-wavy-box-set-03.webp",
+          "alt": "tresa-silver-wavy-box-set - Angle 3",
+          "isHero": false
+        },
+        {
+          "src": "./assets/products/cutlery/tresa-silver-wavy-box-set-01.webp",
+          "alt": "tresa-silver-wavy-box-set - Angle 1",
+          "isHero": true
+        },
+        {
+          "src": "./assets/products/cutlery/tresa-silver-wavy-box-set-02.webp",
+          "alt": "tresa-silver-wavy-box-set - Angle 2",
+          "isHero": false
+        }
+      ]
+    },
+    "links": {
+      "detailsUrl": "products.html#cutlery",
+      "externalBuyUrl": "https://www.amazon.in/dp/B0G65Q42ZW"
+    }
+  },
+  {
     "id": "tresa-cutlery-04",
     "name": "Solstice Brass Salad Servers",
     "slug": "solstice-brass-salad-servers",
