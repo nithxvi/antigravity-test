@@ -45,6 +45,11 @@
           "src": "./assets/products/cutlery/4-piece-gold-dessert-spoon-04.webp",
           "alt": "4-Piece Gold Dessert Spoon - Angle 4",
           "isHero": false
+        },
+        {
+          "src": "./assets/products/cutlery/4-piece-gold-dessert-spoon-01.webp",
+          "alt": "Tresa Gold Dessert Spoon - Angle 5",
+          "isHero": false
         }
       ]
     },
