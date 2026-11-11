@@ -322,6 +322,58 @@
       border-color: rgba(201, 169, 110, 0.3);
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     }
+    .product-card.is-offline {
+      opacity: 0.62;
+    }
+    .product-card.is-offline .card-media img {
+      filter: grayscale(0.65);
+    }
+    .product-card.dragging {
+      opacity: 0.35;
+      border-style: dashed;
+    }
+    .product-card.drop-before::before,
+    .product-card.drop-after::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 3px;
+      border-radius: 2px;
+      background: var(--accent);
+      box-shadow: 0 0 12px var(--accent-glow);
+      z-index: 6;
+      pointer-events: none;
+    }
+    .product-card.drop-before::before { top: -13px; }
+    .product-card.drop-after::after { bottom: -13px; }
+
+    .card-drag-handle {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 3;
+      width: 26px;
+      height: 26px;
+      border-radius: var(--radius-sm);
+      background: rgba(14, 14, 15, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      line-height: 1;
+      letter-spacing: -2px;
+      cursor: grab;
+      transition: all 0.2s var(--ease);
+    }
+    .card-drag-handle:hover {
+      color: var(--accent);
+      border-color: rgba(201, 169, 110, 0.45);
+      background: rgba(14, 14, 15, 0.92);
+    }
+    .card-drag-handle:active { cursor: grabbing; }
 
     .card-media {
       position: relative;
@@ -374,6 +426,19 @@
       letter-spacing: 0.12em;
       text-transform: uppercase;
       padding: 2px 7px;
+      border-radius: var(--radius-pill);
+    }
+
+    .badge-offline {
+      background: rgba(224, 82, 82, 0.16);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(224, 82, 82, 0.5);
+      color: #E78585;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 3px 8px;
       border-radius: var(--radius-pill);
     }
 
@@ -444,6 +509,117 @@
       justify-content: space-between;
       gap: 8px;
     }
+
+    .card-status-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-top: 2px;
+    }
+
+    /* ─── ONLINE / OFFLINE TOGGLE ─── */
+    .toggle-switch {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      user-select: none;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+    }
+    .toggle-switch input[type="checkbox"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+      pointer-events: none;
+    }
+    .toggle-track {
+      position: relative;
+      flex: 0 0 auto;
+      width: 36px;
+      height: 20px;
+      border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      transition: all 0.25s var(--ease);
+    }
+    .toggle-track::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--text-muted);
+      transition: all 0.25s var(--ease);
+    }
+    .toggle-switch input:checked + .toggle-track {
+      background: rgba(56, 161, 105, 0.3);
+      border-color: rgba(56, 161, 105, 0.65);
+    }
+    .toggle-switch input:checked + .toggle-track::after {
+      transform: translateX(16px);
+      background: #72C790;
+    }
+    .toggle-switch input:focus-visible + .toggle-track {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+    .toggle-state.is-on { color: #72C790; }
+    .toggle-state.is-off { color: #E78585; }
+
+    /* ─── EDITOR IMAGE REORDERING ─── */
+    .media-item-box.dragging {
+      opacity: 0.35;
+      border-style: dashed;
+    }
+    .media-item-box.drop-before::before,
+    .media-item-box.drop-after::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      border-radius: 2px;
+      background: var(--accent);
+      box-shadow: 0 0 12px var(--accent-glow);
+      z-index: 5;
+      pointer-events: none;
+    }
+    .media-item-box.drop-before::before { left: -7px; }
+    .media-item-box.drop-after::after { right: -7px; }
+
+    .media-drag-handle {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      z-index: 3;
+      width: 22px;
+      height: 22px;
+      border-radius: 4px;
+      background: rgba(14, 14, 15, 0.78);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      line-height: 1;
+      letter-spacing: -2px;
+      cursor: grab;
+      transition: all 0.2s var(--ease);
+    }
+    .media-item-box:hover .media-drag-handle {
+      color: var(--accent);
+      border-color: rgba(201, 169, 110, 0.45);
+      background: rgba(14, 14, 15, 0.95);
+    }
+    .media-drag-handle:active { cursor: grabbing; }
 
     .card-reorder-btns {
       display: flex;
@@ -899,6 +1075,17 @@
           </div>
           <div class="form-row">
             <div class="form-group">
+              <label class="form-label">Storefront Visibility</label>
+              <label class="toggle-switch">
+                <input type="checkbox" id="fieldIsOnline" checked />
+                <span class="toggle-track"></span>
+                <span class="toggle-state is-on" id="fieldIsOnlineLabel">Online</span>
+              </label>
+              <span class="form-hint">Turn this off to hide the product from the live site without deleting it. Its images remain protected from “Clean Unused Assets”.</span>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
               <label class="checkbox-wrap">
                 <input type="checkbox" id="fieldIsBestseller" />
                 <span>Feature as Bestseller on Homepage</span>
@@ -991,6 +1178,8 @@
       let hasUnsavedChanges = false;
       let isNewProduct = false;
       let slugManuallyEdited = false;
+      let draggedProductId = null;
+      let draggedSlideIndex = null;
 
       // DOM Elements
       const productsGrid = document.getElementById('productsGrid');
@@ -1022,6 +1211,16 @@
       fieldIsBestseller.addEventListener('change', () => {
         bestsellerOrderGroup.style.display = fieldIsBestseller.checked ? 'block' : 'none';
       });
+
+      // Online / offline visibility toggle in the editor
+      const fieldIsOnline = document.getElementById('fieldIsOnline');
+      const fieldIsOnlineLabel = document.getElementById('fieldIsOnlineLabel');
+
+      function syncOnlineSwitchLabel() {
+        fieldIsOnlineLabel.textContent = fieldIsOnline.checked ? 'Online' : 'Offline';
+        fieldIsOnlineLabel.className = 'toggle-state ' + (fieldIsOnline.checked ? 'is-on' : 'is-off');
+      }
+      fieldIsOnline.addEventListener('change', syncOnlineSwitchLabel);
 
       // Name to slug auto-fill (new products only, until manually edited)
       const fieldName = document.getElementById('fieldName');
@@ -1137,7 +1336,11 @@
           const res = await fetch('/api/products');
           const data = await res.json();
           if (data.success && Array.isArray(data.products)) {
-            catalog = data.products;
+            // Normalize visibility so catalogs saved by older versions (or
+            // external tools) default to online instead of undefined.
+            catalog = data.products.map(p => Object.assign({}, p, {
+              isOnline: p.isOnline !== false
+            }));
             renderCatalog();
             setDirty(false);
           } else {
@@ -1149,7 +1352,7 @@
       }
 
       // ─── SAVE FULL CATALOG ───
-      async function saveCatalog() {
+      async function saveCatalog(silent = false) {
         try {
           const res = await fetch('/api/products', {
             method: 'POST',
@@ -1159,7 +1362,7 @@
           const data = await res.json();
           if (data.success) {
             setDirty(false);
-            showToast('Catalog saved to data/products.js successfully!', 'success');
+            if (!silent) showToast('Catalog saved to data/products.js successfully!', 'success');
             refreshOrphanCount();
           } else {
             showToast('Save failed: ' + (data.error || 'Server error'), 'error');
@@ -1168,7 +1371,7 @@
           showToast('Network error saving catalog: ' + err.message, 'error');
         }
       }
-      btnSaveCatalog.addEventListener('click', saveCatalog);
+      btnSaveCatalog.addEventListener('click', () => saveCatalog());
 
       // ─── UNUSED ASSET CLEANUP ───
       function formatBytes(bytes) {
@@ -1293,15 +1496,18 @@
             : 'https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=600&q=80';
           const imgCount = (item.media && item.media.images) ? item.media.images.length : 0;
           const priceDisplay = (item.price && item.price.display) ? item.price.display : '₹' + (item.price?.amount || 0);
+          const isOnline = item.isOnline !== false;
 
           return `
-            <article class="product-card" data-id="${item.id}">
+            <article class="product-card${isOnline ? '' : ' is-offline'}" data-id="${item.id}">
               <div class="card-media">
-                <img src="${heroImg}" alt="${item.name}" loading="lazy" />
+                <img src="${heroImg}" alt="${item.name}" loading="lazy" draggable="false" />
                 <div class="card-badges">
+                  ${isOnline ? '' : '<span class="badge-offline">Offline</span>'}
                   ${item.isBestseller ? '<span class="badge-bestseller">Bestseller</span>' : ''}
                   <span class="badge-category">${item.category}</span>
                 </div>
+                <span class="card-drag-handle" draggable="true" title="Drag to reorder" aria-label="Drag to reorder ${item.name}">⠿</span>
                 <div class="photo-count-pill">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
                   <span>${imgCount}</span>
@@ -1313,6 +1519,13 @@
                   <span class="card-price">${priceDisplay}</span>
                 </div>
                 <p class="card-desc">${item.shortDescription || item.fullDescription || 'No description provided.'}</p>
+                <div class="card-status-row">
+                  <label class="toggle-switch" title="${isOnline ? 'Visible on the live site — click to take offline' : 'Hidden from the live site — click to bring online'}">
+                    <input type="checkbox" class="toggle-online" data-id="${item.id}" ${isOnline ? 'checked' : ''} />
+                    <span class="toggle-track"></span>
+                    <span class="toggle-state ${isOnline ? 'is-on' : 'is-off'}">${isOnline ? 'Online' : 'Offline'}</span>
+                  </label>
+                </div>
                 <div class="card-footer">
                   <div class="card-reorder-btns">
                     <button type="button" class="reorder-btn btn-move-up" title="Move Up" data-id="${item.id}">↑</button>
@@ -1341,6 +1554,88 @@
         productsGrid.querySelectorAll('.btn-move-down').forEach(b => {
           b.addEventListener('click', () => moveProduct(b.dataset.id, 1));
         });
+        productsGrid.querySelectorAll('.toggle-online').forEach(input => {
+          input.addEventListener('change', () => {
+            const item = catalog.find(p => p.id === input.dataset.id);
+            if (!item) return;
+            item.isOnline = input.checked;
+            renderCatalog();
+            setDirty(true);
+            saveCatalog(true);
+            showToast(
+              `"${item.name}" is now ${input.checked ? 'online' : 'offline'}${input.checked ? '.' : ' — hidden from the live site.'}`,
+              input.checked ? 'success' : 'error'
+            );
+          });
+        });
+
+        // Drag & drop reordering (handle-initiated)
+        productsGrid.querySelectorAll('.card-drag-handle').forEach(handle => {
+          handle.addEventListener('dragstart', e => {
+            const card = handle.closest('.product-card');
+            if (!card) return;
+            draggedProductId = card.dataset.id;
+            card.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+            try { e.dataTransfer.setData('text/plain', draggedProductId); } catch (err) { /* ignore */ }
+          });
+          handle.addEventListener('dragend', () => {
+            draggedProductId = null;
+            productsGrid.querySelectorAll('.product-card.dragging').forEach(c => c.classList.remove('dragging'));
+            clearProductDropIndicators();
+          });
+        });
+
+        productsGrid.querySelectorAll('.product-card').forEach(card => {
+          card.addEventListener('dragover', e => {
+            if (!draggedProductId || card.dataset.id === draggedProductId) return;
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+            const rect = card.getBoundingClientRect();
+            const insertBefore = (e.clientY - rect.top) < (rect.height / 2);
+            clearProductDropIndicators();
+            card.classList.add(insertBefore ? 'drop-before' : 'drop-after');
+          });
+          card.addEventListener('dragleave', e => {
+            if (!card.contains(e.relatedTarget)) {
+              card.classList.remove('drop-before', 'drop-after');
+            }
+          });
+          card.addEventListener('drop', e => {
+            if (!draggedProductId) return;
+            e.preventDefault();
+            const insertBefore = card.classList.contains('drop-before');
+            const sourceId = draggedProductId;
+            draggedProductId = null;
+            clearProductDropIndicators();
+            if (card.dataset.id === sourceId) return;
+            reorderProducts(sourceId, card.dataset.id, insertBefore);
+          });
+        });
+      }
+
+      function clearProductDropIndicators() {
+        productsGrid.querySelectorAll('.drop-before, .drop-after').forEach(el => {
+          el.classList.remove('drop-before', 'drop-after');
+        });
+      }
+
+      function reorderProducts(sourceId, targetId, insertBefore) {
+        const fromIdx = catalog.findIndex(p => p.id === sourceId);
+        if (fromIdx === -1) return;
+
+        const moved = catalog.splice(fromIdx, 1)[0];
+        let toIdx = catalog.findIndex(p => p.id === targetId);
+        if (toIdx === -1) {
+          catalog.splice(fromIdx, 0, moved);
+          return;
+        }
+        if (!insertBefore) toIdx += 1;
+        catalog.splice(toIdx, 0, moved);
+
+        renderCatalog();
+        setDirty(true);
+        saveCatalog(true);
       }
 
       // ─── FILTER & SEARCH LISTENERS ───
@@ -1399,6 +1694,7 @@
             name: '',
             slug: '',
             category: currentFilter !== 'all' && currentFilter !== 'bestsellers' ? currentFilter : 'cutlery',
+            isOnline: true,
             isBestseller: false,
             bestsellerOrder: null,
             tagline: '',
@@ -1433,6 +1729,8 @@
             ? editingProduct.links.externalBuyUrl
             : '');
         document.getElementById('fieldBuyUrl').value = existingBuyUrl;
+        fieldIsOnline.checked = editingProduct.isOnline !== false;
+        syncOnlineSwitchLabel();
         document.getElementById('fieldIsBestseller').checked = !!editingProduct.isBestseller;
         document.getElementById('bestsellerOrderGroup').style.display = editingProduct.isBestseller ? 'block' : 'none';
         document.getElementById('fieldBestsellerOrder').value = editingProduct.bestsellerOrder || 1;
@@ -1449,10 +1747,17 @@
         renderEditorSpecs();
 
         modalBackdrop.classList.add('open');
+
+        // Always open the editor at the very top. The modal body is the
+        // scroll container, and browsers can restore a previous scroll
+        // position when the same form is shown again.
+        productForm.scrollTop = 0;
+        requestAnimationFrame(() => { productForm.scrollTop = 0; });
       }
 
       function closeEditor() {
         modalBackdrop.classList.remove('open');
+        productForm.scrollTop = 0;
         editingProduct = null;
         isNewProduct = false;
         slugManuallyEdited = false;
@@ -1464,6 +1769,19 @@
       btnModalCancel.addEventListener('click', closeEditor);
 
       // ─── RENDER MEDIA SLIDES IN EDITOR ───
+      function normalizeMediaHero() {
+        const images = (editingProduct && editingProduct.media && editingProduct.media.images) || [];
+        images.forEach((img, idx) => {
+          if (img && typeof img === 'object') img.isHero = idx === 0;
+        });
+      }
+
+      function clearMediaDropIndicators() {
+        editorMediaGrid.querySelectorAll('.drop-before, .drop-after').forEach(el => {
+          el.classList.remove('drop-before', 'drop-after');
+        });
+      }
+
       function renderEditorMediaGrid() {
         const rawImages = editingProduct.media?.images || [];
         const images = rawImages.map(img => typeof img === 'string' ? { src: img, alt: '' } : img);
@@ -1474,8 +1792,9 @@
 
         editorMediaGrid.innerHTML = images.map((img, idx) => `
           <div class="media-item-box" data-idx="${idx}">
-            <img class="media-item-thumb" src="${toStudioAssetUrl(img.src)}" alt="${img.alt || 'Slide ' + (idx + 1)}" />
+            <img class="media-item-thumb" src="${toStudioAssetUrl(img.src)}" alt="${img.alt || 'Slide ' + (idx + 1)}" draggable="false" />
             ${idx === 0 ? '<span class="media-hero-tag">Hero</span>' : ''}
+            <span class="media-drag-handle" draggable="true" data-idx="${idx}" title="Drag to reorder" aria-label="Drag to reorder image ${idx + 1}">⠿</span>
             <div class="media-item-actions">
               <button type="button" class="reorder-btn btn-slide-left" title="Move Left" data-idx="${idx}">‹</button>
               <button type="button" class="reorder-btn btn-slide-right" title="Move Right" data-idx="${idx}">›</button>
@@ -1493,6 +1812,65 @@
         editorMediaGrid.querySelectorAll('.btn-slide-del').forEach(b => {
           b.addEventListener('click', () => removeSlide(+b.dataset.idx));
         });
+
+        // Drag & drop reordering (handle-initiated)
+        editorMediaGrid.querySelectorAll('.media-drag-handle').forEach(handle => {
+          handle.addEventListener('dragstart', e => {
+            draggedSlideIndex = +handle.dataset.idx;
+            const box = handle.closest('.media-item-box');
+            if (box) box.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+            try { e.dataTransfer.setData('text/plain', String(draggedSlideIndex)); } catch (err) { /* ignore */ }
+          });
+          handle.addEventListener('dragend', () => {
+            draggedSlideIndex = null;
+            editorMediaGrid.querySelectorAll('.media-item-box.dragging').forEach(b => b.classList.remove('dragging'));
+            clearMediaDropIndicators();
+          });
+        });
+
+        editorMediaGrid.querySelectorAll('.media-item-box').forEach(box => {
+          box.addEventListener('dragover', e => {
+            if (draggedSlideIndex === null || +box.dataset.idx === draggedSlideIndex) return;
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+            const rect = box.getBoundingClientRect();
+            const insertBefore = (e.clientX - rect.left) < (rect.width / 2);
+            clearMediaDropIndicators();
+            box.classList.add(insertBefore ? 'drop-before' : 'drop-after');
+          });
+          box.addEventListener('dragleave', e => {
+            if (!box.contains(e.relatedTarget)) {
+              box.classList.remove('drop-before', 'drop-after');
+            }
+          });
+          box.addEventListener('drop', e => {
+            if (draggedSlideIndex === null) return;
+            e.preventDefault();
+            const insertBefore = box.classList.contains('drop-before');
+            const sourceIdx = draggedSlideIndex;
+            const targetIdx = +box.dataset.idx;
+            draggedSlideIndex = null;
+            clearMediaDropIndicators();
+            if (sourceIdx === targetIdx) return;
+            reorderSlide(sourceIdx, targetIdx, insertBefore);
+          });
+        });
+      }
+
+      function reorderSlide(fromIdx, toIdx, insertBefore) {
+        const images = editingProduct.media.images;
+        if (fromIdx == null || fromIdx < 0 || fromIdx >= images.length) return;
+
+        const moved = images.splice(fromIdx, 1)[0];
+        let insertAt = toIdx;
+        if (fromIdx < toIdx) insertAt -= 1;
+        if (!insertBefore) insertAt += 1;
+        insertAt = Math.max(0, Math.min(insertAt, images.length));
+        images.splice(insertAt, 0, moved);
+
+        normalizeMediaHero();
+        renderEditorMediaGrid();
       }
 
       function moveSlide(idx, dir) {
@@ -1502,11 +1880,13 @@
         const temp = images[idx];
         images[idx] = images[target];
         images[target] = temp;
+        normalizeMediaHero();
         renderEditorMediaGrid();
       }
 
       function removeSlide(idx) {
         editingProduct.media.images.splice(idx, 1);
+        normalizeMediaHero();
         renderEditorMediaGrid();
       }
 
@@ -1587,6 +1967,7 @@
           }
         }
 
+        normalizeMediaHero();
         renderEditorMediaGrid();
       }
 
@@ -1621,6 +2002,7 @@
         const priceAmount = parseFloat(document.getElementById('fieldPrice').value) || 0;
         const tagline = document.getElementById('fieldTagline').value.trim();
         const buyUrl = document.getElementById('fieldBuyUrl').value.trim();
+        const isOnline = fieldIsOnline.checked;
         const isBestseller = document.getElementById('fieldIsBestseller').checked;
         const bestsellerOrder = isBestseller ? parseInt(document.getElementById('fieldBestsellerOrder').value, 10) : null;
         const shortDesc = document.getElementById('fieldShortDesc').value.trim();
@@ -1643,6 +2025,7 @@
         editingProduct.category = category;
         editingProduct.tagline = tagline;
         editingProduct.buyUrl = buyUrl;
+        editingProduct.isOnline = isOnline;
         editingProduct.isBestseller = isBestseller;
         editingProduct.bestsellerOrder = bestsellerOrder;
         editingProduct.price = {
@@ -1669,6 +2052,7 @@
         }
 
         // Update or insert into catalog
+        normalizeMediaHero();
         const existingIdx = catalog.findIndex(p => p.id === editingProduct.id);
         if (existingIdx >= 0) {
           catalog[existingIdx] = editingProduct;

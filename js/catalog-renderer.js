@@ -29,6 +29,21 @@
   TresaCatalog.getBuyUrl = getBuyUrl;
 
   /**
+   * Helper: Decide whether a product is visible on the public storefront.
+   * Only an explicit `false` takes a product offline; a missing field is
+   * treated as online so older catalogs remain visible. `published` and
+   * `active` are accepted as aliases for the same flag.
+   */
+  function isProductOnline(item) {
+    if (!item) return false;
+    if (item.isOnline === false) return false;
+    if (item.published === false) return false;
+    if (item.active === false) return false;
+    return true;
+  }
+  TresaCatalog.isProductOnline = isProductOnline;
+
+  /**
    * Helper: Build clean carousel HTML for an array of images.
    */
   TresaCatalog.buildCarouselHTML = function(media) {
@@ -85,7 +100,9 @@
     if (!container) return;
 
     var products = productsList || global.TRESA_PRODUCTS || [];
-    var bestsellers = products.filter(function(p) { return p.isBestseller; });
+    var bestsellers = products.filter(function(p) {
+      return p.isBestseller && isProductOnline(p);
+    });
     bestsellers.sort(function(a, b) { 
       return (a.bestsellerOrder || 99) - (b.bestsellerOrder || 99); 
     });
@@ -164,7 +181,9 @@
       var gridEl = categoryMap[catKey];
       if (!gridEl) return;
 
-      var items = products.filter(function(p) { return p.category === catKey; });
+      var items = products.filter(function(p) {
+        return p.category === catKey && isProductOnline(p);
+      });
       var cardsHTML = items.map(function(item) {
         var carouselHTML = TresaCatalog.buildCarouselHTML(item.media);
         var priceDisplay = (item.price && item.price.display) ? item.price.display : '₹0';

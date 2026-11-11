@@ -111,6 +111,10 @@ function saveProductsCatalog(products) {
  * Keys look like "cutlery/my-image.webp" and are compared case-insensitively
  * on the category, exact on filename. External URLs (http/https/data/blob)
  * are ignored because they are not stored in the local assets folder.
+ *
+ * Every product is scanned regardless of its online/offline visibility, so
+ * images belonging to offline (isOnline: false) products are still protected
+ * from the cleanup endpoint.
  */
 function collectReferencedAssetKeys(products) {
   const referenced = new Set();

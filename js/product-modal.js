@@ -44,6 +44,14 @@
     return Array.isArray(global.TRESA_PRODUCTS) ? global.TRESA_PRODUCTS : [];
   }
 
+  function isProductVisible(product) {
+    if (!product) return false;
+    if (global.TresaCatalog && global.TresaCatalog.isProductOnline) {
+      return global.TresaCatalog.isProductOnline(product);
+    }
+    return product.isOnline !== false && product.published !== false && product.active !== false;
+  }
+
   function buildModal() {
     modal = document.createElement('div');
     modal.id = 'productDetailModal';
@@ -111,7 +119,7 @@
       return item && item.id === productId;
     })[0];
 
-    if (!product) return;
+    if (!product || !isProductVisible(product)) return;
 
     // Capture the clicked card's position before the body scroll lock can
     // shift the page, so the zoom animation starts exactly where it was.
