@@ -1,9 +1,178 @@
 [
   {
+    "id": "tresa-810526",
+    "name": "Tresa Premium Gold Box",
+    "slug": "tresa-premium-gold-box",
+    "category": "cutlery",
+    "isOnline": true,
+    "isBestseller": false,
+    "bestsellerOrder": null,
+    "tagline": "",
+    "buyUrl": "",
+    "price": {
+      "amount": 799,
+      "currency": "INR",
+      "display": "₹799"
+    },
+    "shortDescription": "",
+    "fullDescription": "",
+    "specs": [
+      {
+        "label": "Material",
+        "value": "100% stainless steel"
+      },
+      {
+        "label": "Care",
+        "value": "Dishwasher safe"
+      }
+    ],
+    "media": {
+      "images": [
+        {
+          "src": "./assets/products/cutlery/tresa-premium-gold-box-04.webp",
+          "alt": "tresa-premium-gold-box - Angle 4",
+          "isHero": false
+        },
+        {
+          "src": "./assets/products/cutlery/tresa-premium-gold-box-03.webp",
+          "alt": "tresa-premium-gold-box - Angle 3",
+          "isHero": false
+        },
+        {
+          "src": "./assets/products/cutlery/tresa-premium-gold-box-01.webp",
+          "alt": "tresa-premium-gold-box - Angle 1",
+          "isHero": true
+        },
+        {
+          "src": "./assets/products/cutlery/tresa-premium-gold-box-02.webp",
+          "alt": "tresa-premium-gold-box - Angle 2",
+          "isHero": false
+        }
+      ]
+    },
+    "links": {
+      "detailsUrl": "products.html#cutlery",
+      "externalBuyUrl": "#"
+    }
+  },
+  {
+    "id": "tresa-577319",
+    "name": "Tresa Silver Geometric Box",
+    "slug": "tresa-silver-geometric-box",
+    "category": "cutlery",
+    "isOnline": true,
+    "isBestseller": false,
+    "bestsellerOrder": null,
+    "tagline": "",
+    "buyUrl": "https://www.amazon.in/dp/B0G1JDQBZP",
+    "price": {
+      "amount": 799,
+      "currency": "INR",
+      "display": "₹799"
+    },
+    "shortDescription": "",
+    "fullDescription": "",
+    "specs": [
+      {
+        "label": "Material",
+        "value": "High-Fire Stoneware"
+      },
+      {
+        "label": "Care",
+        "value": "Dishwasher safe"
+      }
+    ],
+    "media": {
+      "images": [
+        {
+          "src": "./assets/products/cutlery/tresa-silver-geometric-box-04.webp",
+          "alt": "tresa-silver-geometric-box - Angle 4",
+          "isHero": false
+        },
+        {
+          "src": "./assets/products/cutlery/tresa-silver-geometric-box-03.webp",
+          "alt": "tresa-silver-geometric-box - Angle 3",
+          "isHero": false
+        },
+        {
+          "src": "./assets/products/cutlery/tresa-silver-geometric-box-02.webp",
+          "alt": "tresa-silver-geometric-box - Angle 2",
+          "isHero": false
+        },
+        {
+          "src": "./assets/products/cutlery/tresa-silver-geometric-box-01.webp",
+          "alt": "tresa-silver-geometric-box - Angle 1",
+          "isHero": true
+        }
+      ]
+    },
+    "links": {
+      "detailsUrl": "products.html#cutlery",
+      "externalBuyUrl": "https://www.amazon.in/dp/B0G1JDQBZP"
+    }
+  },
+  {
+    "id": "tresa-267043",
+    "name": "Tresa Silver Wavy Box",
+    "slug": "tresa-silver-wavy-box-set",
+    "category": "cutlery",
+    "isOnline": true,
+    "isBestseller": false,
+    "bestsellerOrder": null,
+    "tagline": "",
+    "buyUrl": "https://www.amazon.in/dp/B0G65Q42ZW",
+    "price": {
+      "amount": 799,
+      "currency": "INR",
+      "display": "₹799"
+    },
+    "shortDescription": "",
+    "fullDescription": "",
+    "specs": [
+      {
+        "label": "Material",
+        "value": "Stainless Steel"
+      },
+      {
+        "label": "Care",
+        "value": "Dishwasher safe"
+      }
+    ],
+    "media": {
+      "images": [
+        {
+          "src": "./assets/products/cutlery/tresa-silver-wavy-box-set-04.webp",
+          "alt": "tresa-silver-wavy-box-set - Angle 4",
+          "isHero": false
+        },
+        {
+          "src": "./assets/products/cutlery/tresa-silver-wavy-box-set-03.webp",
+          "alt": "tresa-silver-wavy-box-set - Angle 3",
+          "isHero": false
+        },
+        {
+          "src": "./assets/products/cutlery/tresa-silver-wavy-box-set-01.webp",
+          "alt": "tresa-silver-wavy-box-set - Angle 1",
+          "isHero": true
+        },
+        {
+          "src": "./assets/products/cutlery/tresa-silver-wavy-box-set-02.webp",
+          "alt": "Tresa Silver Wavy Box - Angle 4",
+          "isHero": false
+        }
+      ]
+    },
+    "links": {
+      "detailsUrl": "products.html#cutlery",
+      "externalBuyUrl": "https://www.amazon.in/dp/B0G65Q42ZW"
+    }
+  },
+  {
     "id": "tresa-795694",
     "name": "Tresa Gold Dessert Spoon",
     "slug": "4-piece-gold-dessert-spoon",
     "category": "cutlery",
+    "isOnline": true,
     "isBestseller": true,
     "bestsellerOrder": 1,
     "tagline": "PVD Coated Mirror Finish",
@@ -60,25 +229,26 @@
     "buyUrl": "https://www.amazon.in/dp/B0GFPKGZ8P"
   },
   {
-    "id": "tresa-267043",
-    "name": "Tresa Silver Wavy Box Set",
-    "slug": "tresa-silver-wavy-box-set",
+    "id": "tresa-387828",
+    "name": "TRESA Premium Silver Forks",
+    "slug": "tresa-premium-silver-forks",
     "category": "cutlery",
+    "isOnline": true,
     "isBestseller": false,
     "bestsellerOrder": null,
     "tagline": "",
-    "buyUrl": "https://www.amazon.in/dp/B0G65Q42ZW",
+    "buyUrl": "https://www.amazon.in/dp/B0GFMQV39Y",
     "price": {
-      "amount": 799,
+      "amount": 999,
       "currency": "INR",
-      "display": "₹799"
+      "display": "₹999"
     },
     "shortDescription": "",
     "fullDescription": "",
     "specs": [
       {
         "label": "Material",
-        "value": "High-Fire Stoneware"
+        "value": "100% high-grade stainless steel"
       },
       {
         "label": "Care",
@@ -88,30 +258,30 @@
     "media": {
       "images": [
         {
-          "src": "./assets/products/cutlery/tresa-silver-wavy-box-set-04.webp",
-          "alt": "tresa-silver-wavy-box-set - Angle 4",
+          "src": "./assets/products/cutlery/tresa-premium-silver-forks-03.webp",
+          "alt": "tresa-premium-silver-forks - Angle 3",
           "isHero": false
         },
         {
-          "src": "./assets/products/cutlery/tresa-silver-wavy-box-set-03.webp",
-          "alt": "tresa-silver-wavy-box-set - Angle 3",
-          "isHero": false
-        },
-        {
-          "src": "./assets/products/cutlery/tresa-silver-wavy-box-set-01.webp",
-          "alt": "tresa-silver-wavy-box-set - Angle 1",
+          "src": "./assets/products/cutlery/tresa-premium-silver-forks-01.webp",
+          "alt": "tresa-premium-silver-forks - Angle 1",
           "isHero": true
         },
         {
-          "src": "./assets/products/cutlery/tresa-silver-wavy-box-set-02.webp",
-          "alt": "tresa-silver-wavy-box-set - Angle 2",
+          "src": "./assets/products/cutlery/tresa-premium-silver-forks-04.webp",
+          "alt": "tresa-premium-silver-forks - Angle 4",
+          "isHero": false
+        },
+        {
+          "src": "./assets/products/cutlery/tresa-premium-silver-forks-02.webp",
+          "alt": "tresa-premium-silver-forks - Angle 2",
           "isHero": false
         }
       ]
     },
     "links": {
       "detailsUrl": "products.html#cutlery",
-      "externalBuyUrl": "https://www.amazon.in/dp/B0G65Q42ZW"
+      "externalBuyUrl": "https://www.amazon.in/dp/B0GFMQV39Y"
     }
   },
   {
@@ -119,6 +289,7 @@
     "name": "Noir Five-Piece Set",
     "slug": "noir-five-piece-set",
     "category": "cutlery",
+    "isOnline": true,
     "isBestseller": true,
     "bestsellerOrder": 2,
     "tagline": "Forged Titanium",
@@ -181,10 +352,72 @@
     "buyUrl": ""
   },
   {
+    "id": "tresa-884919",
+    "name": "Tresa Brown Rim Spiral Plate",
+    "slug": "tresa-brown-rim-spiral-plate",
+    "category": "plates",
+    "isOnline": true,
+    "isBestseller": false,
+    "bestsellerOrder": null,
+    "tagline": "",
+    "buyUrl": "https://www.amazon.in/dp/B0H3QPRH2J",
+    "price": {
+      "amount": 599,
+      "currency": "INR",
+      "display": "₹599"
+    },
+    "shortDescription": "",
+    "fullDescription": "",
+    "specs": [
+      {
+        "label": "Material",
+        "value": "High-Fire Stoneware"
+      },
+      {
+        "label": "Care",
+        "value": "Dishwasher safe"
+      }
+    ],
+    "media": {
+      "images": [
+        {
+          "src": "./assets/products/plates/tresa-brown-rim-spiral-plate-05.webp",
+          "alt": "tresa-brown-rim-spiral-plate - Angle 5",
+          "isHero": false
+        },
+        {
+          "src": "./assets/products/plates/tresa-brown-rim-spiral-plate-03.webp",
+          "alt": "tresa-brown-rim-spiral-plate - Angle 3",
+          "isHero": false
+        },
+        {
+          "src": "./assets/products/plates/tresa-brown-rim-spiral-plate-01.webp",
+          "alt": "tresa-brown-rim-spiral-plate - Angle 1",
+          "isHero": true
+        },
+        {
+          "src": "./assets/products/plates/tresa-brown-rim-spiral-plate-02.webp",
+          "alt": "tresa-brown-rim-spiral-plate - Angle 2",
+          "isHero": false
+        },
+        {
+          "src": "./assets/products/plates/tresa-brown-rim-spiral-plate-04.webp",
+          "alt": "tresa-brown-rim-spiral-plate - Angle 4",
+          "isHero": false
+        }
+      ]
+    },
+    "links": {
+      "detailsUrl": "products.html#plates",
+      "externalBuyUrl": "https://www.amazon.in/dp/B0H3QPRH2J"
+    }
+  },
+  {
     "id": "tresa-cutlery-02",
     "name": "The Tresa Chef's Knife",
     "slug": "tresa-chefs-knife",
     "category": "cutlery",
+    "isOnline": true,
     "isBestseller": false,
     "bestsellerOrder": null,
     "tagline": "Damascus Steel",
@@ -243,6 +476,7 @@
     "name": "Artisan Serving Spoons",
     "slug": "artisan-serving-spoons",
     "category": "cutlery",
+    "isOnline": true,
     "isBestseller": false,
     "bestsellerOrder": null,
     "tagline": "Sterling Craft",
@@ -301,6 +535,7 @@
     "name": "Solstice Brass Salad Servers",
     "slug": "solstice-brass-salad-servers",
     "category": "cutlery",
+    "isOnline": true,
     "isBestseller": false,
     "bestsellerOrder": null,
     "tagline": "Warm Brass",
@@ -355,10 +590,70 @@
     "buyUrl": ""
   },
   {
+    "id": "tresa-plates-02",
+    "name": "Deep Stoneware Bowl",
+    "slug": "deep-stoneware-bowl",
+    "category": "plates",
+    "isOnline": true,
+    "isBestseller": false,
+    "bestsellerOrder": null,
+    "tagline": "Reactive Glaze",
+    "price": {
+      "amount": 135,
+      "currency": "INR",
+      "display": "₹135"
+    },
+    "shortDescription": "Reactive glaze finish, oven & dishwasher safe",
+    "fullDescription": "Spun from iron-rich stoneware with a natural unglazed foot and mineral-reactive interior. The deep conical walls retain heat, ideal for slow-cooked broths and grain bowls.",
+    "specs": [
+      {
+        "label": "Clay Body",
+        "value": "Iron-Rich Stoneware Clay"
+      },
+      {
+        "label": "Capacity",
+        "value": "850 ml (28 oz)"
+      },
+      {
+        "label": "Dimensions",
+        "value": "190 mm diameter × 85 mm height"
+      },
+      {
+        "label": "Durability",
+        "value": "Thermal shock tested up to 220°C"
+      }
+    ],
+    "media": {
+      "images": [
+        {
+          "src": "https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Deep Stoneware Bowl - Dark Reactive Glaze",
+          "isHero": true
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1576020799627-aeac74d58064?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Deep Stoneware Bowl - Top Perspective",
+          "isHero": false
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Deep Stoneware Bowl - Wheel-Thrown Texture Detail",
+          "isHero": false
+        }
+      ]
+    },
+    "links": {
+      "detailsUrl": "products.html#plates",
+      "externalBuyUrl": "#"
+    },
+    "buyUrl": ""
+  },
+  {
     "id": "tresa-cutlery-05",
     "name": "Smoked Steak Knife Pair",
     "slug": "smoked-steak-knife-pair",
     "category": "cutlery",
+    "isOnline": true,
     "isBestseller": false,
     "bestsellerOrder": null,
     "tagline": "Razor Edge",
@@ -417,6 +712,7 @@
     "name": "The Matte Dinner Plate",
     "slug": "matte-dinner-plate",
     "category": "plates",
+    "isOnline": true,
     "isBestseller": true,
     "bestsellerOrder": 1,
     "tagline": "Ceramic Artistry",
@@ -471,68 +767,11 @@
     "buyUrl": ""
   },
   {
-    "id": "tresa-plates-02",
-    "name": "Deep Stoneware Bowl",
-    "slug": "deep-stoneware-bowl",
-    "category": "plates",
-    "isBestseller": false,
-    "bestsellerOrder": null,
-    "tagline": "Reactive Glaze",
-    "price": {
-      "amount": 135,
-      "currency": "INR",
-      "display": "₹135"
-    },
-    "shortDescription": "Reactive glaze finish, oven & dishwasher safe",
-    "fullDescription": "Spun from iron-rich stoneware with a natural unglazed foot and mineral-reactive interior. The deep conical walls retain heat, ideal for slow-cooked broths and grain bowls.",
-    "specs": [
-      {
-        "label": "Clay Body",
-        "value": "Iron-Rich Stoneware Clay"
-      },
-      {
-        "label": "Capacity",
-        "value": "850 ml (28 oz)"
-      },
-      {
-        "label": "Dimensions",
-        "value": "190 mm diameter × 85 mm height"
-      },
-      {
-        "label": "Durability",
-        "value": "Thermal shock tested up to 220°C"
-      }
-    ],
-    "media": {
-      "images": [
-        {
-          "src": "https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&w=1200&q=80",
-          "alt": "Deep Stoneware Bowl - Dark Reactive Glaze",
-          "isHero": true
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1576020799627-aeac74d58064?auto=format&fit=crop&w=1200&q=80",
-          "alt": "Deep Stoneware Bowl - Top Perspective",
-          "isHero": false
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=1200&q=80",
-          "alt": "Deep Stoneware Bowl - Wheel-Thrown Texture Detail",
-          "isHero": false
-        }
-      ]
-    },
-    "links": {
-      "detailsUrl": "products.html#plates",
-      "externalBuyUrl": "#"
-    },
-    "buyUrl": ""
-  },
-  {
     "id": "tresa-plates-03",
     "name": "Side Plate Duo",
     "slug": "side-plate-duo",
     "category": "plates",
+    "isOnline": true,
     "isBestseller": false,
     "bestsellerOrder": null,
     "tagline": "Minimal Rim",
@@ -591,6 +830,7 @@
     "name": "Basalt Pasta Bowl Set",
     "slug": "basalt-pasta-bowl-set",
     "category": "plates",
+    "isOnline": true,
     "isBestseller": false,
     "bestsellerOrder": null,
     "tagline": "Sculptural Ceramic",
@@ -649,6 +889,7 @@
     "name": "Ceremonial Tea Bowl (Chawan)",
     "slug": "ceremonial-tea-bowl",
     "category": "plates",
+    "isOnline": true,
     "isBestseller": false,
     "bestsellerOrder": null,
     "tagline": "Hand-Pinched",
@@ -707,6 +948,7 @@
     "name": "The Table Runner",
     "slug": "the-table-runner",
     "category": "placemats",
+    "isOnline": true,
     "isBestseller": true,
     "bestsellerOrder": 3,
     "tagline": "Loomed Linen",
@@ -765,6 +1007,7 @@
     "name": "Rattan Woven Mat",
     "slug": "rattan-woven-mat",
     "category": "placemats",
+    "isOnline": true,
     "isBestseller": true,
     "bestsellerOrder": 4,
     "tagline": "Natural Fiber",
@@ -823,6 +1066,7 @@
     "name": "Linen Weave Placemat",
     "slug": "linen-weave-placemat",
     "category": "placemats",
+    "isOnline": true,
     "isBestseller": false,
     "bestsellerOrder": null,
     "tagline": "Stone-Washed",
@@ -881,6 +1125,7 @@
     "name": "Sisal & Jute Charger",
     "slug": "sisal-jute-charger",
     "category": "placemats",
+    "isOnline": true,
     "isBestseller": false,
     "bestsellerOrder": null,
     "tagline": "Hand-Braided",
@@ -939,6 +1184,7 @@
     "name": "Midnight Indigo Napkin Set",
     "slug": "midnight-indigo-napkin-set",
     "category": "placemats",
+    "isOnline": true,
     "isBestseller": false,
     "bestsellerOrder": null,
     "tagline": "Botanical Dye",
