@@ -289,7 +289,7 @@
     "name": "Noir Five-Piece Set",
     "slug": "noir-five-piece-set",
     "category": "cutlery",
-    "isOnline": true,
+    "isOnline": false,
     "isBestseller": true,
     "bestsellerOrder": 2,
     "tagline": "Forged Titanium",
@@ -413,537 +413,6 @@
     }
   },
   {
-    "id": "tresa-cutlery-02",
-    "name": "The Tresa Chef's Knife",
-    "slug": "tresa-chefs-knife",
-    "category": "cutlery",
-    "isOnline": true,
-    "isBestseller": false,
-    "bestsellerOrder": null,
-    "tagline": "Damascus Steel",
-    "price": {
-      "amount": 480,
-      "currency": "INR",
-      "display": "₹480"
-    },
-    "shortDescription": "Hand-forged Damascus steel, rosewood handle",
-    "fullDescription": "67 alternating layers of high-carbon Japanese VG-10 core steel. Hand-hammered tsuchime finish reduces drag while carving, balanced with a seasoned natural rosewood handle.",
-    "specs": [
-      {
-        "label": "Steel",
-        "value": "67-Layer Damascus with VG-10 Core"
-      },
-      {
-        "label": "Blade Length",
-        "value": "210 mm (8.25 in)"
-      },
-      {
-        "label": "Hardness",
-        "value": "60-62 HRC"
-      },
-      {
-        "label": "Handle",
-        "value": "Sustainably harvested Indian Rosewood"
-      }
-    ],
-    "media": {
-      "images": [
-        {
-          "src": "https://images.unsplash.com/photo-1593618998160-e34014e67546?auto=format&fit=crop&w=1200&q=80",
-          "alt": "The Tresa Chef's Knife - Damascus Blade Pattern",
-          "isHero": true
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1589182373726-e4f658ab50f0?auto=format&fit=crop&w=1200&q=80",
-          "alt": "The Tresa Chef's Knife - Handle Joinery and Bolster",
-          "isHero": false
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1567361808960-dec9cb578182?auto=format&fit=crop&w=1200&q=80",
-          "alt": "The Tresa Chef's Knife - Solid Walnut Prep Board Context",
-          "isHero": false
-        }
-      ]
-    },
-    "links": {
-      "detailsUrl": "products.html#cutlery",
-      "externalBuyUrl": "#"
-    },
-    "buyUrl": ""
-  },
-  {
-    "id": "tresa-cutlery-03",
-    "name": "Artisan Serving Spoons",
-    "slug": "artisan-serving-spoons",
-    "category": "cutlery",
-    "isOnline": true,
-    "isBestseller": false,
-    "bestsellerOrder": null,
-    "tagline": "Sterling Craft",
-    "price": {
-      "amount": 220,
-      "currency": "INR",
-      "display": "₹220"
-    },
-    "shortDescription": "Polished sterling silver, set of four",
-    "fullDescription": "Hand-cast solid 925 sterling silver serving spoons with gently flared handles. Designed to age gracefully, acquiring a gentle heirloom patina with each family gathering.",
-    "specs": [
-      {
-        "label": "Composition",
-        "value": "Solid 925 Sterling Silver"
-      },
-      {
-        "label": "Length",
-        "value": "240 mm each"
-      },
-      {
-        "label": "Quantity",
-        "value": "Set of 4 Spoons"
-      },
-      {
-        "label": "Finish",
-        "value": "Mirror Polish with Satin Underside"
-      }
-    ],
-    "media": {
-      "images": [
-        {
-          "src": "https://images.unsplash.com/photo-1615865417491-9941019fbc00?auto=format&fit=crop&w=1200&q=80",
-          "alt": "Artisan Serving Spoons - Silver Set on Slate",
-          "isHero": true
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=1200&q=80",
-          "alt": "Artisan Serving Spoons - Ceramic Bowl Pairing",
-          "isHero": false
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1584346133934-a3afd2a33c4c?auto=format&fit=crop&w=1200&q=80",
-          "alt": "Artisan Serving Spoons - Mirror Finish Detail",
-          "isHero": false
-        }
-      ]
-    },
-    "links": {
-      "detailsUrl": "products.html#cutlery",
-      "externalBuyUrl": "#"
-    },
-    "buyUrl": ""
-  },
-  {
-    "id": "tresa-cutlery-04",
-    "name": "Solstice Brass Salad Servers",
-    "slug": "solstice-brass-salad-servers",
-    "category": "cutlery",
-    "isOnline": true,
-    "isBestseller": false,
-    "bestsellerOrder": null,
-    "tagline": "Warm Brass",
-    "price": {
-      "amount": 260,
-      "currency": "INR",
-      "display": "₹260"
-    },
-    "shortDescription": "Hand-hammered solid brass, paired serving set",
-    "fullDescription": "Cast from solid architectural brass and finished by hand with organic micro-hammering. Treated with a food-safe botanical seal to retain its warm golden radiance.",
-    "specs": [
-      {
-        "label": "Material",
-        "value": "Hand-Hammered Solid Brass"
-      },
-      {
-        "label": "Dimensions",
-        "value": "260 mm × 65 mm"
-      },
-      {
-        "label": "Set Includes",
-        "value": "1 Serving Fork, 1 Serving Spoon"
-      },
-      {
-        "label": "Maintenance",
-        "value": "Rinse with warm water; apply mineral oil yearly"
-      }
-    ],
-    "media": {
-      "images": [
-        {
-          "src": "https://images.unsplash.com/photo-1584346133934-a3afd2a33c4c?auto=format&fit=crop&w=1200&q=80",
-          "alt": "Solstice Brass Salad Servers - Paired Display",
-          "isHero": true
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1616401784845-180882ba9ba8?auto=format&fit=crop&w=1200&q=80",
-          "alt": "Solstice Brass Salad Servers - Tabletop Setting",
-          "isHero": false
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1576867757603-05b134ebc379?auto=format&fit=crop&w=1200&q=80",
-          "alt": "Solstice Brass Salad Servers - Hammered Texture Detail",
-          "isHero": false
-        }
-      ]
-    },
-    "links": {
-      "detailsUrl": "products.html#cutlery",
-      "externalBuyUrl": "#"
-    },
-    "buyUrl": ""
-  },
-  {
-    "id": "tresa-plates-02",
-    "name": "Deep Stoneware Bowl",
-    "slug": "deep-stoneware-bowl",
-    "category": "plates",
-    "isOnline": true,
-    "isBestseller": false,
-    "bestsellerOrder": null,
-    "tagline": "Reactive Glaze",
-    "price": {
-      "amount": 135,
-      "currency": "INR",
-      "display": "₹135"
-    },
-    "shortDescription": "Reactive glaze finish, oven & dishwasher safe",
-    "fullDescription": "Spun from iron-rich stoneware with a natural unglazed foot and mineral-reactive interior. The deep conical walls retain heat, ideal for slow-cooked broths and grain bowls.",
-    "specs": [
-      {
-        "label": "Clay Body",
-        "value": "Iron-Rich Stoneware Clay"
-      },
-      {
-        "label": "Capacity",
-        "value": "850 ml (28 oz)"
-      },
-      {
-        "label": "Dimensions",
-        "value": "190 mm diameter × 85 mm height"
-      },
-      {
-        "label": "Durability",
-        "value": "Thermal shock tested up to 220°C"
-      }
-    ],
-    "media": {
-      "images": [
-        {
-          "src": "https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&w=1200&q=80",
-          "alt": "Deep Stoneware Bowl - Dark Reactive Glaze",
-          "isHero": true
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1576020799627-aeac74d58064?auto=format&fit=crop&w=1200&q=80",
-          "alt": "Deep Stoneware Bowl - Top Perspective",
-          "isHero": false
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=1200&q=80",
-          "alt": "Deep Stoneware Bowl - Wheel-Thrown Texture Detail",
-          "isHero": false
-        }
-      ]
-    },
-    "links": {
-      "detailsUrl": "products.html#plates",
-      "externalBuyUrl": "#"
-    },
-    "buyUrl": ""
-  },
-  {
-    "id": "tresa-cutlery-05",
-    "name": "Smoked Steak Knife Pair",
-    "slug": "smoked-steak-knife-pair",
-    "category": "cutlery",
-    "isOnline": true,
-    "isBestseller": false,
-    "bestsellerOrder": null,
-    "tagline": "Razor Edge",
-    "price": {
-      "amount": 310,
-      "currency": "INR",
-      "display": "₹310"
-    },
-    "shortDescription": "Non-serrated straight edge, burnt oak scales",
-    "fullDescription": "Engineered with a razor-honed straight edge rather than coarse serration, slicing effortlessly without tearing delicate proteins. Fitted with fire-charred smoked oak scales.",
-    "specs": [
-      {
-        "label": "Blade",
-        "value": "High-Carbon German Steel (1.4116)"
-      },
-      {
-        "label": "Handle",
-        "value": "Yakusugi-style Charred Indian Oak"
-      },
-      {
-        "label": "Blade Angle",
-        "value": "14° Hand-Honed Edge"
-      },
-      {
-        "label": "Set Size",
-        "value": "Pair of Two Knives"
-      }
-    ],
-    "media": {
-      "images": [
-        {
-          "src": "https://images.unsplash.com/photo-1593618998160-e34014e67546?auto=format&fit=crop&w=1200&q=80",
-          "alt": "Smoked Steak Knife Pair - Straight Blade Profile",
-          "isHero": true
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1589182373726-e4f658ab50f0?auto=format&fit=crop&w=1200&q=80",
-          "alt": "Smoked Steak Knife Pair - Charred Oak Handle",
-          "isHero": false
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1567361808960-dec9cb578182?auto=format&fit=crop&w=1200&q=80",
-          "alt": "Smoked Steak Knife Pair - In Presentation Box",
-          "isHero": false
-        }
-      ]
-    },
-    "links": {
-      "detailsUrl": "products.html#cutlery",
-      "externalBuyUrl": "#"
-    },
-    "buyUrl": ""
-  },
-  {
-    "id": "tresa-plates-01",
-    "name": "The Matte Dinner Plate",
-    "slug": "matte-dinner-plate",
-    "category": "plates",
-    "isOnline": true,
-    "isBestseller": true,
-    "bestsellerOrder": 1,
-    "tagline": "Ceramic Artistry",
-    "price": {
-      "amount": 180,
-      "currency": "INR",
-      "display": "₹180"
-    },
-    "shortDescription": "Bone china, hand-thrown, set of two",
-    "fullDescription": "Hand-thrown from ultra-fine bone china with our signature smoked-ash matte glaze. Designed with an intentional low rim and substantial weight, each piece elevates daily dining into a quiet ceremonial experience.",
-    "specs": [
-      {
-        "label": "Material",
-        "value": "High-Fire Bone China (1280°C)"
-      },
-      {
-        "label": "Diameter",
-        "value": "275 mm (10.8 in)"
-      },
-      {
-        "label": "Glaze",
-        "value": "Smoked Ash Mineral Glaze"
-      },
-      {
-        "label": "Specs",
-        "value": "Oven, microwave, and dishwasher safe"
-      }
-    ],
-    "media": {
-      "images": [
-        {
-          "src": "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=1200&q=80",
-          "alt": "The Matte Dinner Plate - Low Rim Angled View",
-          "isHero": true
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1615865417491-9941019fbc00?auto=format&fit=crop&w=1200&q=80",
-          "alt": "The Matte Dinner Plate - Table Service Setting",
-          "isHero": false
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1590736969955-71cc94801759?auto=format&fit=crop&w=1200&q=80",
-          "alt": "The Matte Dinner Plate - Bone China Texture and Rim Detail",
-          "isHero": false
-        }
-      ]
-    },
-    "links": {
-      "detailsUrl": "products.html#plates",
-      "externalBuyUrl": "#"
-    },
-    "buyUrl": ""
-  },
-  {
-    "id": "tresa-plates-03",
-    "name": "Side Plate Duo",
-    "slug": "side-plate-duo",
-    "category": "plates",
-    "isOnline": true,
-    "isBestseller": false,
-    "bestsellerOrder": null,
-    "tagline": "Minimal Rim",
-    "price": {
-      "amount": 110,
-      "currency": "INR",
-      "display": "₹110"
-    },
-    "shortDescription": "Minimal rim, smoked ash glaze, set of two",
-    "fullDescription": "A refined 20 cm side plate proportioned for appetizers, sourdough service, and artisanal desserts. Features an ultra-subtle 4 mm raised lip to contain sauces effortlessly.",
-    "specs": [
-      {
-        "label": "Dimensions",
-        "value": "205 mm diameter (8.0 in)"
-      },
-      {
-        "label": "Set Includes",
-        "value": "Two Side Plates"
-      },
-      {
-        "label": "Glaze",
-        "value": "Semi-Matte Smoked Slate"
-      },
-      {
-        "label": "Stackability",
-        "value": "Interlocking vertical rim profile"
-      }
-    ],
-    "media": {
-      "images": [
-        {
-          "src": "https://images.unsplash.com/photo-1590736969955-71cc94801759?auto=format&fit=crop&w=1200&q=80",
-          "alt": "Side Plate Duo - Minimal Rim in Charcoal Slate",
-          "isHero": true
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=1200&q=80",
-          "alt": "Side Plate Duo - Stacked Perspective",
-          "isHero": false
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&w=1200&q=80",
-          "alt": "Side Plate Duo - Morning Pastry Setting",
-          "isHero": false
-        }
-      ]
-    },
-    "links": {
-      "detailsUrl": "products.html#plates",
-      "externalBuyUrl": "#"
-    },
-    "buyUrl": ""
-  },
-  {
-    "id": "tresa-plates-04",
-    "name": "Basalt Pasta Bowl Set",
-    "slug": "basalt-pasta-bowl-set",
-    "category": "plates",
-    "isOnline": true,
-    "isBestseller": false,
-    "bestsellerOrder": null,
-    "tagline": "Sculptural Ceramic",
-    "price": {
-      "amount": 215,
-      "currency": "INR",
-      "display": "₹215"
-    },
-    "shortDescription": "Broad brimmed, volcanic stoneware, set of two",
-    "fullDescription": "A generous 24 cm wide-brim pasta plate with shallow bowl center. Infused with volcanic basalt powder for subtle charcoal flecks throughout the glaze.",
-    "specs": [
-      {
-        "label": "Dimensions",
-        "value": "245 mm diameter × 45 mm depth"
-      },
-      {
-        "label": "Quantity",
-        "value": "Set of 2 Bowls"
-      },
-      {
-        "label": "Body",
-        "value": "Basalt-Enriched Stoneware"
-      },
-      {
-        "label": "Finish",
-        "value": "Textured Satin Rim"
-      }
-    ],
-    "media": {
-      "images": [
-        {
-          "src": "https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&w=1200&q=80",
-          "alt": "Basalt Pasta Bowl Set - Wide Brim Angle",
-          "isHero": true
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1576020799627-aeac74d58064?auto=format&fit=crop&w=1200&q=80",
-          "alt": "Basalt Pasta Bowl Set - Hand-Glazed Charcoal Flecks",
-          "isHero": false
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=1200&q=80",
-          "alt": "Basalt Pasta Bowl Set - Fine Dining Context",
-          "isHero": false
-        }
-      ]
-    },
-    "links": {
-      "detailsUrl": "products.html#plates",
-      "externalBuyUrl": "#"
-    },
-    "buyUrl": ""
-  },
-  {
-    "id": "tresa-plates-05",
-    "name": "Ceremonial Tea Bowl (Chawan)",
-    "slug": "ceremonial-tea-bowl",
-    "category": "plates",
-    "isOnline": true,
-    "isBestseller": false,
-    "bestsellerOrder": null,
-    "tagline": "Hand-Pinched",
-    "price": {
-      "amount": 160,
-      "currency": "INR",
-      "display": "₹160"
-    },
-    "shortDescription": "Hand-pinched shino glaze, one-of-a-kind vessel",
-    "fullDescription": "Individually hand-pinched and wood-fired over 48 hours. The spontaneous crackle shino glaze yields warmth and unique organic contours for mindful tea rituals.",
-    "specs": [
-      {
-        "label": "Method",
-        "value": "Hand-Pinched Kurinuki Technique"
-      },
-      {
-        "label": "Glaze",
-        "value": "Natural Wood-Ash Shino"
-      },
-      {
-        "label": "Firing",
-        "value": "48-Hour Anagama Wood Kiln"
-      },
-      {
-        "label": "Capacity",
-        "value": "320 ml (11 oz)"
-      }
-    ],
-    "media": {
-      "images": [
-        {
-          "src": "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=1200&q=80",
-          "alt": "Ceremonial Tea Bowl - Organic Profile",
-          "isHero": true
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&w=1200&q=80",
-          "alt": "Ceremonial Tea Bowl - Shino Glaze Crackle Detail",
-          "isHero": false
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1576020799627-aeac74d58064?auto=format&fit=crop&w=1200&q=80",
-          "alt": "Ceremonial Tea Bowl - Tea Whisk Pairing",
-          "isHero": false
-        }
-      ]
-    },
-    "links": {
-      "detailsUrl": "products.html#plates",
-      "externalBuyUrl": "#"
-    },
-    "buyUrl": ""
-  },
-  {
     "id": "tresa-631294",
     "name": "Tresa Brown Rim Plate",
     "slug": "tresa-brown-rim-plate",
@@ -1005,301 +474,6 @@
     }
   },
   {
-    "id": "tresa-placemats-01",
-    "name": "The Table Runner",
-    "slug": "the-table-runner",
-    "category": "placemats",
-    "isOnline": true,
-    "isBestseller": true,
-    "bestsellerOrder": 3,
-    "tagline": "Loomed Linen",
-    "price": {
-      "amount": 145,
-      "currency": "INR",
-      "display": "₹145"
-    },
-    "shortDescription": "Hand-embroidered cotton, 180cm, natural ivory",
-    "fullDescription": "Hand-loomed in small batches from unbleached organic flax. The generous 180 cm length drops gracefully off table edges, finished with delicate tonal hemstitch embroidery.",
-    "specs": [
-      {
-        "label": "Composition",
-        "value": "100% Belgian Organic Flax Linen (280 gsm)"
-      },
-      {
-        "label": "Dimensions",
-        "value": "180 cm × 42 cm"
-      },
-      {
-        "label": "Finishing",
-        "value": "Hand-Drawn Hemstitch Border"
-      },
-      {
-        "label": "Care",
-        "value": "Machine wash cold delicate; line dry in shade"
-      }
-    ],
-    "media": {
-      "images": [
-        {
-          "src": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
-          "alt": "The Table Runner - Linen Centerpiece Across Dining Table",
-          "isHero": true
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1528458909336-e7a0adfed0a5?auto=format&fit=crop&w=1200&q=80",
-          "alt": "The Table Runner - Embroidered Hemstitch Texture Detail",
-          "isHero": false
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=1200&q=80",
-          "alt": "The Table Runner - Full Evening Dinner Spread",
-          "isHero": false
-        }
-      ]
-    },
-    "links": {
-      "detailsUrl": "products.html#placemats",
-      "externalBuyUrl": "#"
-    },
-    "buyUrl": ""
-  },
-  {
-    "id": "tresa-placemats-02",
-    "name": "Rattan Woven Mat",
-    "slug": "rattan-woven-mat",
-    "category": "placemats",
-    "isOnline": true,
-    "isBestseller": true,
-    "bestsellerOrder": 4,
-    "tagline": "Natural Fiber",
-    "price": {
-      "amount": 75,
-      "currency": "INR",
-      "display": "₹75"
-    },
-    "shortDescription": "Natural rattan, heat-resistant, artisan-made",
-    "fullDescription": "Harvested from wild climbing palm vines and coiled by multi-generational weavers. Naturally heat-deflecting to protect precious hardwood surfaces while imparting organic texture.",
-    "specs": [
-      {
-        "label": "Material",
-        "value": "100% Wild Indonesian Rattan"
-      },
-      {
-        "label": "Diameter",
-        "value": "380 mm (15.0 in)"
-      },
-      {
-        "label": "Heat Resistance",
-        "value": "Protective up to 180°C"
-      },
-      {
-        "label": "Weave",
-        "value": "Continuous concentric coil"
-      }
-    ],
-    "media": {
-      "images": [
-        {
-          "src": "https://images.unsplash.com/photo-1533777857889-4be7c70b33f7?auto=format&fit=crop&w=1200&q=80",
-          "alt": "Rattan Woven Mat - Natural Coiled Texture",
-          "isHero": true
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1528458909336-e7a0adfed0a5?auto=format&fit=crop&w=1200&q=80",
-          "alt": "Rattan Woven Mat - Tight Weave Macro Shot",
-          "isHero": false
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
-          "alt": "Rattan Woven Mat - Warm Dinner Setting with Ceramic Bowl",
-          "isHero": false
-        }
-      ]
-    },
-    "links": {
-      "detailsUrl": "products.html#placemats",
-      "externalBuyUrl": "#"
-    },
-    "buyUrl": ""
-  },
-  {
-    "id": "tresa-placemats-03",
-    "name": "Linen Weave Placemat",
-    "slug": "linen-weave-placemat",
-    "category": "placemats",
-    "isOnline": true,
-    "isBestseller": false,
-    "bestsellerOrder": null,
-    "tagline": "Stone-Washed",
-    "price": {
-      "amount": 95,
-      "currency": "INR",
-      "display": "₹95"
-    },
-    "shortDescription": "Pre-washed linen, natural edge, set of four",
-    "fullDescription": "Stone-washed French flax with a gentle, relaxed drape. Features soft frayed borders anchored with an interior security stitch to prevent excessive unravelling over time.",
-    "specs": [
-      {
-        "label": "Fabric",
-        "value": "100% Normandy Flax Linen"
-      },
-      {
-        "label": "Quantity",
-        "value": "Set of 4 Placemats"
-      },
-      {
-        "label": "Dimensions",
-        "value": "48 cm × 35 cm"
-      },
-      {
-        "label": "Edge Style",
-        "value": "Natural eyelash frayed border"
-      }
-    ],
-    "media": {
-      "images": [
-        {
-          "src": "https://images.unsplash.com/photo-1528458909336-e7a0adfed0a5?auto=format&fit=crop&w=1200&q=80",
-          "alt": "Linen Weave Placemat - Natural Weave and Frayed Edge",
-          "isHero": true
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
-          "alt": "Linen Weave Placemat - Modern Table Arrangement",
-          "isHero": false
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1616401784845-180882ba9ba8?auto=format&fit=crop&w=1200&q=80",
-          "alt": "Linen Weave Placemat - Soft Warm Detail",
-          "isHero": false
-        }
-      ]
-    },
-    "links": {
-      "detailsUrl": "products.html#placemats",
-      "externalBuyUrl": "#"
-    },
-    "buyUrl": ""
-  },
-  {
-    "id": "tresa-placemats-04",
-    "name": "Sisal & Jute Charger",
-    "slug": "sisal-jute-charger",
-    "category": "placemats",
-    "isOnline": true,
-    "isBestseller": false,
-    "bestsellerOrder": null,
-    "tagline": "Hand-Braided",
-    "price": {
-      "amount": 85,
-      "currency": "INR",
-      "display": "₹85"
-    },
-    "shortDescription": "Braided golden jute and sisal, set of two",
-    "fullDescription": "Heavyweight 6 mm hand-braided golden jute cord sewn with invisible nylon thread. Provides a tactile, grounded foundation beneath dinner plates.",
-    "specs": [
-      {
-        "label": "Material",
-        "value": "Sustainable Golden Jute & Sisal"
-      },
-      {
-        "label": "Thickness",
-        "value": "6 mm Heavyweight Cord"
-      },
-      {
-        "label": "Dimensions",
-        "value": "35 cm diameter"
-      },
-      {
-        "label": "Pack Size",
-        "value": "Set of 2 Chargers"
-      }
-    ],
-    "media": {
-      "images": [
-        {
-          "src": "https://images.unsplash.com/photo-1533777857889-4be7c70b33f7?auto=format&fit=crop&w=1200&q=80",
-          "alt": "Sisal & Jute Charger - Hand-Braided Cord",
-          "isHero": true
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1528458909336-e7a0adfed0a5?auto=format&fit=crop&w=1200&q=80",
-          "alt": "Sisal & Jute Charger - Golden Jute Texture",
-          "isHero": false
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
-          "alt": "Sisal & Jute Charger - Tabletop Setting",
-          "isHero": false
-        }
-      ]
-    },
-    "links": {
-      "detailsUrl": "products.html#placemats",
-      "externalBuyUrl": "#"
-    },
-    "buyUrl": ""
-  },
-  {
-    "id": "tresa-placemats-05",
-    "name": "Midnight Indigo Napkin Set",
-    "slug": "midnight-indigo-napkin-set",
-    "category": "placemats",
-    "isOnline": true,
-    "isBestseller": false,
-    "bestsellerOrder": null,
-    "tagline": "Botanical Dye",
-    "price": {
-      "amount": 105,
-      "currency": "INR",
-      "display": "₹105"
-    },
-    "shortDescription": "Naturally dyed indigo linen, set of four",
-    "fullDescription": "Dip-dyed in authentic botanical indigo fermentation vats. Each linen napkin exhibits unique oceanic gradation, soft to the hand and deeply absorbent.",
-    "specs": [
-      {
-        "label": "Dye",
-        "value": "100% Natural Botanical Indigofera"
-      },
-      {
-        "label": "Quantity",
-        "value": "Set of 4 Napkins"
-      },
-      {
-        "label": "Size",
-        "value": "45 cm × 45 cm square"
-      },
-      {
-        "label": "Fabric",
-        "value": "Pre-Washed Pure Linen"
-      }
-    ],
-    "media": {
-      "images": [
-        {
-          "src": "https://images.unsplash.com/photo-1528458909336-e7a0adfed0a5?auto=format&fit=crop&w=1200&q=80",
-          "alt": "Midnight Indigo Napkin Set - Folded Napkins",
-          "isHero": true
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
-          "alt": "Midnight Indigo Napkin Set - Indigo Dye Variation",
-          "isHero": false
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1616401784845-180882ba9ba8?auto=format&fit=crop&w=1200&q=80",
-          "alt": "Midnight Indigo Napkin Set - Modern Table Styling",
-          "isHero": false
-        }
-      ]
-    },
-    "links": {
-      "detailsUrl": "products.html#placemats",
-      "externalBuyUrl": "#"
-    },
-    "buyUrl": ""
-  },
-  {
     "id": "tresa-379128",
     "name": "Tresa Blue Ceramic Dinner Plate",
     "slug": "tresa-blue-ceramic-dinner-plate",
@@ -1359,5 +533,1019 @@
       "detailsUrl": "products.html#plates",
       "externalBuyUrl": "https://www.amazon.in/dp/B0H4LRV27Y"
     }
+  },
+  {
+    "id": "tresa-016076",
+    "name": "Tresa Gold Leaf Placemat",
+    "slug": "tresa-gold-leaf-placemat",
+    "category": "placemats",
+    "isOnline": true,
+    "isBestseller": false,
+    "bestsellerOrder": null,
+    "tagline": "",
+    "buyUrl": "https://www.amazon.in/dp/B0HP8B5H4Z",
+    "price": {
+      "amount": 499,
+      "currency": "INR",
+      "display": "₹499"
+    },
+    "shortDescription": "",
+    "fullDescription": "",
+    "specs": [
+      {
+        "label": "Material",
+        "value": "High-Fire Stoneware"
+      },
+      {
+        "label": "Care",
+        "value": "Dishwasher safe"
+      }
+    ],
+    "media": {
+      "images": [
+        {
+          "src": "./assets/products/placemats/tresa-gold-leaf-placemat-06.webp",
+          "alt": "tresa-gold-leaf-placemat - Angle 6",
+          "isHero": true
+        },
+        {
+          "src": "./assets/products/placemats/tresa-gold-leaf-placemat-04.webp",
+          "alt": "tresa-gold-leaf-placemat - Angle 4",
+          "isHero": false
+        },
+        {
+          "src": "./assets/products/placemats/tresa-gold-leaf-placemat-05.webp",
+          "alt": "tresa-gold-leaf-placemat - Angle 5",
+          "isHero": false
+        },
+        {
+          "src": "./assets/products/placemats/tresa-gold-leaf-placemat-02.webp",
+          "alt": "tresa-gold-leaf-placemat - Angle 2",
+          "isHero": false
+        },
+        {
+          "src": "./assets/products/placemats/tresa-gold-leaf-placemat-03.webp",
+          "alt": "tresa-gold-leaf-placemat - Angle 3",
+          "isHero": false
+        },
+        {
+          "src": "./assets/products/placemats/tresa-gold-leaf-placemat-01.webp",
+          "alt": "tresa-gold-leaf-placemat - Angle 1",
+          "isHero": false
+        }
+      ]
+    },
+    "links": {
+      "detailsUrl": "products.html#placemats",
+      "externalBuyUrl": "https://www.amazon.in/dp/B0HP8B5H4Z"
+    }
+  },
+  {
+    "id": "tresa-523853",
+    "name": "Tresa Gingko Leaf Placemat",
+    "slug": "tresa-gingko-leaf-placemat",
+    "category": "placemats",
+    "isOnline": true,
+    "isBestseller": false,
+    "bestsellerOrder": null,
+    "tagline": "",
+    "buyUrl": "",
+    "price": {
+      "amount": 499,
+      "currency": "INR",
+      "display": "₹499"
+    },
+    "shortDescription": "",
+    "fullDescription": "",
+    "specs": [
+      {
+        "label": "Material",
+        "value": "High-Fire Stoneware"
+      },
+      {
+        "label": "Care",
+        "value": "Dishwasher safe"
+      }
+    ],
+    "media": {
+      "images": [
+        {
+          "src": "./assets/products/placemats/tresa-gingko-leaf-placemat-05.webp",
+          "alt": "tresa-gingko-leaf-placemat - Angle 5",
+          "isHero": true
+        },
+        {
+          "src": "./assets/products/placemats/tresa-gingko-leaf-placemat-02.webp",
+          "alt": "tresa-gingko-leaf-placemat - Angle 2",
+          "isHero": false
+        },
+        {
+          "src": "./assets/products/placemats/tresa-gingko-leaf-placemat-04.webp",
+          "alt": "tresa-gingko-leaf-placemat - Angle 4",
+          "isHero": false
+        },
+        {
+          "src": "./assets/products/placemats/tresa-gingko-leaf-placemat-03.webp",
+          "alt": "tresa-gingko-leaf-placemat - Angle 3",
+          "isHero": false
+        },
+        {
+          "src": "./assets/products/placemats/tresa-gingko-leaf-placemat-01.webp",
+          "alt": "tresa-gingko-leaf-placemat - Angle 1",
+          "isHero": false
+        }
+      ]
+    },
+    "links": {
+      "detailsUrl": "products.html#placemats",
+      "externalBuyUrl": "#"
+    }
+  },
+  {
+    "id": "tresa-072137",
+    "name": "Tresa Silver Flower Placemat",
+    "slug": "tresa-silver-flower-placemat",
+    "category": "placemats",
+    "isOnline": true,
+    "isBestseller": false,
+    "bestsellerOrder": null,
+    "tagline": "",
+    "buyUrl": "https://www.amazon.in/dp/B0HQ1PHWTV",
+    "price": {
+      "amount": 499,
+      "currency": "INR",
+      "display": "₹499"
+    },
+    "shortDescription": "",
+    "fullDescription": "",
+    "specs": [
+      {
+        "label": "Material",
+        "value": "High-Fire Stoneware"
+      },
+      {
+        "label": "Care",
+        "value": "Dishwasher safe"
+      }
+    ],
+    "media": {
+      "images": [
+        {
+          "src": "./assets/products/placemats/tresa-silver-flower-placemat-05.webp",
+          "alt": "tresa-silver-flower-placemat - Angle 5",
+          "isHero": true
+        },
+        {
+          "src": "./assets/products/placemats/tresa-silver-flower-placemat-03.webp",
+          "alt": "tresa-silver-flower-placemat - Angle 3",
+          "isHero": false
+        },
+        {
+          "src": "./assets/products/placemats/tresa-silver-flower-placemat-02.webp",
+          "alt": "tresa-silver-flower-placemat - Angle 2",
+          "isHero": false
+        },
+        {
+          "src": "./assets/products/placemats/tresa-silver-flower-placemat-01.webp",
+          "alt": "tresa-silver-flower-placemat - Angle 1",
+          "isHero": false
+        },
+        {
+          "src": "./assets/products/placemats/tresa-silver-flower-placemat-04.webp",
+          "alt": "tresa-silver-flower-placemat - Angle 4",
+          "isHero": false
+        }
+      ]
+    },
+    "links": {
+      "detailsUrl": "products.html#placemats",
+      "externalBuyUrl": "https://www.amazon.in/dp/B0HQ1PHWTV"
+    }
+  },
+  {
+    "id": "tresa-cutlery-02",
+    "name": "The Tresa Chef's Knife",
+    "slug": "tresa-chefs-knife",
+    "category": "cutlery",
+    "isOnline": false,
+    "isBestseller": false,
+    "bestsellerOrder": null,
+    "tagline": "Damascus Steel",
+    "price": {
+      "amount": 480,
+      "currency": "INR",
+      "display": "₹480"
+    },
+    "shortDescription": "Hand-forged Damascus steel, rosewood handle",
+    "fullDescription": "67 alternating layers of high-carbon Japanese VG-10 core steel. Hand-hammered tsuchime finish reduces drag while carving, balanced with a seasoned natural rosewood handle.",
+    "specs": [
+      {
+        "label": "Steel",
+        "value": "67-Layer Damascus with VG-10 Core"
+      },
+      {
+        "label": "Blade Length",
+        "value": "210 mm (8.25 in)"
+      },
+      {
+        "label": "Hardness",
+        "value": "60-62 HRC"
+      },
+      {
+        "label": "Handle",
+        "value": "Sustainably harvested Indian Rosewood"
+      }
+    ],
+    "media": {
+      "images": [
+        {
+          "src": "https://images.unsplash.com/photo-1593618998160-e34014e67546?auto=format&fit=crop&w=1200&q=80",
+          "alt": "The Tresa Chef's Knife - Damascus Blade Pattern",
+          "isHero": true
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1589182373726-e4f658ab50f0?auto=format&fit=crop&w=1200&q=80",
+          "alt": "The Tresa Chef's Knife - Handle Joinery and Bolster",
+          "isHero": false
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1567361808960-dec9cb578182?auto=format&fit=crop&w=1200&q=80",
+          "alt": "The Tresa Chef's Knife - Solid Walnut Prep Board Context",
+          "isHero": false
+        }
+      ]
+    },
+    "links": {
+      "detailsUrl": "products.html#cutlery",
+      "externalBuyUrl": "#"
+    },
+    "buyUrl": ""
+  },
+  {
+    "id": "tresa-cutlery-03",
+    "name": "Artisan Serving Spoons",
+    "slug": "artisan-serving-spoons",
+    "category": "cutlery",
+    "isOnline": false,
+    "isBestseller": false,
+    "bestsellerOrder": null,
+    "tagline": "Sterling Craft",
+    "price": {
+      "amount": 220,
+      "currency": "INR",
+      "display": "₹220"
+    },
+    "shortDescription": "Polished sterling silver, set of four",
+    "fullDescription": "Hand-cast solid 925 sterling silver serving spoons with gently flared handles. Designed to age gracefully, acquiring a gentle heirloom patina with each family gathering.",
+    "specs": [
+      {
+        "label": "Composition",
+        "value": "Solid 925 Sterling Silver"
+      },
+      {
+        "label": "Length",
+        "value": "240 mm each"
+      },
+      {
+        "label": "Quantity",
+        "value": "Set of 4 Spoons"
+      },
+      {
+        "label": "Finish",
+        "value": "Mirror Polish with Satin Underside"
+      }
+    ],
+    "media": {
+      "images": [
+        {
+          "src": "https://images.unsplash.com/photo-1615865417491-9941019fbc00?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Artisan Serving Spoons - Silver Set on Slate",
+          "isHero": true
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Artisan Serving Spoons - Ceramic Bowl Pairing",
+          "isHero": false
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1584346133934-a3afd2a33c4c?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Artisan Serving Spoons - Mirror Finish Detail",
+          "isHero": false
+        }
+      ]
+    },
+    "links": {
+      "detailsUrl": "products.html#cutlery",
+      "externalBuyUrl": "#"
+    },
+    "buyUrl": ""
+  },
+  {
+    "id": "tresa-cutlery-04",
+    "name": "Solstice Brass Salad Servers",
+    "slug": "solstice-brass-salad-servers",
+    "category": "cutlery",
+    "isOnline": false,
+    "isBestseller": false,
+    "bestsellerOrder": null,
+    "tagline": "Warm Brass",
+    "price": {
+      "amount": 260,
+      "currency": "INR",
+      "display": "₹260"
+    },
+    "shortDescription": "Hand-hammered solid brass, paired serving set",
+    "fullDescription": "Cast from solid architectural brass and finished by hand with organic micro-hammering. Treated with a food-safe botanical seal to retain its warm golden radiance.",
+    "specs": [
+      {
+        "label": "Material",
+        "value": "Hand-Hammered Solid Brass"
+      },
+      {
+        "label": "Dimensions",
+        "value": "260 mm × 65 mm"
+      },
+      {
+        "label": "Set Includes",
+        "value": "1 Serving Fork, 1 Serving Spoon"
+      },
+      {
+        "label": "Maintenance",
+        "value": "Rinse with warm water; apply mineral oil yearly"
+      }
+    ],
+    "media": {
+      "images": [
+        {
+          "src": "https://images.unsplash.com/photo-1584346133934-a3afd2a33c4c?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Solstice Brass Salad Servers - Paired Display",
+          "isHero": true
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1616401784845-180882ba9ba8?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Solstice Brass Salad Servers - Tabletop Setting",
+          "isHero": false
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1576867757603-05b134ebc379?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Solstice Brass Salad Servers - Hammered Texture Detail",
+          "isHero": false
+        }
+      ]
+    },
+    "links": {
+      "detailsUrl": "products.html#cutlery",
+      "externalBuyUrl": "#"
+    },
+    "buyUrl": ""
+  },
+  {
+    "id": "tresa-plates-01",
+    "name": "The Matte Dinner Plate",
+    "slug": "matte-dinner-plate",
+    "category": "plates",
+    "isOnline": false,
+    "isBestseller": true,
+    "bestsellerOrder": 1,
+    "tagline": "Ceramic Artistry",
+    "price": {
+      "amount": 180,
+      "currency": "INR",
+      "display": "₹180"
+    },
+    "shortDescription": "Bone china, hand-thrown, set of two",
+    "fullDescription": "Hand-thrown from ultra-fine bone china with our signature smoked-ash matte glaze. Designed with an intentional low rim and substantial weight, each piece elevates daily dining into a quiet ceremonial experience.",
+    "specs": [
+      {
+        "label": "Material",
+        "value": "High-Fire Bone China (1280°C)"
+      },
+      {
+        "label": "Diameter",
+        "value": "275 mm (10.8 in)"
+      },
+      {
+        "label": "Glaze",
+        "value": "Smoked Ash Mineral Glaze"
+      },
+      {
+        "label": "Specs",
+        "value": "Oven, microwave, and dishwasher safe"
+      }
+    ],
+    "media": {
+      "images": [
+        {
+          "src": "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=1200&q=80",
+          "alt": "The Matte Dinner Plate - Low Rim Angled View",
+          "isHero": true
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1615865417491-9941019fbc00?auto=format&fit=crop&w=1200&q=80",
+          "alt": "The Matte Dinner Plate - Table Service Setting",
+          "isHero": false
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1590736969955-71cc94801759?auto=format&fit=crop&w=1200&q=80",
+          "alt": "The Matte Dinner Plate - Bone China Texture and Rim Detail",
+          "isHero": false
+        }
+      ]
+    },
+    "links": {
+      "detailsUrl": "products.html#plates",
+      "externalBuyUrl": "#"
+    },
+    "buyUrl": ""
+  },
+  {
+    "id": "tresa-plates-02",
+    "name": "Deep Stoneware Bowl",
+    "slug": "deep-stoneware-bowl",
+    "category": "plates",
+    "isOnline": false,
+    "isBestseller": false,
+    "bestsellerOrder": null,
+    "tagline": "Reactive Glaze",
+    "price": {
+      "amount": 135,
+      "currency": "INR",
+      "display": "₹135"
+    },
+    "shortDescription": "Reactive glaze finish, oven & dishwasher safe",
+    "fullDescription": "Spun from iron-rich stoneware with a natural unglazed foot and mineral-reactive interior. The deep conical walls retain heat, ideal for slow-cooked broths and grain bowls.",
+    "specs": [
+      {
+        "label": "Clay Body",
+        "value": "Iron-Rich Stoneware Clay"
+      },
+      {
+        "label": "Capacity",
+        "value": "850 ml (28 oz)"
+      },
+      {
+        "label": "Dimensions",
+        "value": "190 mm diameter × 85 mm height"
+      },
+      {
+        "label": "Durability",
+        "value": "Thermal shock tested up to 220°C"
+      }
+    ],
+    "media": {
+      "images": [
+        {
+          "src": "https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Deep Stoneware Bowl - Dark Reactive Glaze",
+          "isHero": true
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1576020799627-aeac74d58064?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Deep Stoneware Bowl - Top Perspective",
+          "isHero": false
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Deep Stoneware Bowl - Wheel-Thrown Texture Detail",
+          "isHero": false
+        }
+      ]
+    },
+    "links": {
+      "detailsUrl": "products.html#plates",
+      "externalBuyUrl": "#"
+    },
+    "buyUrl": ""
+  },
+  {
+    "id": "tresa-cutlery-05",
+    "name": "Smoked Steak Knife Pair",
+    "slug": "smoked-steak-knife-pair",
+    "category": "cutlery",
+    "isOnline": false,
+    "isBestseller": false,
+    "bestsellerOrder": null,
+    "tagline": "Razor Edge",
+    "price": {
+      "amount": 310,
+      "currency": "INR",
+      "display": "₹310"
+    },
+    "shortDescription": "Non-serrated straight edge, burnt oak scales",
+    "fullDescription": "Engineered with a razor-honed straight edge rather than coarse serration, slicing effortlessly without tearing delicate proteins. Fitted with fire-charred smoked oak scales.",
+    "specs": [
+      {
+        "label": "Blade",
+        "value": "High-Carbon German Steel (1.4116)"
+      },
+      {
+        "label": "Handle",
+        "value": "Yakusugi-style Charred Indian Oak"
+      },
+      {
+        "label": "Blade Angle",
+        "value": "14° Hand-Honed Edge"
+      },
+      {
+        "label": "Set Size",
+        "value": "Pair of Two Knives"
+      }
+    ],
+    "media": {
+      "images": [
+        {
+          "src": "https://images.unsplash.com/photo-1593618998160-e34014e67546?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Smoked Steak Knife Pair - Straight Blade Profile",
+          "isHero": true
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1589182373726-e4f658ab50f0?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Smoked Steak Knife Pair - Charred Oak Handle",
+          "isHero": false
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1567361808960-dec9cb578182?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Smoked Steak Knife Pair - In Presentation Box",
+          "isHero": false
+        }
+      ]
+    },
+    "links": {
+      "detailsUrl": "products.html#cutlery",
+      "externalBuyUrl": "#"
+    },
+    "buyUrl": ""
+  },
+  {
+    "id": "tresa-plates-03",
+    "name": "Side Plate Duo",
+    "slug": "side-plate-duo",
+    "category": "plates",
+    "isOnline": false,
+    "isBestseller": false,
+    "bestsellerOrder": null,
+    "tagline": "Minimal Rim",
+    "price": {
+      "amount": 110,
+      "currency": "INR",
+      "display": "₹110"
+    },
+    "shortDescription": "Minimal rim, smoked ash glaze, set of two",
+    "fullDescription": "A refined 20 cm side plate proportioned for appetizers, sourdough service, and artisanal desserts. Features an ultra-subtle 4 mm raised lip to contain sauces effortlessly.",
+    "specs": [
+      {
+        "label": "Dimensions",
+        "value": "205 mm diameter (8.0 in)"
+      },
+      {
+        "label": "Set Includes",
+        "value": "Two Side Plates"
+      },
+      {
+        "label": "Glaze",
+        "value": "Semi-Matte Smoked Slate"
+      },
+      {
+        "label": "Stackability",
+        "value": "Interlocking vertical rim profile"
+      }
+    ],
+    "media": {
+      "images": [
+        {
+          "src": "https://images.unsplash.com/photo-1590736969955-71cc94801759?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Side Plate Duo - Minimal Rim in Charcoal Slate",
+          "isHero": true
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Side Plate Duo - Stacked Perspective",
+          "isHero": false
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Side Plate Duo - Morning Pastry Setting",
+          "isHero": false
+        }
+      ]
+    },
+    "links": {
+      "detailsUrl": "products.html#plates",
+      "externalBuyUrl": "#"
+    },
+    "buyUrl": ""
+  },
+  {
+    "id": "tresa-plates-04",
+    "name": "Basalt Pasta Bowl Set",
+    "slug": "basalt-pasta-bowl-set",
+    "category": "plates",
+    "isOnline": false,
+    "isBestseller": false,
+    "bestsellerOrder": null,
+    "tagline": "Sculptural Ceramic",
+    "price": {
+      "amount": 215,
+      "currency": "INR",
+      "display": "₹215"
+    },
+    "shortDescription": "Broad brimmed, volcanic stoneware, set of two",
+    "fullDescription": "A generous 24 cm wide-brim pasta plate with shallow bowl center. Infused with volcanic basalt powder for subtle charcoal flecks throughout the glaze.",
+    "specs": [
+      {
+        "label": "Dimensions",
+        "value": "245 mm diameter × 45 mm depth"
+      },
+      {
+        "label": "Quantity",
+        "value": "Set of 2 Bowls"
+      },
+      {
+        "label": "Body",
+        "value": "Basalt-Enriched Stoneware"
+      },
+      {
+        "label": "Finish",
+        "value": "Textured Satin Rim"
+      }
+    ],
+    "media": {
+      "images": [
+        {
+          "src": "https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Basalt Pasta Bowl Set - Wide Brim Angle",
+          "isHero": true
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1576020799627-aeac74d58064?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Basalt Pasta Bowl Set - Hand-Glazed Charcoal Flecks",
+          "isHero": false
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Basalt Pasta Bowl Set - Fine Dining Context",
+          "isHero": false
+        }
+      ]
+    },
+    "links": {
+      "detailsUrl": "products.html#plates",
+      "externalBuyUrl": "#"
+    },
+    "buyUrl": ""
+  },
+  {
+    "id": "tresa-plates-05",
+    "name": "Ceremonial Tea Bowl (Chawan)",
+    "slug": "ceremonial-tea-bowl",
+    "category": "plates",
+    "isOnline": false,
+    "isBestseller": false,
+    "bestsellerOrder": null,
+    "tagline": "Hand-Pinched",
+    "price": {
+      "amount": 160,
+      "currency": "INR",
+      "display": "₹160"
+    },
+    "shortDescription": "Hand-pinched shino glaze, one-of-a-kind vessel",
+    "fullDescription": "Individually hand-pinched and wood-fired over 48 hours. The spontaneous crackle shino glaze yields warmth and unique organic contours for mindful tea rituals.",
+    "specs": [
+      {
+        "label": "Method",
+        "value": "Hand-Pinched Kurinuki Technique"
+      },
+      {
+        "label": "Glaze",
+        "value": "Natural Wood-Ash Shino"
+      },
+      {
+        "label": "Firing",
+        "value": "48-Hour Anagama Wood Kiln"
+      },
+      {
+        "label": "Capacity",
+        "value": "320 ml (11 oz)"
+      }
+    ],
+    "media": {
+      "images": [
+        {
+          "src": "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Ceremonial Tea Bowl - Organic Profile",
+          "isHero": true
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Ceremonial Tea Bowl - Shino Glaze Crackle Detail",
+          "isHero": false
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1576020799627-aeac74d58064?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Ceremonial Tea Bowl - Tea Whisk Pairing",
+          "isHero": false
+        }
+      ]
+    },
+    "links": {
+      "detailsUrl": "products.html#plates",
+      "externalBuyUrl": "#"
+    },
+    "buyUrl": ""
+  },
+  {
+    "id": "tresa-placemats-01",
+    "name": "The Table Runner",
+    "slug": "the-table-runner",
+    "category": "placemats",
+    "isOnline": false,
+    "isBestseller": true,
+    "bestsellerOrder": 3,
+    "tagline": "Loomed Linen",
+    "price": {
+      "amount": 145,
+      "currency": "INR",
+      "display": "₹145"
+    },
+    "shortDescription": "Hand-embroidered cotton, 180cm, natural ivory",
+    "fullDescription": "Hand-loomed in small batches from unbleached organic flax. The generous 180 cm length drops gracefully off table edges, finished with delicate tonal hemstitch embroidery.",
+    "specs": [
+      {
+        "label": "Composition",
+        "value": "100% Belgian Organic Flax Linen (280 gsm)"
+      },
+      {
+        "label": "Dimensions",
+        "value": "180 cm × 42 cm"
+      },
+      {
+        "label": "Finishing",
+        "value": "Hand-Drawn Hemstitch Border"
+      },
+      {
+        "label": "Care",
+        "value": "Machine wash cold delicate; line dry in shade"
+      }
+    ],
+    "media": {
+      "images": [
+        {
+          "src": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
+          "alt": "The Table Runner - Linen Centerpiece Across Dining Table",
+          "isHero": true
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1528458909336-e7a0adfed0a5?auto=format&fit=crop&w=1200&q=80",
+          "alt": "The Table Runner - Embroidered Hemstitch Texture Detail",
+          "isHero": false
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=1200&q=80",
+          "alt": "The Table Runner - Full Evening Dinner Spread",
+          "isHero": false
+        }
+      ]
+    },
+    "links": {
+      "detailsUrl": "products.html#placemats",
+      "externalBuyUrl": "#"
+    },
+    "buyUrl": ""
+  },
+  {
+    "id": "tresa-placemats-02",
+    "name": "Rattan Woven Mat",
+    "slug": "rattan-woven-mat",
+    "category": "placemats",
+    "isOnline": false,
+    "isBestseller": true,
+    "bestsellerOrder": 4,
+    "tagline": "Natural Fiber",
+    "price": {
+      "amount": 75,
+      "currency": "INR",
+      "display": "₹75"
+    },
+    "shortDescription": "Natural rattan, heat-resistant, artisan-made",
+    "fullDescription": "Harvested from wild climbing palm vines and coiled by multi-generational weavers. Naturally heat-deflecting to protect precious hardwood surfaces while imparting organic texture.",
+    "specs": [
+      {
+        "label": "Material",
+        "value": "100% Wild Indonesian Rattan"
+      },
+      {
+        "label": "Diameter",
+        "value": "380 mm (15.0 in)"
+      },
+      {
+        "label": "Heat Resistance",
+        "value": "Protective up to 180°C"
+      },
+      {
+        "label": "Weave",
+        "value": "Continuous concentric coil"
+      }
+    ],
+    "media": {
+      "images": [
+        {
+          "src": "https://images.unsplash.com/photo-1533777857889-4be7c70b33f7?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Rattan Woven Mat - Natural Coiled Texture",
+          "isHero": true
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1528458909336-e7a0adfed0a5?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Rattan Woven Mat - Tight Weave Macro Shot",
+          "isHero": false
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Rattan Woven Mat - Warm Dinner Setting with Ceramic Bowl",
+          "isHero": false
+        }
+      ]
+    },
+    "links": {
+      "detailsUrl": "products.html#placemats",
+      "externalBuyUrl": "#"
+    },
+    "buyUrl": ""
+  },
+  {
+    "id": "tresa-placemats-03",
+    "name": "Linen Weave Placemat",
+    "slug": "linen-weave-placemat",
+    "category": "placemats",
+    "isOnline": false,
+    "isBestseller": false,
+    "bestsellerOrder": null,
+    "tagline": "Stone-Washed",
+    "price": {
+      "amount": 95,
+      "currency": "INR",
+      "display": "₹95"
+    },
+    "shortDescription": "Pre-washed linen, natural edge, set of four",
+    "fullDescription": "Stone-washed French flax with a gentle, relaxed drape. Features soft frayed borders anchored with an interior security stitch to prevent excessive unravelling over time.",
+    "specs": [
+      {
+        "label": "Fabric",
+        "value": "100% Normandy Flax Linen"
+      },
+      {
+        "label": "Quantity",
+        "value": "Set of 4 Placemats"
+      },
+      {
+        "label": "Dimensions",
+        "value": "48 cm × 35 cm"
+      },
+      {
+        "label": "Edge Style",
+        "value": "Natural eyelash frayed border"
+      }
+    ],
+    "media": {
+      "images": [
+        {
+          "src": "https://images.unsplash.com/photo-1528458909336-e7a0adfed0a5?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Linen Weave Placemat - Natural Weave and Frayed Edge",
+          "isHero": true
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Linen Weave Placemat - Modern Table Arrangement",
+          "isHero": false
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1616401784845-180882ba9ba8?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Linen Weave Placemat - Soft Warm Detail",
+          "isHero": false
+        }
+      ]
+    },
+    "links": {
+      "detailsUrl": "products.html#placemats",
+      "externalBuyUrl": "#"
+    },
+    "buyUrl": ""
+  },
+  {
+    "id": "tresa-placemats-04",
+    "name": "Sisal & Jute Charger",
+    "slug": "sisal-jute-charger",
+    "category": "placemats",
+    "isOnline": false,
+    "isBestseller": false,
+    "bestsellerOrder": null,
+    "tagline": "Hand-Braided",
+    "price": {
+      "amount": 85,
+      "currency": "INR",
+      "display": "₹85"
+    },
+    "shortDescription": "Braided golden jute and sisal, set of two",
+    "fullDescription": "Heavyweight 6 mm hand-braided golden jute cord sewn with invisible nylon thread. Provides a tactile, grounded foundation beneath dinner plates.",
+    "specs": [
+      {
+        "label": "Material",
+        "value": "Sustainable Golden Jute & Sisal"
+      },
+      {
+        "label": "Thickness",
+        "value": "6 mm Heavyweight Cord"
+      },
+      {
+        "label": "Dimensions",
+        "value": "35 cm diameter"
+      },
+      {
+        "label": "Pack Size",
+        "value": "Set of 2 Chargers"
+      }
+    ],
+    "media": {
+      "images": [
+        {
+          "src": "https://images.unsplash.com/photo-1533777857889-4be7c70b33f7?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Sisal & Jute Charger - Hand-Braided Cord",
+          "isHero": true
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1528458909336-e7a0adfed0a5?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Sisal & Jute Charger - Golden Jute Texture",
+          "isHero": false
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Sisal & Jute Charger - Tabletop Setting",
+          "isHero": false
+        }
+      ]
+    },
+    "links": {
+      "detailsUrl": "products.html#placemats",
+      "externalBuyUrl": "#"
+    },
+    "buyUrl": ""
+  },
+  {
+    "id": "tresa-placemats-05",
+    "name": "Midnight Indigo Napkin Set",
+    "slug": "midnight-indigo-napkin-set",
+    "category": "placemats",
+    "isOnline": false,
+    "isBestseller": false,
+    "bestsellerOrder": null,
+    "tagline": "Botanical Dye",
+    "price": {
+      "amount": 105,
+      "currency": "INR",
+      "display": "₹105"
+    },
+    "shortDescription": "Naturally dyed indigo linen, set of four",
+    "fullDescription": "Dip-dyed in authentic botanical indigo fermentation vats. Each linen napkin exhibits unique oceanic gradation, soft to the hand and deeply absorbent.",
+    "specs": [
+      {
+        "label": "Dye",
+        "value": "100% Natural Botanical Indigofera"
+      },
+      {
+        "label": "Quantity",
+        "value": "Set of 4 Napkins"
+      },
+      {
+        "label": "Size",
+        "value": "45 cm × 45 cm square"
+      },
+      {
+        "label": "Fabric",
+        "value": "Pre-Washed Pure Linen"
+      }
+    ],
+    "media": {
+      "images": [
+        {
+          "src": "https://images.unsplash.com/photo-1528458909336-e7a0adfed0a5?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Midnight Indigo Napkin Set - Folded Napkins",
+          "isHero": true
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Midnight Indigo Napkin Set - Indigo Dye Variation",
+          "isHero": false
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1616401784845-180882ba9ba8?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Midnight Indigo Napkin Set - Modern Table Styling",
+          "isHero": false
+        }
+      ]
+    },
+    "links": {
+      "detailsUrl": "products.html#placemats",
+      "externalBuyUrl": "#"
+    },
+    "buyUrl": ""
   }
 ]
