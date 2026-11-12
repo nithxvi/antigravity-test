@@ -5,8 +5,8 @@
     "slug": "tresa-premium-gold-box",
     "category": "cutlery",
     "isOnline": true,
-    "isBestseller": false,
-    "bestsellerOrder": null,
+    "isBestseller": true,
+    "bestsellerOrder": 3,
     "tagline": "",
     "buyUrl": "",
     "price": {
@@ -31,7 +31,7 @@
         {
           "src": "./assets/products/cutlery/tresa-premium-gold-box-04.webp",
           "alt": "tresa-premium-gold-box - Angle 4",
-          "isHero": false
+          "isHero": true
         },
         {
           "src": "./assets/products/cutlery/tresa-premium-gold-box-03.webp",
@@ -41,7 +41,7 @@
         {
           "src": "./assets/products/cutlery/tresa-premium-gold-box-01.webp",
           "alt": "tresa-premium-gold-box - Angle 1",
-          "isHero": true
+          "isHero": false
         },
         {
           "src": "./assets/products/cutlery/tresa-premium-gold-box-02.webp",
@@ -290,8 +290,8 @@
     "slug": "tresa-brown-rim-spiral-plate",
     "category": "plates",
     "isOnline": true,
-    "isBestseller": false,
-    "bestsellerOrder": null,
+    "isBestseller": true,
+    "bestsellerOrder": 2,
     "tagline": "",
     "buyUrl": "https://www.amazon.in/dp/B0H3QPRH2J",
     "price": {
@@ -316,7 +316,7 @@
         {
           "src": "./assets/products/plates/tresa-brown-rim-spiral-plate-05.webp",
           "alt": "tresa-brown-rim-spiral-plate - Angle 5",
-          "isHero": false
+          "isHero": true
         },
         {
           "src": "./assets/products/plates/tresa-brown-rim-spiral-plate-03.webp",
@@ -326,7 +326,7 @@
         {
           "src": "./assets/products/plates/tresa-brown-rim-spiral-plate-01.webp",
           "alt": "tresa-brown-rim-spiral-plate - Angle 1",
-          "isHero": true
+          "isHero": false
         },
         {
           "src": "./assets/products/plates/tresa-brown-rim-spiral-plate-02.webp",
@@ -473,8 +473,8 @@
     "slug": "tresa-gold-leaf-placemat",
     "category": "placemats",
     "isOnline": true,
-    "isBestseller": false,
-    "bestsellerOrder": null,
+    "isBestseller": true,
+    "bestsellerOrder": 4,
     "tagline": "",
     "buyUrl": "https://www.amazon.in/dp/B0HP8B5H4Z",
     "price": {
