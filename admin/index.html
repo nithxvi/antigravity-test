@@ -312,11 +312,11 @@
       background: var(--card);
       border: var(--border-subtle);
       border-radius: var(--radius-md);
-      overflow: hidden;
       display: flex;
       flex-direction: column;
-      transition: transform 0.25s var(--ease), border-color 0.25s var(--ease), box-shadow 0.25s var(--ease);
+      transition: transform 0.25s var(--ease), border-color 0.25s var(--ease), box-shadow 0.25s var(--ease), opacity 0.2s var(--ease);
       position: relative;
+      will-change: transform;
     }
     .product-card:hover {
       border-color: rgba(201, 169, 110, 0.3);
@@ -329,8 +329,17 @@
       filter: grayscale(0.65);
     }
     .product-card.dragging {
-      opacity: 0.35;
-      border-style: dashed;
+      opacity: 0.5;
+      border-color: rgba(201, 169, 110, 0.65);
+      transform: scale(1.02) rotate(-0.3deg);
+      box-shadow: 0 24px 54px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(201, 169, 110, 0.25);
+      z-index: 10;
+      cursor: grabbing;
+    }
+    .product-card.drop-before,
+    .product-card.drop-after {
+      border-color: rgba(201, 169, 110, 0.55);
+      box-shadow: 0 10px 34px rgba(0, 0, 0, 0.45);
     }
     .product-card.drop-before::before,
     .product-card.drop-after::after {
@@ -338,15 +347,15 @@
       position: absolute;
       left: 0;
       right: 0;
-      height: 3px;
-      border-radius: 2px;
-      background: var(--accent);
-      box-shadow: 0 0 12px var(--accent-glow);
+      height: 4px;
+      border-radius: 3px;
+      background: linear-gradient(90deg, rgba(201, 169, 110, 0.15) 0%, var(--accent) 12%, #F7E8C4 50%, var(--accent) 88%, rgba(201, 169, 110, 0.15) 100%);
+      box-shadow: 0 0 14px var(--accent-glow), 0 0 3px rgba(255, 255, 255, 0.65);
       z-index: 6;
       pointer-events: none;
     }
-    .product-card.drop-before::before { top: -13px; }
-    .product-card.drop-after::after { bottom: -13px; }
+    .product-card.drop-before::before { top: -14px; }
+    .product-card.drop-after::after { bottom: -14px; }
 
     .card-drag-handle {
       position: absolute;
@@ -381,6 +390,7 @@
       aspect-ratio: 4 / 3;
       background: #111;
       overflow: hidden;
+      border-radius: var(--radius-md) var(--radius-md) 0 0;
     }
     .card-media img {
       width: 100%;
@@ -575,8 +585,16 @@
 
     /* ─── EDITOR IMAGE REORDERING ─── */
     .media-item-box.dragging {
-      opacity: 0.35;
-      border-style: dashed;
+      opacity: 0.5;
+      border-color: var(--accent);
+      transform: scale(1.05);
+      box-shadow: 0 16px 34px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(201, 169, 110, 0.35);
+      z-index: 6;
+      cursor: grabbing;
+    }
+    .media-item-box.drop-before,
+    .media-item-box.drop-after {
+      border-color: rgba(201, 169, 110, 0.6);
     }
     .media-item-box.drop-before::before,
     .media-item-box.drop-after::after {
@@ -584,15 +602,15 @@
       position: absolute;
       top: 0;
       bottom: 0;
-      width: 3px;
-      border-radius: 2px;
-      background: var(--accent);
-      box-shadow: 0 0 12px var(--accent-glow);
+      width: 4px;
+      border-radius: 3px;
+      background: linear-gradient(180deg, rgba(201, 169, 110, 0.2) 0%, var(--accent) 15%, #F7E8C4 50%, var(--accent) 85%, rgba(201, 169, 110, 0.2) 100%);
+      box-shadow: 0 0 14px var(--accent-glow), 0 0 3px rgba(255, 255, 255, 0.65);
       z-index: 5;
       pointer-events: none;
     }
-    .media-item-box.drop-before::before { left: -7px; }
-    .media-item-box.drop-after::after { right: -7px; }
+    .media-item-box.drop-before::before { left: -8px; }
+    .media-item-box.drop-after::after { right: -8px; }
 
     .media-drag-handle {
       position: absolute;
@@ -620,6 +638,11 @@
       background: rgba(14, 14, 15, 0.95);
     }
     .media-drag-handle:active { cursor: grabbing; }
+
+    body.is-dragging,
+    body.is-dragging * {
+      cursor: grabbing !important;
+    }
 
     .card-reorder-btns {
       display: flex;
@@ -866,10 +889,11 @@
       background: var(--surface-elevated);
       border: var(--border-subtle);
       border-radius: var(--radius-sm);
-      overflow: hidden;
       position: relative;
       display: flex;
       flex-direction: column;
+      transition: transform 0.25s var(--ease), border-color 0.2s var(--ease), box-shadow 0.2s var(--ease), opacity 0.2s var(--ease);
+      will-change: transform;
     }
     .media-item-thumb {
       width: 100%;
@@ -877,6 +901,8 @@
       object-fit: cover;
       display: block;
       background: #111;
+      overflow: hidden;
+      border-radius: var(--radius-sm) var(--radius-sm) 0 0;
     }
     .media-item-actions {
       padding: 6px;
@@ -885,6 +911,7 @@
       justify-content: space-between;
       gap: 4px;
       background: var(--card);
+      border-radius: 0 0 var(--radius-sm) var(--radius-sm);
     }
     .media-hero-tag {
       position: absolute;
@@ -1180,6 +1207,8 @@
       let slugManuallyEdited = false;
       let draggedProductId = null;
       let draggedSlideIndex = null;
+      let dragAutoScroll = null;
+      let activeDragScroller = null;
 
       // DOM Elements
       const productsGrid = document.getElementById('productsGrid');
@@ -1576,14 +1605,13 @@
             if (!card) return;
             draggedProductId = card.dataset.id;
             card.classList.add('dragging');
+            document.body.classList.add('is-dragging');
+            activeDragScroller = window;
+            stopAutoScroll();
             e.dataTransfer.effectAllowed = 'move';
             try { e.dataTransfer.setData('text/plain', draggedProductId); } catch (err) { /* ignore */ }
           });
-          handle.addEventListener('dragend', () => {
-            draggedProductId = null;
-            productsGrid.querySelectorAll('.product-card.dragging').forEach(c => c.classList.remove('dragging'));
-            clearProductDropIndicators();
-          });
+          handle.addEventListener('dragend', endDragSession);
         });
 
         productsGrid.querySelectorAll('.product-card').forEach(card => {
@@ -1606,10 +1634,10 @@
             e.preventDefault();
             const insertBefore = card.classList.contains('drop-before');
             const sourceId = draggedProductId;
-            draggedProductId = null;
-            clearProductDropIndicators();
-            if (card.dataset.id === sourceId) return;
-            reorderProducts(sourceId, card.dataset.id, insertBefore);
+            const targetId = card.dataset.id;
+            endDragSession();
+            if (targetId === sourceId) return;
+            reorderProducts(sourceId, targetId, insertBefore);
           });
         });
       }
@@ -1624,6 +1652,10 @@
         const fromIdx = catalog.findIndex(p => p.id === sourceId);
         if (fromIdx === -1) return;
 
+        // Capture positions before the DOM changes so cards can glide into
+        // their new slots (FLIP animation) instead of jumping.
+        const rects = captureProductRects();
+
         const moved = catalog.splice(fromIdx, 1)[0];
         let toIdx = catalog.findIndex(p => p.id === targetId);
         if (toIdx === -1) {
@@ -1634,8 +1666,151 @@
         catalog.splice(toIdx, 0, moved);
 
         renderCatalog();
+        animateProductsFrom(rects);
         setDirty(true);
         saveCatalog(true);
+      }
+
+      // ─── FLIP DROP ANIMATIONS ───
+      function captureProductRects() {
+        const rects = new Map();
+        productsGrid.querySelectorAll('.product-card').forEach(card => {
+          rects.set(card.dataset.id, card.getBoundingClientRect());
+        });
+        return rects;
+      }
+
+      function animateProductsFrom(rects) {
+        if (!rects || !rects.size || !window.Element || !Element.prototype.animate) return;
+        productsGrid.querySelectorAll('.product-card').forEach(card => {
+          const prev = rects.get(card.dataset.id);
+          if (!prev) return;
+          const next = card.getBoundingClientRect();
+          const dx = prev.left - next.left;
+          const dy = prev.top - next.top;
+          if (!dx && !dy) return;
+          card.animate(
+            [
+              { transform: 'translate(' + dx + 'px, ' + dy + 'px)' },
+              { transform: 'translate(0, 0)' }
+            ],
+            { duration: 280, easing: 'cubic-bezier(0.2, 0.8, 0.2, 1)' }
+          );
+        });
+      }
+
+      function captureMediaRects() {
+        const rects = new Map();
+        const images = (editingProduct && editingProduct.media && editingProduct.media.images) || [];
+        images.forEach((img, idx) => {
+          const box = editorMediaGrid.querySelector('.media-item-box[data-idx="' + idx + '"]');
+          if (box) rects.set(img, box.getBoundingClientRect());
+        });
+        return rects;
+      }
+
+      function animateMediaFrom(rects) {
+        if (!rects || !rects.size || !window.Element || !Element.prototype.animate) return;
+        const images = (editingProduct && editingProduct.media && editingProduct.media.images) || [];
+        images.forEach((img, idx) => {
+          const prev = rects.get(img);
+          const box = editorMediaGrid.querySelector('.media-item-box[data-idx="' + idx + '"]');
+          if (!prev || !box) return;
+          const next = box.getBoundingClientRect();
+          const dx = prev.left - next.left;
+          const dy = prev.top - next.top;
+          if (!dx && !dy) return;
+          box.animate(
+            [
+              { transform: 'translate(' + dx + 'px, ' + dy + 'px)' },
+              { transform: 'translate(0, 0)' }
+            ],
+            { duration: 240, easing: 'cubic-bezier(0.2, 0.8, 0.2, 1)' }
+          );
+        });
+      }
+
+      // ─── AUTO-SCROLL WHILE DRAGGING ───
+      function getScrollParent(el) {
+        let node = el ? el.parentElement : null;
+        while (node && node !== document.body && node !== document.documentElement) {
+          const style = window.getComputedStyle(node);
+          const overflowY = style.overflowY;
+          if ((overflowY === 'auto' || overflowY === 'scroll' || overflowY === 'overlay') &&
+              node.scrollHeight > node.clientHeight + 1) {
+            return node;
+          }
+          node = node.parentElement;
+        }
+        return window;
+      }
+
+      function beginAutoScroll(scroller, clientY) {
+        stopAutoScroll();
+        dragAutoScroll = { scroller, clientY, raf: 0 };
+
+        const EDGE = 80;      // px from the top/bottom edge that triggers scrolling
+        const MAX_SPEED = 16; // px per frame (~960 px/s at 60 fps)
+
+        function step() {
+          if (!dragAutoScroll) return;
+          const state = dragAutoScroll;
+
+          let top = 0;
+          let bottom = window.innerHeight;
+          if (state.scroller !== window) {
+            const rect = state.scroller.getBoundingClientRect();
+            top = rect.top;
+            bottom = rect.bottom;
+          }
+
+          let speed = 0;
+          if (state.clientY < top + EDGE) {
+            speed = -Math.ceil(((top + EDGE - state.clientY) / EDGE) * MAX_SPEED);
+          } else if (state.clientY > bottom - EDGE) {
+            speed = Math.ceil(((state.clientY - (bottom - EDGE)) / EDGE) * MAX_SPEED);
+          }
+          speed = Math.max(-MAX_SPEED, Math.min(MAX_SPEED, speed));
+
+          if (speed !== 0) {
+            if (state.scroller === window) {
+              window.scrollBy(0, speed);
+            } else {
+              state.scroller.scrollTop += speed;
+            }
+          }
+
+          dragAutoScroll.raf = requestAnimationFrame(step);
+        }
+
+        dragAutoScroll.raf = requestAnimationFrame(step);
+      }
+
+      function updateAutoScroll(clientY) {
+        if (!activeDragScroller) return;
+        if (!dragAutoScroll) {
+          beginAutoScroll(activeDragScroller, clientY);
+          return;
+        }
+        dragAutoScroll.clientY = clientY;
+      }
+
+      function stopAutoScroll() {
+        if (!dragAutoScroll) return;
+        cancelAnimationFrame(dragAutoScroll.raf);
+        dragAutoScroll = null;
+      }
+
+      function endDragSession() {
+        stopAutoScroll();
+        activeDragScroller = null;
+        draggedProductId = null;
+        draggedSlideIndex = null;
+        document.body.classList.remove('is-dragging');
+        productsGrid.querySelectorAll('.product-card.dragging').forEach(c => c.classList.remove('dragging'));
+        editorMediaGrid.querySelectorAll('.media-item-box.dragging').forEach(b => b.classList.remove('dragging'));
+        clearProductDropIndicators();
+        clearMediaDropIndicators();
       }
 
       // ─── FILTER & SEARCH LISTENERS ───
@@ -1819,14 +1994,13 @@
             draggedSlideIndex = +handle.dataset.idx;
             const box = handle.closest('.media-item-box');
             if (box) box.classList.add('dragging');
+            document.body.classList.add('is-dragging');
+            activeDragScroller = getScrollParent(editorMediaGrid);
+            stopAutoScroll();
             e.dataTransfer.effectAllowed = 'move';
             try { e.dataTransfer.setData('text/plain', String(draggedSlideIndex)); } catch (err) { /* ignore */ }
           });
-          handle.addEventListener('dragend', () => {
-            draggedSlideIndex = null;
-            editorMediaGrid.querySelectorAll('.media-item-box.dragging').forEach(b => b.classList.remove('dragging'));
-            clearMediaDropIndicators();
-          });
+          handle.addEventListener('dragend', endDragSession);
         });
 
         editorMediaGrid.querySelectorAll('.media-item-box').forEach(box => {
@@ -1850,8 +2024,7 @@
             const insertBefore = box.classList.contains('drop-before');
             const sourceIdx = draggedSlideIndex;
             const targetIdx = +box.dataset.idx;
-            draggedSlideIndex = null;
-            clearMediaDropIndicators();
+            endDragSession();
             if (sourceIdx === targetIdx) return;
             reorderSlide(sourceIdx, targetIdx, insertBefore);
           });
@@ -1862,6 +2035,8 @@
         const images = editingProduct.media.images;
         if (fromIdx == null || fromIdx < 0 || fromIdx >= images.length) return;
 
+        const rects = captureMediaRects();
+
         const moved = images.splice(fromIdx, 1)[0];
         let insertAt = toIdx;
         if (fromIdx < toIdx) insertAt -= 1;
@@ -1871,17 +2046,20 @@
 
         normalizeMediaHero();
         renderEditorMediaGrid();
+        animateMediaFrom(rects);
       }
 
       function moveSlide(idx, dir) {
         const target = idx + dir;
         const images = editingProduct.media.images;
         if (target < 0 || target >= images.length) return;
+        const rects = captureMediaRects();
         const temp = images[idx];
         images[idx] = images[target];
         images[target] = temp;
         normalizeMediaHero();
         renderEditorMediaGrid();
+        animateMediaFrom(rects);
       }
 
       function removeSlide(idx) {
@@ -2065,6 +2243,16 @@
         setDirty(true);
         saveCatalog(); // Automatically save to disk upon modal apply
       });
+
+      // Shared drag wiring: feed the pointer position to the auto-scroll
+      // loop and guarantee cleanup even if a drag ends outside a drop zone.
+      document.addEventListener('dragover', e => {
+        if (!activeDragScroller) return;
+        updateAutoScroll(e.clientY);
+      }, true);
+      document.addEventListener('drop', endDragSession);
+      document.addEventListener('dragend', endDragSession);
+      window.addEventListener('blur', endDragSession);
 
       // Initial Load
       loadCatalog();
