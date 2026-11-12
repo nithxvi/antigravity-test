@@ -28,18 +28,16 @@ jobs:
         run: |
           set -euo pipefail
           rm -rf _site
-          mkdir -p _site/data _site/assets/products
+          mkdir -p _site/data
 
-          cp index.html products.html about.html _site/
+          cp index.html products.html about.html favicon.ico _site/
           cp -R css js _site/
           cp data/products.js _site/data/
 
-          # Publish only real image files from assets/products.
-          find assets/products -type f \
-            \( -iname '*.webp' -o -iname '*.jpg' -o -iname '*.jpeg' \
-               -o -iname '*.png' -o -iname '*.avif' -o -iname '*.gif' \
-               -o -iname '*.svg' \) \
-            -exec cp --parents {} _site/ \;
+          # Publish the whole assets tree: product images, brand favicons and
+          # any media added in the future. The folder contains public media
+          # only, so nothing private is exposed.
+          cp -R assets _site/
 
           # Preserve optional site files if they are added later.
           if [ -f CNAME ]; then cp CNAME _site/; fi
@@ -55,7 +53,9 @@ jobs:
           test ! -e _site/package.json
           test ! -e _site/package-lock.json
           test ! -e _site/data/products.json
-          test ! -e _site/assets/products/README.md
+          test -f _site/favicon.ico
+          test -f _site/assets/brand/favicon-32.png
+          test -f _site/assets/brand/favicon-180.png
           echo "Public artifact contents:"
           find _site -type f | sort
 
