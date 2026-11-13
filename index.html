@@ -691,6 +691,39 @@
       }
     }
 
+    /* Touch: stop the OS blue tap flash on product media and its controls */
+    html,
+    body,
+    .product-card,
+    .bs-row,
+    .product-carousel,
+    .product-carousel-slide,
+    .p-carousel-btn,
+    .p-carousel-dot,
+    .product-btn,
+    .bs-purchase-btn {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .product-card:focus,
+    .bs-row:focus,
+    .p-carousel-btn:focus,
+    .p-carousel-dot:focus,
+    .product-btn:focus,
+    .bs-purchase-btn:focus {
+      outline: none;
+    }
+
+    .product-card:focus-visible,
+    .bs-row:focus-visible,
+    .p-carousel-btn:focus-visible,
+    .p-carousel-dot:focus-visible,
+    .product-btn:focus-visible,
+    .bs-purchase-btn:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
     .bs-ambient-glow {
       position: absolute;
       width: 220px;

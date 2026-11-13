@@ -289,6 +289,21 @@
         });
       }
 
+      // Failsafe for touch: a tap on an arrow must never reach the card
+      // wrapper's click handler (which would open the detail modal) and must
+      // not begin a swipe gesture on the carousel.
+      [prevBtn, nextBtn].forEach(function(arrowBtn) {
+        if (!arrowBtn) return;
+
+        var stopArrowEvent = function(e) {
+          e.stopPropagation();
+        };
+
+        arrowBtn.addEventListener('pointerdown', stopArrowEvent);
+        arrowBtn.addEventListener('touchstart', stopArrowEvent, { passive: true });
+        arrowBtn.addEventListener('touchend', stopArrowEvent, { passive: true });
+      });
+
       dots.forEach(function(dot, idx) {
         dot.addEventListener('click', function(e) {
           e.preventDefault();

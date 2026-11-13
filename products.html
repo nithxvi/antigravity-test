@@ -582,6 +582,33 @@
       }
     }
 
+    /* Touch: stop the OS blue tap flash on product media and its controls */
+    html,
+    body,
+    .product-card,
+    .product-carousel,
+    .product-carousel-slide,
+    .p-carousel-btn,
+    .p-carousel-dot,
+    .product-btn {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .product-card:focus,
+    .p-carousel-btn:focus,
+    .p-carousel-dot:focus,
+    .product-btn:focus {
+      outline: none;
+    }
+
+    .product-card:focus-visible,
+    .p-carousel-btn:focus-visible,
+    .p-carousel-dot:focus-visible,
+    .product-btn:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
     /* Cutlery gradients */
     .cat-cutlery .product-card:nth-child(1) .product-image { background: linear-gradient(145deg, #1a1a1c 0%, #0d0d10 40%, #1c1810 100%); }
     .cat-cutlery .product-card:nth-child(2) .product-image { background: linear-gradient(145deg, #121218 0%, #1a1710 60%, #0e0e0f 100%); }
